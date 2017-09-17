@@ -37,7 +37,7 @@ def add_urls():
                 update_db(name, path)
 
 
-def add_infoplist(info_path, index_page, key):
+def add_infoplist(info_path, index_page):
     name = docset_name.split('.')[0]
     info = """
     <?xml version="1.0" encoding="UTF-8"?>

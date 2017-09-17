@@ -32,6 +32,10 @@ Valid `OPTIONS` are the following:
 
 	Name the docset explicitly instead of letting doc2dash guess the correct name from the directory name of the source.
 
+* -k, --key  
+
+	Keyword the docset explicitly instead of letting doc2dash guess the correct keyword from the directory name of the source.
+
 * -d PATH, --destination PATH  
 
 	Put the resulting docset into PATH. Default is the directory `~/Library/Application Support/html2dash/DocSets` 

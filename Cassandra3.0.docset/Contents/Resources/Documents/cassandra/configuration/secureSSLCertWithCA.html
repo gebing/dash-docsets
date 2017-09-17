@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html
+  PUBLIC "" "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" xml:lang="en-us" lang="en-us">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+      <meta name="title" content="Preparing SSL certificates for production" /><meta name="description" content="Steps to generate SSL certificates for client-to-node encryption or node-to-node encryption using a self-signed Certificate Authority (CA) in a production environment." /><title>Preparing SSL certificates for production</title><!--  Generated with Oxygen version 19.0, build number 2017062918.  --><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="wh-path2root" content="../../index.html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta class="swiftype" name="version" data-type="string" content="3.0" />
+        <meta class="swiftype" name="book" data-type="string" content="Apache Cassandra™ 3.0" />
+        <meta class="swiftype" name="doc-name" data-type="string" content="cassandra30" />
+        <meta class="swiftype" name="site-priority-for-Corporate" data-type="integer" content="60" />
+        
+        <script>
+          function debug(msg, object){
+              console.log(msg, object);
+          }
+          function executeQuery(){
+              $('#searchForm').submit();
+              return true;
+          }
+        </script>
+      
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/commonltr.css?buildId=2017062918" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/webhelp_responsive_topic.css?buildId=2017062918" />
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap.min.css" />
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/js/jquery-ui.min.css" />
+        <!-- Changes and comments, as side-notes  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/p-side-notes.css?buildId=2017062918" />
+
+        <!-- Template default styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_default.css?buildId=2017062918" />
+        
+        <!-- Expand-collapse support styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_expand.css?buildId=2017062918" />
+
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-3.1.1.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/localization/strings.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/localization.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/parseuri.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-ui.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script>
+        
+        <!-- Swiftype jQuery and Autocomplete plugins -->
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.ba-hashchange.min.js"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.search.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/search.css" media="all" />
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.autocomplete.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/autocomplete.css" media="all" />
+        
+        <!-- end Swiftype plugins -->
+
+        <!-- DataStax-specific styles. -->
+        <link rel="shortcut icon" type="image/ico" href="../../oxygen-webhelp/assets/images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/details-shim.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/magnific-popup.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/datastax-highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/noshdesc.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/ds-skin-override.css" />
+        <!-- DataStax-specific scripts -->
+        <script src="../../oxygen-webhelp/assets/js/versionDropdown.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/navlinks.js" type="text/javascript"></script>
+        <script type="text/javascript">document.title = document.title + " | Apache Cassandra™ 3.0";</script>
+    <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/variants/tree/oxygen/skin.css?buildId=2017062918" /></head>
+
+    <body onload="highlightSearchTerm()" class="wh_topic_page frmBody" id="secureSSLCertWithCA">
+        <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TWSQ28" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TWSQ28');</script>
+        <!-- End Google Tag Manager -->
+        <!-- whc:include_html href="${webhelp.fragment.before.body}"/ -->
+        
+<div>
+    <div class="container-fluid">
+        <div class="wh_header_flex_container">
+            <div class="container">
+                <div class="col-sm-6 collapse navbar-collapse">
+                    <ul id="ds_sites_list">
+                        <li><a href="https://www.datastax.com" target="_blank">HOME</a></li>
+                        <li><a href="https://academy.datastax.com/" target="_blank">ACADEMY</a></li>
+                        <li><a href="/en" target="_self">DOCS</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 collapse navbar-collapse ds_buttons">
+                    <a class="ds_buttons_button" href="https://www.datastax.com/contactus" target="_blank">CONTACT US</a>
+                    <a class="ds_buttons_button" href="https://academy.datastax.com/downloads" target="_blank"><span class="pad-right">DOWNLOAD DATASTAX</span>
+                        <img src="https://www.datastax.com/wp-content/themes/datastax-2014-08/images/common/icon-dowload-ds.png" width="17" height="15" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color:#067A97; min-height:37px">
+        <div class="container">
+            <div class="col-sm-6 navbar-collapse ds_logo">
+                <a href="https://www.datastax.com/" class="wh_logo ds_logo_collapse" target="_blank">
+                    <img src="../../oxygen-webhelp/assets/images/logo.png" alt="DataStax Logo" />
+                </a>
+            </div>
+            <div class="col-sm-6 collapse navbar-collapse ds_global_menu">
+                <ul id="ds_links_list">
+                    <li><a href="http://docs.datastax.com"/en/glossary/doc/" target="_blank">GLOSSARY</a></li>
+                    <li><a href="https://support.datastax.com/" target="_blank">SUPPORT</a></li>
+                    <li><a href="https://www.datastax.com/dev/blog/" target="_blank">DEVELOPER
+                        BLOGS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default wh_header">
+        <div class="container">
+            <div class="wh_header_flex_container">
+                <div class="hidden-xs">
+                    <span id="version-dropdown" style="display: none;">
+                        <form id="version-dropdown-form">
+                            <select></select>
+                        </form>
+                    </span>
+                </div>
+                <div class="wh_logo_and_publication_title_container">
+                    <div class="wh_logo_and_publication_title">
+                        
+                        <!-- whc:webhelp_logo class="hidden-xs"/ -->
+                    <div class=" wh_publication_title "><a href="../../index.html"><span class="title">Apache Cassandra™ 3.0 <span class="ph red">(Supported)</span>  </span></a></div>
+                    
+                </div>
+                    <button type="button" data-target=".wh_top_menu_and_indexterms_link" data-toggle="collapse" class="navbar-toggle collapsed wh_toggle_button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            
+                <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse">
+                    <!--whc:include_html href="${webhelp.fragment.before.top_menu}"/-->
+                    <div class=" wh_top_menu "><ul><li class=" has-children "><span class="topicref"><a href="../../cassandra/cassandraAbout.html" data-id="cassandraAbout">About Apache Cassandra</a></span><ul><li><span class="topicref"><a href="../../cassandra/features.html" data-id="features">What's new?</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archTOC.html" data-id="archTOC">Understanding the architecture</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archIntro.html" data-id="archIntro">Architecture in brief</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archGossipAbout.html" data-id="archGossipAbout">Internode communications (gossip)</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeFailDetect.html" data-id="archDataDistributeFailDetect">Failure detection and recovery</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeAbout.html" data-id="archDataDistributeAbout">Data distribution and replication</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeHashing.html" data-id="archDataDistributeHashing">Consistent hashing</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeVnodesUsing.html" data-id="archDataDistributeVnodesUsing">Virtual nodes</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeReplication.html" data-id="archDataDistributeReplication">Data replication</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archPartitionerAbout.html" data-id="archPartitionerAbout">Partitioners</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archPartitionerM3P.html" data-id="archPartitionerM3P">Murmur3Partitioner</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archPartitionerRandom.html" data-id="archPartitionerRandom">RandomPartitioner</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archPartitionerBOP.html" data-id="archPartitionerBOP">ByteOrderedPartitioner</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archSnitchesAbout.html" data-id="archSnitchesAbout">Snitches</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchDynamic.html" data-id="archSnitchDynamic">Dynamic snitching</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchSimple.html" data-id="archSnitchSimple">SimpleSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchRackInf.html" data-id="archSnitchRackInf">RackInferringSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchPFSnitch.html" data-id="archSnitchPFSnitch">PropertyFileSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archsnitchGossipPF.html" data-id="archsnitchGossipPF">GossipingPropertyFileSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchEC2.html" data-id="archSnitchEC2">Ec2Snitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchEC2MultiRegion.html" data-id="archSnitchEC2MultiRegion">Ec2MultiRegionSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchGoogle.html" data-id="archSnitchGoogle">GoogleCloudSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchCloudStack.html" data-id="archSnitchCloudStack">CloudstackSnitch</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/dml/dmlDatabaseInternalsTOC.html" data-id="dmlDatabaseInternalsTOC">Database internals</a></span><ul><li><span class="topicref"><a href="../../cassandra/dml/dmlManageOndisk.html" data-id="dmlManageOndisk">Storage engine</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/dml/dmlIntro.html" data-id="dmlIntro">How Cassandra reads and writes data</a></span><ul><li><span class="topicref"><a href="../../cassandra/dml/dmlHowDataWritten.html" data-id="dmlHowDataWritten">How is data written?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlHowDataMaintain.html" data-id="dmlHowDataMaintain">How is data maintained?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlWriteUpdate.html" data-id="dmlWriteUpdate">How is data updated?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutDeletes.html" data-id="dmlAboutDeletes">How is data deleted?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlIndexInternals.html" data-id="dmlIndexInternals">How are indexes stored and updated?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutReads.html" data-id="dmlAboutReads">How is data read?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlWritePatterns.html" data-id="dmlWritePatterns">How do write patterns affect reads?</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/dml/dmlDataConsistencyTOC.html" data-id="dmlDataConsistencyTOC">Data consistency</a></span><ul><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutDataConsistency.html" data-id="dmlAboutDataConsistency">How are consistent read and write operations handled?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlTransactionsDiffer.html" data-id="dmlTransactionsDiffer">How are Cassandra transactions different from RDBMS transactions?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlLtwtTransactions.html" data-id="dmlLtwtTransactions">How do I accomplish lightweight transactions with linearizable consistency?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlCLDiscovery.html" data-id="dmlCLDiscovery">How do I discover consistency level performance?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlConfigConsistency.html" data-id="dmlConfigConsistency">How is the consistency level configured?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlConfigSerialConsistency.html" data-id="dmlConfigSerialConsistency">How is the serial consistency level configured?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlClientRequestsRead.html" data-id="dmlClientRequestsRead">How are read requests accomplished?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlClientRequestsWrite.html" data-id="dmlClientRequestsWrite">How are write requests accomplished?</a></span></li></ul></li></ul></li><li><span class="topicref"><a href="../../cassandra/planning/planPlanningAbout.html" data-id="planPlanningAbout">Planning a cluster deployment</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/install/installTOC.html" data-id="installTOC">Installing</a></span><ul><li><span class="topicref"><a href="../../cassandra/install/installRHEL.html" data-id="installRHEL">Using the Yum repository</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installDeb.html" data-id="installDeb">Using the APT repository</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installTarball.html" data-id="installTarball">Installing from the binary tarball</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installPriorVersions.html" data-id="installPriorVersions">Installing earlier releases</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installRemove.html" data-id="installRemove">Uninstalling Cassandra</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installCloudProviders.html" data-id="installCloudProviders">Installing on cloud providers</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/install/installJDKabout.html" data-id="installJDKabout">Installing the JDK</a></span><ul><li><span class="topicref"><a href="../../cassandra/install/installJdkRHEL.html" data-id="installJdkRHEL">Installing Oracle JDK on RHEL-based Systems</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installJdkDeb.html" data-id="installJdkDeb">Installing Oracle JDK on Debian-based systems</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installOpenJdkRHEL.html" data-id="installOpenJdkRHEL">Installing OpenJDK on RHEL-based systems</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installOpenJdkDeb.html" data-id="installOpenJdkDeb">Installing OpenJDK on Debian-based systems</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/install/installRecommendSettings.html" data-id="installRecommendSettings">Recommended production settings</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/install/referenceInstallLocationsTOC.html" data-id="referenceInstallLocationsTOC">Install locations</a></span><ul><li><span class="topicref"><a href="../../cassandra/install/referenceInstallLocateTar.html" data-id="referenceInstallLocateTar">Tarball installation directories</a></span></li><li><span class="topicref"><a href="../../cassandra/install/referenceInstallLocatePkg.html" data-id="referenceInstallLocatePkg">Package installation directories</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/configuration/configTOC.html" data-id="configTOC">Configuration</a></span><ul><li><span class="topicref"><a href="../../cassandra/configuration/configCassandra_yaml.html" data-id="configCassandra_yaml">cassandra.yaml</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/referenceInclude.html" data-id="referenceInclude">Cassandra include file</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/configuration/secureTOC.html" data-id="secureTOC">Security</a></span><ul><li><span class="topicref"><a href="../../cassandra/configuration/secureIntro.html" data-id="secureIntro">Securing Cassandra</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureInternalAuthenticationTOC.html" data-id="secureInternalAuthenticationTOC">Internal authentication</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureInternalAuthorizationTOC.html" data-id="secureInternalAuthorizationTOC">Internal authorization</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureJMXAuthenticationTOC.html" data-id="secureJMXAuthenticationTOC">JMX authentication and authorization</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLEncryptTOC.html" data-id="secureSSLEncryptTOC">SSL encryption</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureFireWall.html" data-id="secureFireWall">Configuring firewall port access</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/configuration/configGossipSettings.html" data-id="configGossipSettings">Configuring gossip settings</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configHeapDump.html" data-id="configHeapDump">Configuring the heap dump directory</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/configuration/configVirtualNodesTOC.html" data-id="configVirtualNodesTOC">Configuring virtual nodes</a></span><ul><li><span class="topicref"><a href="../../cassandra/configuration/configVnodesEnable.html" data-id="configVnodesEnable">Enabling virtual nodes on a new cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configVnodesProduction.html" data-id="configVnodesProduction">Enabling virtual nodes on an existing production cluster</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/configuration/configMultiNetworks.html" data-id="configMultiNetworks">Using multiple network interfaces</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configLoggingLevels.html" data-id="configLoggingLevels">Configuring logging</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configLogArchive.html" data-id="configLogArchive">Commit log archive configuration</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configCDCLogging.html" data-id="configCDCLogging">Change Data Capture (CDC) logging</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configGenTokens.html" data-id="configGenTokens">Generating tokens</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configHadoop.html" data-id="configHadoop">Hadoop support</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/initialize/initTOC.html" data-id="initTOC">Initializing a cluster</a></span><ul><li><span class="topicref"><a href="../../cassandra/initialize/initSingleDS.html" data-id="initSingleDS">Initializing a multiple node cluster (single datacenter)</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/initMultipleDS.html" data-id="initMultipleDS">Initializing a multiple node cluster (multiple datacenters)</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/initialize/referenceStartStopTOC.html" data-id="referenceStartStopTOC">Starting and stopping Cassandra</a></span><ul><li><span class="topicref"><a href="../../cassandra/initialize/referenceStartCservice.html" data-id="referenceStartCservice">Starting Cassandra as a service</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceStartCprocess.html" data-id="referenceStartCprocess">Starting Cassandra as a stand-alone process</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceStopCservice_t.html" data-id="referenceStopCservice_t">Stopping Cassandra as a service</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceStopCprocess.html" data-id="referenceStopCprocess">Stopping Cassandra as a stand-alone process</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceClearCpkgData.html" data-id="referenceClearCpkgData">Clearing the data as a service</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceClearCbinaryData.html" data-id="referenceClearCbinaryData">Clearing the data as a stand-alone process</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/operationsTOC.html" data-id="operationsTOC">Operations</a></span><ul><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsAddingRemovingNodeTOC.html" data-id="opsAddingRemovingNodeTOC">Adding or removing nodes, datacenters, or clusters</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsAddNodeToCluster.html" data-id="opsAddNodeToCluster">Adding nodes to an existing cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsAddDCToCluster.html" data-id="opsAddDCToCluster">Adding a datacenter to a cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsReplaceNode.html" data-id="opsReplaceNode">Replacing a dead node or dead seed node</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsReplaceLiveNode.html#opsReplaceLiveNode" data-id="opsReplaceLiveNode">Replacing a running node</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsMoveNodeRack.html" data-id="opsMoveNodeRack">Moving a node from one rack to another</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsDecomissionDC.html" data-id="opsDecomissionDC">Decommissioning a datacenter</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRemoveNode.html" data-id="opsRemoveNode">Removing a node</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsSwitchSnitch.html" data-id="opsSwitchSnitch">Switching snitches</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsChangeKSStrategy.html" data-id="opsChangeKSStrategy">Changing keyspace replication strategy</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsMoveCluster.html" data-id="opsMoveCluster">Edge cases for transitioning or migrating a cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsAddRplSingleTokenNodes.html" data-id="opsAddRplSingleTokenNodes">Adding single-token nodes to a cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsAddDCSingleTokenNodes.html" data-id="opsAddDCSingleTokenNodes">Adding a datacenter to a single-token architecture cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsReplaceSingleTokenNode.html" data-id="opsReplaceSingleTokenNode">Replacing a dead node in a single-architecture cluster</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsBackupRestore.html" data-id="opsBackupRestore">Backing up and restoring data</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsAboutSnapshots.html" data-id="opsAboutSnapshots">About snapshots</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupTakesSnapshot.html" data-id="opsBackupTakesSnapshot">Taking a snapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupDeleteSnapshot.html" data-id="opsBackupDeleteSnapshot">Deleting snapshot files</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupIncremental.html" data-id="opsBackupIncremental">Enabling incremental backups</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupSnapshotRestore.html" data-id="opsBackupSnapshotRestore">Restoring from a snapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsSnapshotRestoreNewCluster.html" data-id="opsSnapshotRestoreNewCluster">Restoring a snapshot into a new cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRecoverUsingJBOD.html" data-id="opsRecoverUsingJBOD">Recovering from a single disk failure using JBOD</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesTOC.html" data-id="opsRepairNodesTOC">Repairing nodes</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesHintedHandoff.html" data-id="opsRepairNodesHintedHandoff">Hinted Handoff: repair during write path</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesReadRepair.html" data-id="opsRepairNodesReadRepair">Read Repair: repair during read path</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesManualRepair.html" data-id="opsRepairNodesManualRepair">Manual repair: Anti-entropy repair</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesMigration.html" data-id="opsRepairNodesMigration">Migrating to incremental repairs</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/monitoringCassandraTOC.html" data-id="monitoringCassandraTOC">Monitoring Cassandra</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsMonitoring.html" data-id="opsMonitoring">Monitoring a Cassandra cluster</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/operations/opsTuneJVM.html" data-id="opsTuneJVM">Tuning Java resources</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsDataCachingTOC.html" data-id="opsDataCachingTOC">Data caching</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsConfiguringCaches.html" data-id="opsConfiguringCaches">Configuring data caches</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsMonitoringCache.html" data-id="opsMonitoringCache">Monitoring and adjusting caching</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/operations/opsMemtableThruput.html" data-id="opsMemtableThruput">Configuring memtable thresholds</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsConfigureCompaction.html" data-id="opsConfigureCompaction">Configuring compaction</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsAboutConfigCompress.html" data-id="opsAboutConfigCompress">Compression</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsWhenCompress.html" data-id="opsWhenCompress">When to compress data</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsConfigCompress.html" data-id="opsConfigCompress">Configuring compression</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/operations/opsTestCompactCompress.html" data-id="opsTestCompactCompress">Testing compaction and compression</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsTuningBloomFilters.html" data-id="opsTuningBloomFilters">Tuning Bloom filters</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/migrating.html" data-id="migrating">Moving data to or from other databases</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsGossipPurge.html" data-id="opsGossipPurge">Purging gossip state on a node</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsTOC.html" data-id="toolsTOC">Cassandra tools</a></span><ul><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsNodetool.html" data-id="toolsNodetool">The nodetool utility</a></span><ul><li><span class="topicref"><a href="../../cassandra/tools/toolsAboutNodetool.html" data-id="toolsAboutNodetool">About the nodetool utility</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsAssassinate.html" data-id="toolsAssassinate">assassinate</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsBootstrap.html" data-id="toolsBootstrap">bootstrap</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCfHistogramsRedirect.html" data-id="toolsCfHistogramsRedirect">cfhistograms</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCfStatsRedirect.html" data-id="toolsCfStatsRedirect">cfstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCleanup.html" data-id="toolsCleanup">cleanup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsClearSnapShot.html" data-id="toolsClearSnapShot">clearsnapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCompact.html" data-id="toolsCompact">compact</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCompactionHistory.html" data-id="toolsCompactionHistory">compactionhistory</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCompactionStats.html" data-id="toolsCompactionStats">compactionstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDecommission.html" data-id="toolsDecommission">decommission</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDescribeCluster.html" data-id="toolsDescribeCluster">describecluster</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDescribeRing.html" data-id="toolsDescribeRing">describering</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableAutoCompaction.html" data-id="toolsDisableAutoCompaction">disableautocompaction</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableBackup.html" data-id="toolsDisableBackup">disablebackup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableBinary.html" data-id="toolsDisableBinary">disablebinary</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableGossip.html" data-id="toolsDisableGossip">disablegossip</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableHandoff.html" data-id="toolsDisableHandoff">disablehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisablehintsfordc.html" data-id="toolsDisablehintsfordc">disablehintsfordc</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableThrift.html" data-id="toolsDisableThrift">disablethrift</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDrain.html" data-id="toolsDrain">drain</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableAutoCompaction.html" data-id="toolsEnableAutoCompaction">enableautocompaction</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableBackup.html" data-id="toolsEnableBackup">enablebackup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableBinary.html" data-id="toolsEnableBinary">enablebinary</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableGossip.html" data-id="toolsEnableGossip">enablegossip</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableHandoff.html" data-id="toolsEnableHandoff">enablehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnablehintsfordc.html" data-id="toolsEnablehintsfordc">enablehintsfordc</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableThrift.html" data-id="toolsEnableThrift">enablethrift</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsFailureDetector.html" data-id="toolsFailureDetector">failuredetector</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsFlush.html" data-id="toolsFlush">flush</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGcstats.html" data-id="toolsGcstats">gcstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetCompactionThreshold.html" data-id="toolsGetCompactionThreshold">getcompactionthreshold</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetcompactionthroughput.html" data-id="toolsGetcompactionthroughput">getcompactionthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetEndPoints.html" data-id="toolsGetEndPoints">getendpoints</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetInterDcStreamThroughPut.html" data-id="toolsGetInterDcStreamThroughPut">getinterdcstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetLogLev.html" data-id="toolsGetLogLev">getlogginglevels</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetSstables.html" data-id="toolsGetSstables">getsstables</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetStreamThroughput.html" data-id="toolsGetStreamThroughput">getstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGettimeout.html" data-id="toolsGettimeout">gettimeout</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetTraceProbability.html" data-id="toolsGetTraceProbability">gettraceprobability</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGossipInfo.html" data-id="toolsGossipInfo">gossipinfo</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsHelp.html" data-id="toolsHelp">help</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInfo.html" data-id="toolsInfo">info</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInvalidatecountercache.html" data-id="toolsInvalidatecountercache">invalidatecountercache</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInvalidateKeyCache.html" data-id="toolsInvalidateKeyCache">invalidatekeycache</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInvalidateRowCache.html" data-id="toolsInvalidateRowCache">invalidaterowcache</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsJoin.html" data-id="toolsJoin">join</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsListSnapShots.html" data-id="toolsListSnapShots">listsnapshots</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsMove.html" data-id="toolsMove">move</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsNetstats.html" data-id="toolsNetstats">netstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsPauseHandoff.html" data-id="toolsPauseHandoff">pausehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsProxyHistograms.html" data-id="toolsProxyHistograms">proxyhistograms</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRangeKeySample.html" data-id="toolsRangeKeySample">rangekeysample</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRebuild.html" data-id="toolsRebuild">rebuild</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRebuildIndex.html" data-id="toolsRebuildIndex">rebuild_index</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRefresh.html" data-id="toolsRefresh">refresh</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRefreshSizeEstimates.html" data-id="toolsRefreshSizeEstimates">refreshsizeestimates</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsReloadTriggers.html" data-id="toolsReloadTriggers">reloadtriggers</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRelocateSSTables.html" data-id="toolsRelocateSSTables">relocatesstables</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRemoveNode.html" data-id="toolsRemoveNode">removenode</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRepair.html" data-id="toolsRepair">repair</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsReplaybatchlog.html" data-id="toolsReplaybatchlog">replaybatchlog</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsResetLocalSchema.html" data-id="toolsResetLocalSchema">resetlocalschema</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsResumeHandoff.html" data-id="toolsResumeHandoff">resumehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRing.html" data-id="toolsRing">ring</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsScrub.html" data-id="toolsScrub">scrub</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCacheCapacity.html" data-id="toolsSetCacheCapacity">setcachecapacity</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCacheKeysToSave.html" data-id="toolsSetCacheKeysToSave">setcachekeystosave</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCompactionThreshold.html" data-id="toolsSetCompactionThreshold">setcompactionthreshold</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCompactionThroughput.html" data-id="toolsSetCompactionThroughput">setcompactionthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetHHthrottle.html" data-id="toolsSetHHthrottle">sethintedhandoffthrottlekb</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetInterDcStreamThroughput.html" data-id="toolsSetInterDcStreamThroughput">setinterdcstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetLogLev.html" data-id="toolsSetLogLev">setlogginglevel</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetStreamThroughput.html" data-id="toolsSetStreamThroughput">setstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSettimeout.html" data-id="toolsSettimeout">settimeout</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetTraceProbability.html" data-id="toolsSetTraceProbability">settraceprobability</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSjk.html" data-id="toolsSjk">sjk</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSnapShot.html" data-id="toolsSnapShot">snapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatus.html" data-id="toolsStatus">status</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusBackup.html" data-id="toolsStatusBackup">statusbackup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusBinary.html" data-id="toolsStatusBinary">statusbinary</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusGossip.html" data-id="toolsStatusGossip">statusgossip</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusHandoff.html" data-id="toolsStatusHandoff">statushandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusThrift.html" data-id="toolsStatusThrift">statusthrift</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStop.html" data-id="toolsStop">stop</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStopDaemon.html" data-id="toolsStopDaemon">stopdaemon</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTablehisto.html" data-id="toolsTablehisto">tablehistograms</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTablestats.html" data-id="toolsTablestats">tablestats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsToppartitions.html" data-id="toolsToppartitions">toppartitions</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTPstats.html" data-id="toolsTPstats">tpstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTruncateHints.html" data-id="toolsTruncateHints">truncatehints</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsUpgradeSstables.html" data-id="toolsUpgradeSstables">upgradesstables</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsVerify.html" data-id="toolsVerify">verify</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsVersion.html" data-id="toolsVersion">version</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCUtility.html" data-id="toolsCUtility">The cassandra utility</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsCStress.html" data-id="toolsCStress">The cassandra-stress tool</a></span><ul><li><span class="topicref"><a href="../../cassandra/tools/toolsCStressOutput.html" data-id="toolsCStressOutput">Interpreting the output of cassandra-stress</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsSSTableUtilitiesTOC.html" data-id="toolsSSTableUtilitiesTOC">SSTable utilities</a></span><ul><li><span class="topicref"><a href="../../cassandra/tools/ToolsSSTabledump.html" data-id="ToolsSSTabledump">sstabledump</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabExpiredBlockers.html" data-id="toolsSStabExpiredBlockers">sstableexpiredblockers</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabLevelReset.html" data-id="toolsSStabLevelReset">sstablelevelreset</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsBulkloader.html" data-id="toolsBulkloader">sstableloader (Cassandra bulk loader)</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSSTableMetadata.html" data-id="toolsSSTableMetadata">sstablemetadata</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabOfflineRelevel.html" data-id="toolsSStabOfflineRelevel">sstableofflinerelevel</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabRepairedSet.html" data-id="toolsSStabRepairedSet">sstablerepairedset</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSSTableScrub.html" data-id="toolsSSTableScrub">sstablescrub</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSSTableSplit.html" data-id="toolsSSTableSplit">sstablesplit</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/ToolsSSTableupgrade.html" data-id="ToolsSSTableupgrade">sstableupgrade</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabUtil.html" data-id="toolsSStabUtil">sstableutil</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabVerify.html" data-id="toolsSStabVerify">sstableverify</a></span></li></ul></li></ul></li><li><span class="topicref"><a href="../../cassandra/troubleshooting/trblshootTOC.html" data-id="trblshootTOC">Troubleshooting</a></span></li><li><span class="topicref"><a href="../../cassandra/releaseNotes.html" data-id="releaseNotes">Release notes</a></span></li></ul></div>
+                    
+                    <!--whc:include_html href="${webhelp.fragment.after.top_menu}"/-->
+                    <div class="ds_top_menu_collapse">
+                        <ul>
+                            <li><a href="https://www.datastax.com">Home</a></li>
+                            <li><a href="https://academy.datastax.com/">Academy</a></li>
+                            <li><a href="/en">Docs home</a></li>
+                            <li><a href="https://www.datastax.com/contactus">Contact us</a></li>
+                            <li><a href="https://academy.datastax.com/downloads">Download
+                                DataStax</a></li>
+                            <li><a href="http://docs.datastax.com"/en/glossary/doc/">Glossary</a></li>
+                            <li><a href="https://support.datastax.com/">Support</a></li>
+                            <li><a href="https://www.datastax.com/dev/blog/">Developer blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+        
+        <!-- Search forms -->
+        
+        <span>
+            <div class=" wh_search_input "><form id="searchForm" method="get" action="../../search.html"><div><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" /><button type="submit" class="wh_search_button"><span>Search</span></button></div></form></div>
+        </span>
+        <div class="advanced-search">
+            <p><a href="http://docs.datastax.com"/en/advancedSearch.html">Search all docs</a></p>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+
+                <nav class="wh_tools hidden-print">
+                    <div class=" wh_breadcrumb "><ol class="hidden-print"><li><span class="home"><a href="../../index.html"><span>Home</span></a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configTOC.html">Configuration</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureTOC.html">Security</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLEncryptTOC.html">SSL encryption</a></span></li><li class="active"><span class="topicref">Preparing SSL certificates for production</span></li></ol></div>
+
+                    <div class="wh_right_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cassandra/configuration/secureSSLCertificates.html" title="Preparing server certificates for development"></a></span>  
+<span class="navnext"><a class="link" href="../../cassandra/configuration/secureSSLNodeToNode.html" title="Node-to-node encryption"></a></span>  </span></div>
+                        <div class=" wh_print_link print "><a href="javascript:window.print();" title="Print this page"></a></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wh_content_area  data-swiftype-index=true" id="annotate">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Preparing SSL certificates for production<a class="headerlink" href="secureSSLCertWithCA.html#secureSSLCertWithCA" rel="internal"> </a></h1>
+
+    
+    <div class="body taskbody"><p class="shortdesc">Steps to generate SSL certificates for client-to-node encryption or node-to-node
+        encryption using a self-signed Certificate Authority (CA) in a production
+        environment.</p>
+
+        <section class="section context">
+            <p class="p">To use SSL encryption for client-to-node encryption or node-to-node encryption, SSL
+                certificates must be generated using <a class="xref" href="https://www.openssl.org" target="_blank">openssl</a> and  <a class="xref" href="http://docs.oracle.com/javase/8/docs/technotes/guides/security/SecurityToolsSummary.html" target="_blank">keytool</a>. To validate the certificates, a
+                self-signed Certificate Authority (CA) can be generated for production use with
+                Apache Cassandra. The certificates generated using these instructions can be used
+                for both internode and client-to-node encryption. For internode encryption, all
+                nodes must have the truststore that provides the chain of trust for the CA. The
+                certificates in the truststore can either be signed by the self-signed certificate
+                authority used here or by a trusted and recognized public certificate authority.</p>
+
+        </section>
+
+        <div class="tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><p class="li stepsection"><strong class="ph b">Create a root CA certificate and key</strong></p><ol><li class="li step stepexpand">
+                <span class="ph cmd">Create the root CA certificate and key using <code class="ph codeph">openssl req</code>. This
+                    command uses a certificate configuration file
+                        <code class="ph codeph">gen_rootCa_cert.conf</code>.</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">$ openssl req 
+    -config gen_rootCa_cert.conf 
+    -new -x509 -nodes 
+    -subj /CN=rootCa/OU=TestCluster/O=YourCompany/C=US/ 
+    -keyout rootCa.key 
+    -out rootCa.crt
+    -days 365</pre>
+
+                    <pre class="pre codeblock"><code># gen_rootCa_cert.conf
+[ req ]
+distinguished_name        = req_distinguished_name
+prompt		      = no
+output_password	    = myPass
+default_bits		= 2048
+
+[ req_distinguished_name ]
+C			    = US
+O			    = YourCompany
+OU			   = TestCluster
+CN			    = rootCa</code></pre>
+                    
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="secureSSLCertWithCA__table_itm_1yb_hx" class="table" frame="border" border="1" rules="all"><colgroup><col /><col /></colgroup><tbody class="tbody">
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Option</strong></td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Description</strong></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-config</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Configuration file to use</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-new</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Generate new certificate</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-x509</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Outputs a self-signed certificate</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-nodes</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">If a private key is created, it is not encrypted</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-subj</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Sets subject name when processing</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keyout</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the private key filename to write</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-out</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the certificate filename to write</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-days</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the number of days for which to certify the
+                                        certificate</td>
+
+                                </tr>
+
+                            </tbody>
+</table>
+</div>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <p class="p">The resulting files are the rootCA certificate and the rootCa private
+                        key.</p>
+
+                    <div class="p">An example of the <code class="ph codeph">rootCa.crt</code> file:
+                        <pre class="pre codeblock"><code>-----BEGIN CERTIFICATE-----
+MIIDADCCAegCCQCWl1PhaMCqNDANBgkqhkiG9w0BAQsFADBCMQswCQYDVQQGEwJV
+UzEMMAoGA1UEChMDTExQMRQwEgYDVQQLEwtUZXN0Q2x1c3RlcjEPMA0GA1UEAxMG
+cm9vdENhMB4XDTE2MDkxMDAzNTkzOFoXDTE3MDkxMDAzNTkzOFowQjELMAkGA1UE
+BhMCVVMxDDAKBgNVBAoTA0xMUDEUMBIGA1UECxMLVGVzdENsdXN0ZXIxDzANBgNV
+BAMTBnJvb3RDYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANmFeE58
+eafNDPOYr6yFGNHxnwtiKRIs1CXF8pJQ1smgzM2v6D9UeixdZ5bDs0grK14a4UoE
+939ZCWKOLcgFi3394XwXHCf0mSjudrHd0ptAQKVSMqILRiJ5nJaR4yqfZBFbB2fl
+iQ5r9z2P20zTjlbbXZoJT83KF4Q+ke+VLLmEgSsLowjmq+JPP4Uzlp8dCyVLpAeD
+snf/T7/RaeIuZ+Wzje5pMlerY7Cv9A6te/SkFK1bZYzMsTCFOY6RBk1KdcVyDvhi
+co1b8Hv5hQLZ4v3nd6RtfmXNdL7YrqnLA9LnmS9ZFIk1w95Plg6hdBOuGT62W3ll
+IypMbZBOdWBMp0MCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAmoh6xkoa71yuVxJO
+O24wDfSNIpgAiP1uj7tvgza0yPs221o8p2e/34wdRaWdzLnc3Iu8cLpommuq9b82
+/WQNxdqFIJyyJwDTZUZ6VisSSXktDsW3mDPy10As+HJHuQ9adTsi/sOerh85FjmT
+BYbTDjX6BsIrwywgFBnb6uud2/GKlzTtlsi5LFLWKHVryxqng+ja4CZZbQ6/GT02
+hdP2d/17gGgCi1hIg5KJv/MoVhN0dLb6cueqfxLOOLGkqkXev2NiONzpjQITRwoF
+1NUo45DRHi25PAJ8+slUzvii4ADbe3P+SfEI6AETdnadCnA+WOffHI35OqxxePO9
+VqWu8w==
+-----END CERTIFICATE-----</code></pre></div>
+
+                    <div class="p">An example of the <code class="ph codeph">rootCa.key</code>
+                        file:<pre class="pre codeblock"><code>-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZhXhOfHmnzQzz
+mK+shRjR8Z8LYikSLNQlxfKSUNbJoMzNr+g/VHosXWeWw7NIKyteGuFKBPd/WQli
+ji3IBYt9/eF8Fxwn9Jko7nax3dKbQEClUjKiC0YieZyWkeMqn2QRWwdn5YkOa/c9
+j9tM045W212aCU/NyheEPpHvlSy5hIErC6MI5qviTz+FM5afHQslS6QHg7J3/0+/
+0WniLmfls43uaTJXq2Owr/QOrXv0pBStW2WMzLEwhTmOkQZNSnXFcg74YnKNW/B7
++YUC2eL953ekbX5lzXS+2K6pywPS55kvWRSJNcPeT5YOoXQTrhk+tlt5ZSMqTG2Q
+TnVgTKdDAgMBAAECggEAYsdSn8m08TeTtxdSR3TVlZk00VWNMxy6ZkDi7ADb2Qo1
+lv5X6FJzfKwZ+4P5aT95XS21uwhQYDtNoLzSG3AxLVDaUaCo/5f66XSI4DLMjgX6
+lVijd6TI/6TcMCAl2dgx+BOvZEX/HFZ5GzK1ssirbdQGSIoL/HbWgQ5s9TB38/Ja
+205ZB1lMUVsqdmY2M6vwY0xgr/xKXMgA3KvsW5PFBX1bgh8T6OLuIXTERYezGU4c
+c71JJt+1ejHSDInEEIV1peJer6qXopHDMQOcOSTzcZkGgDlFB7DHyGZM1ZsDRDOO
+f7Kq02A2c6CwJQeyGyRVIxDO6Ef73zw6UEtWzYCHeQKBgQDw9i8y0nlLgBLZaWor
+bJzJN9ML7CfOVw/RuGD2Y0z7su8SWQLLecVW1lwcaec80rD7e/SBr9Q/Kz68va13
+sVBx43QEDNp63g36bX917gu/hwBQs6RJlHGJmiNa/p5S01MaMM2YrX35gxBCQJHN
+hiE0yBzepfdGDELrEtOcttfCFwKBgQDnGMhpCpBEvYX43l9PQmnJ+P2w3lZoo8RF
+YUdpUuyH9n/mbopU3zu5f1roJefiEaxOozuL1sUOCsCN8qK2B3YCcX0LUvLrpAqR
+UD+So+eAF9tgFKHDvPLO7YA3iGPUl00cnwl2UXxV+7SONJRZsCbhbGO+T6QWq6YT
+eohMfvgbtQKBgFHPlAjSUyJiMoQkeUqTDsx2qq4SmRVCk/lle25MGrgecXMuS3eg
+OXMZRp7TChKpijNoS4S4mPx1h1B3qezIhAKW8i3p20f6Go7bHHqCvvRhNqcvxujA
+gKfycGyVpFWEsGNlDHj49pt/d0a3O4mnL6EHDF4/xSvAP/wmITjFD44zAoGBALbB
+jpwjUnxKNUze7xjLOMYVNutMqaEPAgSsLcFJZu0PL46YFKWR9LV51faJI5xQxada
+x5iLPEMilaysGalCtTyxa2YtLxbTH9hTUjMxk75lH4QYTOVy48JpaGCCaBCTptPf
+oagEQQPujpd3VWqoN9dF1IuIiAe1rxzwZiG4t5WRAoGBAKdypl5nZgtghlUxoazS
+CXfQsIT7g4y0LvoL9+EqdPk98Wl2Cb6MD1M89UqFhoyh65xE73EssGqDyypgYFGE
+HS/sMt9PP44ftfWRgQEGje6tJdKXLyUHSF+kKg4mormriOSm54sZD7Qk5RxEVcMq
+arKAClJVFkL9ARoAxRQWwidv
+-----END PRIVATE KEY-----</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Verify the rootCa certificate</strong></p><ol start="2"><li class="li step stepexpand">
+                <span class="ph cmd">Verify the rootCa certificate.</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">$  openssl x509
+    -in rootCa.crt
+    -text 
+    -noout</pre>
+
+                    
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="secureSSLCertWithCA__table_lc1_nbc_hx" class="table" frame="border" border="1" rules="all"><colgroup><col /><col /></colgroup><tbody class="tbody">
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Option</strong></td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Description</strong></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-in</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the certificate filename to verify</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-text</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Print out the certificate in text form including the
+                                        public key, signature algorithms, issuer and subject names,
+                                        serial number any extensions present and any trust
+                                        settings</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-noout</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Prevents output of the encoded version of the
+                                        request</td>
+
+                                </tr>
+
+                            </tbody>
+</table>
+</div>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">This command prints output to the console that is similar to this
+                        example:<pre class="pre codeblock"><code>Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number: 10851234054762703412 (0x969753e168c0aa34)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, O=YourCompany, OU=TestCluster, CN=rootCa
+        Validity
+            Not Before: Sep 10 03:59:38 2016 GMT
+            Not After : Sep 10 03:59:38 2017 GMT
+        Subject: C=US, O=YourCompany, OU=TestCluster, CN=rootCa
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:d9:85:78:4e:7c:79:a7:cd:0c:f3:98:af:ac:85:
+                    18:d1:f1:9f:0b:62:29:12:2c:d4:25:c5:f2:92:50:
+                    d6:c9:a0:cc:cd:af:e8:3f:54:7a:2c:5d:67:96:c3:
+                    b3:48:2b:2b:5e:1a:e1:4a:04:f7:7f:59:09:62:8e:
+                    2d:c8:05:8b:7d:fd:e1:7c:17:1c:27:f4:99:28:ee:
+                    76:b1:dd:d2:9b:40:40:a5:52:32:a2:0b:46:22:79:
+                    9c:96:91:e3:2a:9f:64:11:5b:07:67:e5:89:0e:6b:
+                    f7:3d:8f:db:4c:d3:8e:56:db:5d:9a:09:4f:cd:ca:
+                    17:84:3e:91:ef:95:2c:b9:84:81:2b:0b:a3:08:e6:
+                    ab:e2:4f:3f:85:33:96:9f:1d:0b:25:4b:a4:07:83:
+                    b2:77:ff:4f:bf:d1:69:e2:2e:67:e5:b3:8d:ee:69:
+                    32:57:ab:63:b0:af:f4:0e:ad:7b:f4:a4:14:ad:5b:
+                    65:8c:cc:b1:30:85:39:8e:91:06:4d:4a:75:c5:72:
+                    0e:f8:62:72:8d:5b:f0:7b:f9:85:02:d9:e2:fd:e7:
+                    77:a4:6d:7e:65:cd:74:be:d8:ae:a9:cb:03:d2:e7:
+                    99:2f:59:14:89:35:c3:de:4f:96:0e:a1:74:13:ae:
+                    19:3e:b6:5b:79:65:23:2a:4c:6d:90:4e:75:60:4c:
+                    a7:43
+                Exponent: 65537 (0x10001)
+    Signature Algorithm: sha256WithRSAEncryption
+         9a:88:7a:c6:4a:1a:ef:5c:ae:57:12:4e:3b:6e:30:0d:f4:8d:
+         22:98:00:88:fd:6e:8f:bb:6f:83:36:b4:c8:fb:36:db:5a:3c:
+         a7:67:bf:df:8c:1d:45:a5:9d:cc:b9:dc:dc:8b:bc:70:ba:68:
+         9a:6b:aa:f5:bf:36:fd:64:0d:c5:da:85:20:9c:b2:27:00:d3:
+         65:46:7a:56:2b:12:49:79:2d:0e:c5:b7:98:33:f2:d7:40:2c:
+         f8:72:47:b9:0f:5a:75:3b:22:fe:c3:9e:ae:1f:39:16:39:93:
+         05:86:d3:0e:35:fa:06:c2:2b:c3:2c:20:14:19:db:ea:eb:9d:
+         db:f1:8a:97:34:ed:96:c8:b9:2c:52:d6:28:75:6b:cb:1a:a7:
+         83:e8:da:e0:26:59:6d:0e:bf:19:3d:36:85:d3:f6:77:fd:7b:
+         80:68:02:8b:58:48:83:92:89:bf:f3:28:56:13:74:74:b6:fa:
+         72:e7:aa:7f:12:ce:38:b1:a4:aa:45:de:bf:63:62:38:dc:e9:
+         8d:02:13:47:0a:05:d4:d5:28:e3:90:d1:1e:2d:b9:3c:02:7c:
+         fa:c9:54:ce:f8:a2:e0:00:db:7b:73:fe:49:f1:08:e8:01:13:
+         76:76:9d:0a:70:3e:58:e7:df:1c:8d:f9:3a:ac:71:78:f3:bd:
+         56:a5:ae:f3</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Generate public/private key pair and keystore for each
+                node</strong></p><ol start="3"><li class="li step stepexpand">
+                <span class="ph cmd">Repeat this command for each node. The files can be generated on a single node
+                    and distributed out to the nodes after the entire process is completed.</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">keytool -genkeypair 
+    -keyalg RSA 
+    -alias 10.200.175.15 
+    -keystore 10.200.175.15.jks 
+    -storepass myKeyPass 
+    -keypass myKeyPass 
+    -validity 365 
+    -keysize 2048 
+    -dname "CN=10.200.175.15, OU=TestCluster, O=YourCompany, C=US"   
+</pre>
+
+                    
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="secureSSLCertWithCA__table_x1c_2dc_hx" class="table" frame="border" border="1" rules="all"><colgroup><col /><col /></colgroup><tbody class="tbody">
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Option</strong></td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Description</strong></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-genkeypair</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Command to generate a public/private key pair</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keyalg</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the key algorithm</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-alias</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Assign an unique alias by which keystore entry is
+                                        accessed</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keystore</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the keystore filename</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-storepass</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the keystore password</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keypass</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the private key password</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-validity</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the number of days for the keystore certificate
+                                        validity</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keysize</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the size of the generated key</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-dname</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the X.500 Distinguished Name to be associated
+                                        with the value of alias</td>
+
+                                </tr>
+
+                            </tbody>
+</table>
+</div>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <p class="p">In this example, the node IP address is <code class="ph codeph">10.200.175.15</code> and
+                        the keystore filename incorporates that IP address with a suffix of
+                            <code class="ph codeph">jks</code> (Java KeyStore). While the keystore can be named
+                        with any convention, the examples here use the IP address in order to map
+                        the files to the nodes. The <code class="ph codeph">dname</code> sets the
+                            <code class="ph codeph">CN</code> value to the node's IP address or FQDN as well. The
+                            <code class="ph codeph">storepass</code> and <code class="ph codeph">keypass</code> must be the same
+                        value.</p>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Check certificates</strong></p><ol start="4"><li class="li step stepexpand">
+                <span class="ph cmd">The certificates can be checked once generated:</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">keytool -list 
+    -keystore 10.200.175.15.jks 
+    -storepass myKeyPass</pre>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">An example keystore
+                        file:<pre class="pre codeblock"><code>Keystore type: JKS
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+10.200.175.15, Sep 10, 2016, PrivateKeyEntry, 
+Certificate fingerprint (SHA1): D6:1B:6C:FE:E3:3B:4B:3D:E0:F0:38:EA:54:AD:F0:E7:1E:D4:CB:4D</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Export certificate signing request (CSR) for each node</strong></p><ol start="5"><li class="li step stepexpand">
+                <span class="ph cmd">Once the node certificate and key are generated, a certificate signing request
+                    (CSR) is exported. The CSR will be signed with the rootCa certificate to verify
+                    that the node's certificate is trusted.</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">keytool -certreq
+    -keystore 10.200.175.15.jks 
+    -alias 10.200.175.15 
+    -file 10.200.175.15.csr 
+    -keypass myKeyPass 
+    -storepass myKeyPass 
+    -dname "CN=10.200.175.15, OU=TestCluster, O=YourCompany, C=US"  
+</pre>
+
+                    
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="secureSSLCertWithCA__table_b2c_1gc_hx" class="table" frame="border" border="1" rules="all"><colgroup><col /><col /></colgroup><tbody class="tbody">
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Option</strong></td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Description</strong></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-certreq</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Command to export a CSR</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-file</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the CSR filename</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-alias</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Assign an unique alias by which keystore entry is
+                                        accessed</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keystore</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the keystore filename</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-storepass</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the keystore password</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-keypass</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the private key password</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-dname</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the X.500 Distinguished Name to be associated
+                                        with the value of alias</td>
+
+                                </tr>
+
+                            </tbody>
+</table>
+</div>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">An example CSR file:
+                        <pre class="pre codeblock"><code>-----BEGIN NEW CERTIFICATE REQUEST-----
+MIICvDCCAaQCAQAwRzELMAkGA1UEBhMCVVMxDDAKBgNVBAoTA0xMUDESMBAGA1UECxMJTExQMDkw
+NzE2MRYwFAYDVQQDEw0xMC4yMDAuMTc1LjE1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAhUJWFQ+9Xgs8KfhLYCBi8i0csY44YkCBFAz3jh6g80wdCqYetYcNxWi+3rgAFL6BAibt23xG
+qBKtNszxyUu8M7ocfw+dVeT4YQJWE0TNAnwlijx+jyl2IKCFtuON3NmGvvHviPDyNyz2VuB7jlA3
+fGuCSsXEzpDXdStKZNcozeIxnmLRv2VKkp8edOX0Bi3QOxwKgwzZQ0/Z7yWaixl1WB2YKzY9s1Bn
+oEoRHdFeQZR7f9QuQYBwIKsCx3cFsiEQJnpKqbZYLFrPmpMrR7ynLx6MGZVDuLfrXp/yFyuHmamI
+M80CGvKljwr/onalDY2F5AeSdUyBM3vVTWrC9n9jwQIDAQABoDAwLgYJKoZIhvcNAQkOMSEwHzAd
+BgNVHQ4EFgQUSbrkacD4XXCIaJQtX+7/en3Z8r8wDQYJKoZIhvcNAQELBQADggEBAAxU2FbQxy21
+EHcnfC4YETDQvXuwv4qQzcT61faZEjmznZ9ekm8ckzV5NlHpyArk12EO13twh94U56ZItKfiYOKW
+tP5wUGcoYhdyQnG0p6wunVRJAMidoZMAkjJ6bXwDwgNqnlKL48iGD8ZnguVUM353KwTDm1mvJ4yE
+ssEcnBKd4lDzfZN+yx3pmyCr/MjMCODLF7VVMRH5FpQZ0+uGAIq0fx8FeEugxGie4tkzqP3xkkUB
+RDKkfrUC8Z61gL3K1LpLZ77a1okpP3cNkvSStVgbhLH9qwnhCORNGHy+NyZLm1a+hS4QCAJzRKlC
+nsdwUTp+HXUtyNLd7GJHGLPu0YY=
+-----END NEW CERTIFICATE REQUEST-----</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Sign node certificate with rootCa for each node</strong></p><ol start="6"><li class="li step stepexpand">
+                <span class="ph cmd">The CSR is input, signed with the rootCa certificate and a signed node
+                    certificate is created.</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">openssl x509 
+    -req 
+    -CA rootCa.crt 
+    -CAkey rootCa.key 
+    -in 10.200.175.15.csr 
+    -out 10.200.175.15.crt_signed 
+    -days 365 
+    -CAcreateserial 
+    -passin pass:myPass
+</pre>
+
+                    
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="secureSSLCertWithCA__table_kts_qgc_hx" class="table" frame="border" border="1" rules="all"><colgroup><col /><col /></colgroup><tbody class="tbody">
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Option</strong></td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;"><strong class="ph b">Description</strong></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-req</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify that the input file is a CSR</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-CA</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Identify the rootCa certificate</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-CAkey</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Identify the rootCa key</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-in</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the input filename from which to read a
+                                        certificate</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-out</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the output filename for the signed
+                                        certificate</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-CAcreateserial</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify that a CA serial number file is created if it
+                                        does not exist</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-days</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the number of days for which to certify the
+                                        certificate</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="entry cellrowborder" style="vertical-align:top;">-passin</td>
+
+                                    <td class="entry cellrowborder" style="vertical-align:top;">Specify the key password source</td>
+
+                                </tr>
+
+                            </tbody>
+</table>
+</div>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">An example of the signed
+                        certificate:<pre class="pre codeblock"><code>-----BEGIN CERTIFICATE-----
+MIIDBTCCAe0CCQDBKbNGSE8C9DANBgkqhkiG9w0BAQsFADBCMQswCQYDVQQGEwJV
+UzEMMAoGA1UEChMDTExQMRQwEgYDVQQLEwtUZXN0Q2x1c3RlcjEPMA0GA1UEAxMG
+cm9vdENhMB4XDTE2MDkxMDA0MDAzMFoXDTE3MDkxMDA0MDAzMFowRzELMAkGA1UE
+BhMCVVMxDDAKBgNVBAoTA0xMUDESMBAGA1UECxMJTExQMDkwNzE2MRYwFAYDVQQD
+Ew0xMC4yMDAuMTc1LjE1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+hUJWFQ+9Xgs8KfhLYCBi8i0csY44YkCBFAz3jh6g80wdCqYetYcNxWi+3rgAFL6B
+Aibt23xGqBKtNszxyUu8M7ocfw+dVeT4YQJWE0TNAnwlijx+jyl2IKCFtuON3NmG
+vvHviPDyNyz2VuB7jlA3fGuCSsXEzpDXdStKZNcozeIxnmLRv2VKkp8edOX0Bi3Q
+OxwKgwzZQ0/Z7yWaixl1WB2YKzY9s1BnoEoRHdFeQZR7f9QuQYBwIKsCx3cFsiEQ
+JnpKqbZYLFrPmpMrR7ynLx6MGZVDuLfrXp/yFyuHmamIM80CGvKljwr/onalDY2F
+5AeSdUyBM3vVTWrC9n9jwQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCqqXSKsKlW
+sivk9/ap57fVbvYWj34FCmCYEWAPTrj0gEDwEP2WU2/813FF3fiXeFGwuNcm3XHl
+0jsPsrckVmtko2ERGHCsQS7RlRlbRRzinQZ6zQaHFyDqsVBGeb/FRE0eJPO2OWQA
+hksT1y7DAMv0kFyzvHDGtJRzWgXMpjc5LrWto46+JByx+9JjVI5a9DuKdvuoJGL/
+CShFW/AWyOBk8LFlx+qzcYBy1R6WYqqE+pIhsq8X9Jtb6/ZymZBw7Ek9XH8ULNjV
+S8QfiEkEXMjH+s+7Pofky7/8/udrEemQgLcIY3xKnlp+Rsz/wH21ZdKGs/lhbIzm
+Xo+7pYd2dqHT
+-----END CERTIFICATE-----</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Verify the signed certificate for each node</strong></p><ol start="7"><li class="li step stepexpand">
+                <span class="ph cmd">Check the signed certificate by designating the rootCa certificate and the
+                    signed certificate to verify:</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">openssl verify -CAfile rootCa.crt 10.200.175.15.crt_signed</pre>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">If the verification succeeds, a console message is
+                        returned:<pre class="pre codeblock"><code>10.200.175.15.crt_signed: OK</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Import rootCa certificate to each node keystore</strong></p><ol start="8"><li class="li step stepexpand">
+                <span class="ph cmd">Use <code class="ph codeph">keytool -importcert</code> to import the rootCa certificate into
+                    each node keystore:</span>
+                <div class="itemgroup stepxmp">
+                    <div class="p"><pre class="pre screen">keytool -importcert 
+    -keystore 10.200.175.15.jks 
+    -alias rootCa  
+    -file rootCa.crt 
+    -noprompt  
+    -keypass myKeyPass 
+    -storepass myKeyPass 
+</pre>
+The
+                            <code class="ph codeph">-noprompt</code> option allows the command to use the
+                        specified values rather than prompting for input.</div>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">The keystore file now has two entries, one for the rootCa certificate and one
+                        for the node
+                        certificate:<pre class="pre codeblock"><code>Keystore type: JKS
+Keystore provider: SUN
+
+Your keystore contains 2 entries
+
+rootca, Sep 10, 2016, trustedCertEntry, 
+Certificate fingerprint (SHA1): CD:F2:A5:6F:EC:DA:B9:9E:C1:8D:89:09:AE:FF:DB:BD:56:F6:7D:79
+10.200.175.15, Sep 10, 2016, PrivateKeyEntry, 
+Certificate fingerprint (SHA1): D6:1B:6C:FE:E3:3B:4B:3D:E0:F0:38:EA:54:AD:F0:E7:1E:D4:CB:4D</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Import node's signed certificate into node keystore for each
+                node</strong></p><ol start="9"><li class="li step stepexpand">
+                <span class="ph cmd"></span><br />
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">keytool -importcert
+    -keystore 10.200.175.15.jks 
+    -alias 10.200.175.15  
+    -file 10.200.175.15.crt_signed 
+    -noprompt 
+    -keypass myKeyPass 
+    -storepass myKeyPass 
+</pre>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <p class="p">The resulting file will appear similar to the result from the previous step,
+                        but the node certificate originally created is replaced with the signed node
+                        certificate.</p>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Create a server truststore</strong></p><ol start="10"><li class="li step stepexpand">
+                <span class="ph cmd">A server truststore file can be used to establish a chain of trust between the
+                    nodes of the cluster. </span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">keytool -importcert 
+    -keystore generic-server-truststore.jks 
+    -alias rootCa  
+    -file rootCa.crt 
+    -noprompt
+    -keypass myPass 
+    -storepass truststorePass </pre>
+
+                </div>
+                <div class="itemgroup stepresult">
+                    <div class="p">The resulting truststore file can be inspected using the <code class="ph codeph">keytool
+                            -list</code>
+                        command:<pre class="pre screen">keytool -list 
+    -keystore generic-server-truststore.jks 
+    -storepass truststorePass</pre>
+
+                        and an example of the truststore file will include a rootCa certificate
+                        entry:<pre class="pre codeblock"><code>Keystore type: JKS
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+rootca, Sep 10, 2016, trustedCertEntry, 
+Certificate fingerprint (SHA1): CD:F2:A5:6F:EC:DA:B9:9E:C1:8D:89:09:AE:FF:DB:BD:56:F6:7D:79</code></pre></div>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Copy the truststore file to each node</strong></p><ol start="11"><li class="li step stepexpand">
+                <span class="ph cmd">The truststore file must be copied to each node. If a node is used to generate
+                    the file, copy the file to a location of choice and name the file with a
+                    standard format, such as <code class="ph codeph">server-truststore.jks</code>. This example
+                    shows the copy command for a Linux server with a tarball installation of
+                    Cassandra and stores the file in the configuration directory of Cassandra:</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">cp ~/generic-server-truststore.jks /usr/local/lib/cassandra/conf/server-truststore.jks</pre>
+
+                </div>
+            </li>
+</ol><p class="li stepsection"><strong class="ph b">Copy the each node keystore file to each node</strong></p><ol start="12"><li class="li step stepexpand">
+                <span class="ph cmd">Each node file must have a copy of its keystore file. If a node is used to
+                    generate the file, copy the file to a location of choice. This example shows the
+                    secure remote copy commands for a Linux server with a tarball installation of
+                    Cassandra, where the certificates were generated on a single node.  The file is
+                    stored in the configuration directory of Cassandra in this example:</span>
+                <div class="itemgroup stepxmp">
+                    <pre class="pre screen">scp -r 10.200.175.150.jks /usr/local/lib/cassandra/conf/10.200.175.150.jks</pre>
+
+                </div>
+            </li>
+</ol>
+    </div>
+
+</article></main></div>
+                        
+                        
+                        
+                        
+                    </div>
+                    <nav role="navigation" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 navbar" id="wh_side_toc">
+                        <div class=" wh_side_toc "><ul class="hidden-print"><li><span class="topicref"><a href="../../cassandra/configuration/configTOC.html">Configuration</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cassandra/configuration/configCassandra_yaml.html">cassandra.yaml</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/referenceInclude.html">Cassandra include file</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureTOC.html">Security</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cassandra/configuration/secureIntro.html">Securing Cassandra</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureInternalAuthenticationTOC.html">Internal authentication</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureInternalAuthorizationTOC.html">Internal authorization</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureJMXAuthenticationTOC.html">JMX authentication and authorization</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLEncryptTOC.html">SSL encryption</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLIntro.html">Encrypting Cassandra with SSL</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/installJCE.html">Installing Java Cryptography Extension (JCE) Files </a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLCertificates.html">Preparing server certificates for development</a></span></li><li class="active"><span class="topicref">Preparing SSL certificates for production</span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLNodeToNode.html">Node-to-node encryption</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLClientToNode.html">Client-to-node encryption</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureCqlshSSL.html">Using cqlsh with SSL</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureNodetoolSSL.html">Using nodetool (JMX) with SSL encryption</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureJconsoleSSL.html">Using jconsole (JMX) with SSL encryption</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/configuration/secureFireWall.html">Configuring firewall port access</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/configuration/configGossipSettings.html">Configuring gossip settings</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configHeapDump.html">Configuring the heap dump directory</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configVirtualNodesTOC.html">Configuring virtual nodes</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configMultiNetworks.html">Using multiple network interfaces</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configLoggingLevels.html">Configuring logging</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configLogArchive.html">Commit log archive configuration</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configCDCLogging.html">Change Data Capture (CDC) logging</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configGenTokens.html">Generating tokens</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configHadoop.html">Hadoop support</a></span></li></ul></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="hidden-print col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="text-center wh_bottom_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links bottom_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cassandra/configuration/secureSSLCertificates.html" title="Preparing server certificates for development"></a></span>  
+<span class="navnext"><a class="link" href="../../cassandra/configuration/secureSSLNodeToNode.html" title="Node-to-node encryption"></a></span>  </span></div>
+                    </div>
+                </nav>
+            </div>
+        </div> 
+        <nav class="navbar navbar-default wh_footer">
+  <div class=" footer-container text-center ">
+    <div class="ds_footer_bottom">
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/docTips.html" target="_blank" title="Doc Tips">
+        <span class="flaticon-signs"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Email feedback guidelines">
+        <span class="flaticon-new-email-interface-symbol-of-black-closed-envelope"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Twitter feedback guidelines">
+        <span class="flaticon-twitter-logo-button"></span></a>
+      <a href="https://github.com/datastax/" target="_blank" title="DataStax GitHub">
+        <span class="flaticon-github-logo"></span></a>
+      <a href="http://docs.datastax.com"/en/cassandra/3.0/zip/cassandra30.zip" target="_blank" title="Zipped document">
+        <span class="flaticon-symbols"></span></a>
+      <div>
+        <span>DataStax Enterprise is powered by the best distribution of Apache Cassandra™</span>
+      </div>
+      <div>
+        <span>©</span>
+        <span id="copyrightdate"></span>
+        <script type="text/javascript">document.getElementById("copyrightdate").innerHTML = new Date().getFullYear();</script>
+        <span>DataStax, Inc. All rights reserved. Updated: 31 August 2017</span>
+        <span style="display: none">Build time: 31 August 2017 07:45:10.908</span>
+      </div>
+    </div>
+    <div>
+        <p>DataStax, Titan, and TitanDB are registered trademark of DataStax, Inc. and its subsidiaries in the United States and/or other countries.</p>
+        <p>Apache Cassandra, Apache, Tomcat, Lucene, Solr, Hadoop, Spark, TinkerPop, and Cassandra are trademarks of the 
+            <a href="https://www.apache.org/" target="_blank" title="Apache Software Foundation">Apache Software Foundation</a> 
+            or its subsidiaries in Canada, the United States and/or other countries.</p>
+    </div>
+  </div>
+</nav>
+ 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="../../oxygen-webhelp/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/template/resources/js/wt_default.js?buildId=2017062918" type="text/javascript"></script>
+        <!-- Expand/collapse support -->
+        <script src="../../oxygen-webhelp/template/resources/js/wt_expand.js?buildId=2017062918" type="text/javascript"></script>
+        <div>
+    <script>
+    <!--
+    var collapsibleSections = {
+        /* Selectors for the nodes that contain an expand/collapse button. */
+        "expand_buttons" : [
+            /* Table caption */
+            "table > caption > .wh_expand_btn",
+            /* Article title */
+            ".topic > .title > .wh_expand_btn",
+            /* Section title */
+            ".sectiontitle > .wh_expand_btn",
+            /* Index terms groups */
+            ".wh_term_group > .wh_first_letter > .wh_expand_btn"
+        ],
+        "collapse_by_default" : [
+            /* sections with collapseByDefault output class */
+            ".collapseOnLoad > .wh_expand_btn"
+        ]
+    };
+
+    $(document).ready(function () {
+        /* Collapse selected nodes. */
+        collapsibleSections.collapse_by_default.forEach(
+            function(selector) {
+                var matchedNodes =  $(document).find(selector);
+                // Change the button state
+                matchedNodes.toggleClass("expanded");
+                // Will collapse the siblings of the parent node, excepting the ones that were marked otherwise
+                var siblings = matchedNodes.parent().siblings(':not(.wh_not_expandable)');
+                siblings.toggle();
+            }
+        );
+    });
+    //-->
+    </script>
+</div>
+        
+        <!-- DataStax js -->
+        <script src="../../oxygen-webhelp/assets/js/details-shim.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/highlight.pack.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/magnific-popup.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/dsInit.js" type="text/javascript"></script>
+        <!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+        <script type="text/javascript">replaceNextPrevArrows();</script>
+        <script type="text/javascript">getVersionDropdown("cassandra", "cassandra30");</script>
+        
+        <!-- Search autocomplete -->
+        <script type="text/javascript" src="../../oxygen-webhelp/search/keywords.js?uniqueId=20170831074510"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchAutocomplete.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchHistoryItems.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchOptions.js?uniqueId=20170831074510"></script>
+        
+        <!-- Analytics scripts for IT -->
+        <script type="text/javascript">
+          (function() {
+            var didInit = false;
+            function initMunchkin() {
+              if(didInit === false) {
+                didInit = true;
+                Munchkin.init('259-IFZ-779');
+                }
+              }
+              var s = document.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+              s.onreadystatechange = function() {
+                if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                  initMunchkin();
+                }
+             };
+             s.onload = initMunchkin;
+             document.getElementsByTagName('head')[0].appendChild(s);
+        })();
+        </script>
+        
+        <!-- end analytics scripts for IT -->
+            
+        <!-- Swiftype search code -->
+        
+        <!-- script type="text/javascript">
+            // set up autocomplete
+            $("#st-search-input").swiftype({
+                engineKey: "35HEzyB2mn1a1qGMmCwN"
+            });
+            // set up search
+            $("#st-search-input").swiftypeSearch({
+                engineKey: "35HEzyB2mn1a1qGMmCwN",
+                resultContainingElement: "#st-results-container"
+            });
+        </script -->
+		<!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+    </body>
+</html>

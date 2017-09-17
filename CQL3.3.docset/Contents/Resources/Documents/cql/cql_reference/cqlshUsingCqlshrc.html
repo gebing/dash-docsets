@@ -1,0 +1,1162 @@
+
+<!DOCTYPE html
+  PUBLIC "" "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" xml:lang="en-us" lang="en-us">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+      <meta name="title" content="Configuring cqlsh from a file" /><meta name="description" content="Customize the CQL shell configuration at start up from a properties file." /><title>Configuring cqlsh from a file</title><!--  Generated with Oxygen version 19.0, build number 2017062918.  --><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="wh-path2root" content="../../index.html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta class="swiftype" name="version" data-type="string" content="3.3" />
+        <meta class="swiftype" name="book" data-type="string" content="CQL for Cassandra 3.0" />
+        <meta class="swiftype" name="doc-name" data-type="string" content="cql33" />
+        <meta class="swiftype" name="site-priority-for-Corporate" data-type="integer" content="60" />
+        
+        <script>
+          function debug(msg, object){
+              console.log(msg, object);
+          }
+          function executeQuery(){
+              $('#searchForm').submit();
+              return true;
+          }
+        </script>
+      
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/commonltr.css?buildId=2017062918" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/webhelp_responsive_topic.css?buildId=2017062918" />
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap.min.css" />
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/js/jquery-ui.min.css" />
+        <!-- Changes and comments, as side-notes  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/p-side-notes.css?buildId=2017062918" />
+
+        <!-- Template default styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_default.css?buildId=2017062918" />
+        
+        <!-- Expand-collapse support styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_expand.css?buildId=2017062918" />
+
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-3.1.1.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/localization/strings.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/localization.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/parseuri.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-ui.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script>
+        
+        <!-- Swiftype jQuery and Autocomplete plugins -->
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.ba-hashchange.min.js"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.search.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/search.css" media="all" />
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.autocomplete.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/autocomplete.css" media="all" />
+        
+        <!-- end Swiftype plugins -->
+
+        <!-- DataStax-specific styles. -->
+        <link rel="shortcut icon" type="image/ico" href="../../oxygen-webhelp/assets/images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/details-shim.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/magnific-popup.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/datastax-highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/noshdesc.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/ds-skin-override.css" />
+        <!-- DataStax-specific scripts -->
+        <script src="../../oxygen-webhelp/assets/js/versionDropdown.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/navlinks.js" type="text/javascript"></script>
+        <script type="text/javascript">document.title = document.title + " | CQL for Cassandra 3.0";</script>
+    <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/variants/tree/oxygen/skin.css?buildId=2017062918" /></head>
+
+    <body onload="highlightSearchTerm()" class="wh_topic_page frmBody" id="cqlshUsingCqlshrc">
+        <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TWSQ28" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TWSQ28');</script>
+        <!-- End Google Tag Manager -->
+        <!-- whc:include_html href="${webhelp.fragment.before.body}"/ -->
+        
+<div>
+    <div class="container-fluid">
+        <div class="wh_header_flex_container">
+            <div class="container">
+                <div class="col-sm-6 collapse navbar-collapse">
+                    <ul id="ds_sites_list">
+                        <li><a href="https://www.datastax.com" target="_blank">HOME</a></li>
+                        <li><a href="https://academy.datastax.com/" target="_blank">ACADEMY</a></li>
+                        <li><a href="/en" target="_self">DOCS</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 collapse navbar-collapse ds_buttons">
+                    <a class="ds_buttons_button" href="https://www.datastax.com/contactus" target="_blank">CONTACT US</a>
+                    <a class="ds_buttons_button" href="https://academy.datastax.com/downloads" target="_blank"><span class="pad-right">DOWNLOAD DATASTAX</span>
+                        <img src="https://www.datastax.com/wp-content/themes/datastax-2014-08/images/common/icon-dowload-ds.png" width="17" height="15" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color:#067A97; min-height:37px">
+        <div class="container">
+            <div class="col-sm-6 navbar-collapse ds_logo">
+                <a href="https://www.datastax.com/" class="wh_logo ds_logo_collapse" target="_blank">
+                    <img src="../../oxygen-webhelp/assets/images/logo.png" alt="DataStax Logo" />
+                </a>
+            </div>
+            <div class="col-sm-6 collapse navbar-collapse ds_global_menu">
+                <ul id="ds_links_list">
+                    <li><a href="http://docs.datastax.com"/en/glossary/doc/" target="_blank">GLOSSARY</a></li>
+                    <li><a href="https://support.datastax.com/" target="_blank">SUPPORT</a></li>
+                    <li><a href="https://www.datastax.com/dev/blog/" target="_blank">DEVELOPER
+                        BLOGS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default wh_header">
+        <div class="container">
+            <div class="wh_header_flex_container">
+                <div class="hidden-xs">
+                    <span id="version-dropdown" style="display: none;">
+                        <form id="version-dropdown-form">
+                            <select></select>
+                        </form>
+                    </span>
+                </div>
+                <div class="wh_logo_and_publication_title_container">
+                    <div class="wh_logo_and_publication_title">
+                        
+                        <!-- whc:webhelp_logo class="hidden-xs"/ -->
+                    <div class=" wh_publication_title "><a href="../../index.html"><span class="title">CQL for Apache Cassandra™ 3.0 <span class="ph red">(Supported)</span>  </span></a></div>
+                    
+                </div>
+                    <button type="button" data-target=".wh_top_menu_and_indexterms_link" data-toggle="collapse" class="navbar-toggle collapsed wh_toggle_button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            
+                <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse">
+                    <!--whc:include_html href="${webhelp.fragment.before.top_menu}"/-->
+                    <div class=" wh_top_menu "><ul><li><span class="topicref"><a href="../../cql/cqlIntro.html" data-id="cqlIntro">Introduction to Cassandra Query Language</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/ddl/ddlCQLDataModelingTOC.html" data-id="ddlCQLDataModelingTOC">CQL data modeling</a></span><ul><li><span class="topicref"><a href="../../cql/ddl/dataModelingApproach.html" data-id="dataModelingApproach">Data modeling concepts</a></span></li><li><span class="topicref"><a href="../../cql/ddl/dataModelingAnalysis.html" data-id="dataModelingAnalysis">Data modeling analysis</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAboutCQL.html" data-id="useAboutCQL">Using CQL</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/startCqlLinuxMac.html" data-id="startCqlLinuxMac">Starting cqlsh on Linux and Mac OS X</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateKeyspace.html" data-id="useCreateKeyspace">Creating and updating a keyspace</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useExampleCreatingKeyspace.html" data-id="useExampleCreatingKeyspace">Example of creating a keyspace</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useUpdateKeyspaceRF.html" data-id="useUpdateKeyspaceRF">Updating the replication factor</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateTableTOC.html" data-id="useCreateTableTOC">Creating a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCreateTable.html" data-id="useCreateTable">Creating a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useKSQualifier.html" data-id="useKSQualifier">Using the keyspace qualifier</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSimplePrimaryKeyConcept.html#useSimplePrimaryKeyConcept" data-id="useSimplePrimaryKeyConcept">Simple Primary Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompositePartitionKeyConcept.html#useCompositePartitionKeyConcept" data-id="useCompositePartitionKeyConcept">Composite Partition Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompoundPrimaryKeyConcept.html" data-id="useCompoundPrimaryKeyConcept">Compound Primary Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCountersConcept.html" data-id="useCountersConcept">Creating a counter table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompactStorage.html" data-id="useCompactStorage">Create table with COMPACT STORAGE</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateTableCollisionFix.html" data-id="useCreateTableCollisionFix">Table schema collision fix</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateMV.html" data-id="useCreateMV">Creating a materialized view</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAdvancedDataTypesTOC.html" data-id="useAdvancedDataTypesTOC">Creating advanced data types in tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCollections.html" data-id="useCollections">Creating collections</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateTableTuple.html" data-id="useCreateTableTuple">Creating a table with a tuple</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDT.html" data-id="useCreateUDT">Creating a user-defined type (UDT)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateFunctionsTOC.html" data-id="useCreateFunctionsTOC">Creating functions</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDF.html" data-id="useCreateUDF">Creating user-defined function (UDF)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDA.html" data-id="useCreateUDA">Creating User-Defined Aggregate Function (UDA)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useInsertDataTOC.html" data-id="useInsertDataTOC">Inserting and updating data</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useInsertSimple.html" data-id="useInsertSimple">Inserting simple data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertSet.html" data-id="useInsertSet">Inserting and updating data into a set</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertList.html" data-id="useInsertList">Inserting and updating data into a list</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertMap.html" data-id="useInsertMap">Inserting and updating data into a map</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertTuple.html" data-id="useInsertTuple">Inserting tuple data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertUDT.html" data-id="useInsertUDT">Inserting or updating data into a user-defined type (UDT)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertJSON.html" data-id="useInsertJSON">Inserting JSON data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertLWT.html" data-id="useInsertLWT">Using lightweight transactions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/refStaticCol.html" data-id="refStaticCol">Sharing a static column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useExpire.html" data-id="useExpire">Expiring data with time-to-live</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useBatchTOC.html" data-id="useBatchTOC">Batching data insertion and updates</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useBatch.html" data-id="useBatch">Batching inserts, updates and deletes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useBatchGoodExample.html" data-id="useBatchGoodExample">Good use of BATCH statement</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useBatchBadExample.html" data-id="useBatchBadExample">Misuse of BATCH statement</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useQueryDataTOC.html" data-id="useQueryDataTOC">Querying tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useQueryColumnsSort.html" data-id="useQueryColumnsSort">Retrieval and sorting results</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryCollections.html" data-id="useQueryCollections">Retrieval using collections</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryJSON.html" data-id="useQueryJSON">Retrieval using JSON</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryIN.html" data-id="useQueryIN">Retrieval using the IN keyword</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useScanPartition.html" data-id="useScanPartition">Retrieval by scanning a partition</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryStdAggregate.html" data-id="useQueryStdAggregate">Retrieval using standard aggregate functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryUDF.html" data-id="useQueryUDF">Retrieval using a user-defined function (UDF)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryUDA.html" data-id="useQueryUDA">Retrieval using user-defined aggregate (UDA) functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQuerySystem.html" data-id="useQuerySystem">Querying a system table</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/usePrimaryIndex.html" data-id="usePrimaryIndex">Indexing</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useWhenIndex.html" data-id="useWhenIndex">When to use an index</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecondaryIndex.html" data-id="useSecondaryIndex">Using a secondary index</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useMultIndexes.html" data-id="useMultIndexes">Using multiple indexes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useIndexColl.html" data-id="useIndexColl">Indexing a collection</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAlterTableTOC.html" data-id="useAlterTableTOC">Altering a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useAlterColumn.html" data-id="useAlterColumn">Altering columns in a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterAddColl.html" data-id="useAlterAddColl">Altering a table to add a collection</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterColType.html" data-id="useAlterColType">Altering the data type of a column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterTabProp.html" data-id="useAlterTabProp">Altering the table properties</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterMV.html" data-id="useAlterMV">Altering a materialized view</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterType.html" data-id="useAlterType">Altering a user-defined type</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useRemoveData.html" data-id="useRemoveData">Removing a keyspace, schema, or data</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useDropKSTableMV.html" data-id="useDropKSTableMV">Dropping a keyspace, table or materialized view</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useDropColumn.html" data-id="useDropColumn">Deleting columns and rows</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useDropUDF.html" data-id="useDropUDF">Dropping a user-defined function (UDF)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useSecureTOC.html" data-id="useSecureTOC">Securing a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useSecureRoles.html" data-id="useSecureRoles">Database roles</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecurePermission.html" data-id="useSecurePermission">Database Permissions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecureUsers.html" data-id="useSecureUsers">Database users</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useTracing.html" data-id="useTracing">Tracing consistency changes</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useTracingSetup.html" data-id="useTracingSetup">Setup to trace consistency changes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTracingTrace.html" data-id="useTracingTrace">Trace reads at different consistency levels</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTracingPerf.html" data-id="useTracingPerf">How consistency affects performance</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useToken.html" data-id="useToken">Displaying rows from an unordered partitioner with the TOKEN function</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTTL.html" data-id="useTTL">Determining time-to-live (TTL) for a column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useWritetime.html" data-id="useWritetime">Determining the date/time of a write</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useLegacyTableTOC.html" data-id="useLegacyTableTOC">Legacy tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useLegacyTables.html" data-id="useLegacyTables">Working with legacy applications</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryLegacyTables.html" data-id="useQueryLegacyTables">Querying a legacy table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCQL3QueryLegacyTables.html" data-id="useCQL3QueryLegacyTables">Using a CQL legacy table query</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html" data-id="cqlReferenceTOC">CQL reference</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/about_cql_ref_c.html" data-id="about_cql_ref_c">Introduction</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cql_lexicon_c.html" data-id="cql_lexicon_c">CQL lexical structure</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/ucase-lcase_r.html" data-id="ucase-lcase_r">Uppercase and lowercase</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/escape_char_r.html" data-id="escape_char_r">Escaping characters</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/valid_literal_r.html" data-id="valid_literal_r">Valid literals</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/exponential_notation_r.html" data-id="exponential_notation_r">Exponential notation</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRefComment.html" data-id="cqlRefComment">CQL code comments</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/keywords_r.html" data-id="keywords_r">CQL Keywords</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cql_data_types_c.html" data-id="cql_data_types_c">CQL data types</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/blob_r.html" data-id="blob_r">Blob type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/collection_type_r.html" data-id="collection_type_r">Collection type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/counter_type.html" data-id="counter_type">Counter type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/uuid_type_r.html" data-id="uuid_type_r">UUID and timeuuid types</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/timeuuid_functions_r.html" data-id="timeuuid_functions_r">UUID and timeuuid functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/timestamp_type_r.html" data-id="timestamp_type_r">Timestamp type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/tupleType.html" data-id="tupleType">Tuple type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRefUDType.html" data-id="cqlRefUDType">User-defined type</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_function_r.html" data-id="cql_function_r">Functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/refLimits.html" data-id="refLimits">CQL limits</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html" data-id="cqlshCommandsTOC">CQL shell commands</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/cqlsh.html" data-id="cqlsh">Starting cqlsh</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshUsingCqlshrc.html" data-id="cqlshUsingCqlshrc">Configuring cqlsh from a file</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCapture.html" data-id="cqlshCapture">CAPTURE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshClear.html" data-id="cqlshClear">CLEAR</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshConsistency.html" data-id="cqlshConsistency">CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCopy.html" data-id="cqlshCopy">COPY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshDescribe.html" data-id="cqlshDescribe">DESCRIBE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExpand.html" data-id="cqlshExpand">cqlshExpand</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExit.html" data-id="cqlshExit">EXIT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshLogin.html" data-id="cqlshLogin">LOGIN</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshPaging.html" data-id="cqlshPaging">PAGING</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSerialConsistency.html" data-id="cqlshSerialConsistency">SERIAL CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshShow.html" data-id="cqlshShow">SHOW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSource.html" data-id="cqlshSource">SOURCE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshTracing.html" data-id="cqlshTracing">TRACING</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html" data-id="cqlCommandsTOC">CQL commands</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterKeyspace.html" data-id="cqlAlterKeyspace">ALTER KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterMaterializedView.html" data-id="cqlAlterMaterializedView">ALTER MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterRole.html" data-id="cqlAlterRole">ALTER ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterTable.html" data-id="cqlAlterTable">ALTER TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterType.html" data-id="cqlAlterType">ALTER TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterUser.html" data-id="cqlAlterUser">ALTER USER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlBatch.html" data-id="cqlBatch">BATCH</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateAggregate.html" data-id="cqlCreateAggregate">CREATE AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateIndex.html" data-id="cqlCreateIndex">CREATE INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateFunction.html" data-id="cqlCreateFunction">CREATE FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateKeyspace.html" data-id="cqlCreateKeyspace">CREATE KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateMaterializedView.html" data-id="cqlCreateMaterializedView">CREATE MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#cqlCreateTable" data-id="cqlCreateTable">CREATE TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTrigger.html" data-id="cqlCreateTrigger">CREATE TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateType.html" data-id="cqlCreateType">CREATE TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateRole.html" data-id="cqlCreateRole">CREATE ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateUser.html" data-id="cqlCreateUser">CREATE USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDelete.html" data-id="cqlDelete">DELETE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropAggregate.html" data-id="cqlDropAggregate">DROP AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropFunction.html" data-id="cqlDropFunction">DROP FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropIndex.html" data-id="cqlDropIndex">DROP INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropKeyspace.html" data-id="cqlDropKeyspace">DROP KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropMatializedView.html" data-id="cqlDropMatializedView">DROP MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropRole.html" data-id="cqlDropRole">DROP ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTable.html" data-id="cqlDropTable">DROP TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTrigger.html" data-id="cqlDropTrigger">DROP TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropType.html" data-id="cqlDropType">DROP TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropUser.html" data-id="cqlDropUser">DROP USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlGrant.html" data-id="cqlGrant">GRANT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlInsert.html" data-id="cqlInsert">INSERT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListPermissions.html" data-id="cqlListPermissions">LIST PERMISSIONS</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListRoles.html" data-id="cqlListRoles">LIST ROLES</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListUsers.html" data-id="cqlListUsers">LIST USERS (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRevoke.html" data-id="cqlRevoke">REVOKE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlSelect.html" data-id="cqlSelect">SELECT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlTruncate.html" data-id="cqlTruncate">TRUNCATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUpdate.html" data-id="cqlUpdate">UPDATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUse.html" data-id="cqlUse">USE</a></span></li></ul></li></ul></li></ul></div>
+                    
+                    <!--whc:include_html href="${webhelp.fragment.after.top_menu}"/-->
+                    <div class="ds_top_menu_collapse">
+                        <ul>
+                            <li><a href="https://www.datastax.com">Home</a></li>
+                            <li><a href="https://academy.datastax.com/">Academy</a></li>
+                            <li><a href="/en">Docs home</a></li>
+                            <li><a href="https://www.datastax.com/contactus">Contact us</a></li>
+                            <li><a href="https://academy.datastax.com/downloads">Download
+                                DataStax</a></li>
+                            <li><a href="http://docs.datastax.com"/en/glossary/doc/">Glossary</a></li>
+                            <li><a href="https://support.datastax.com/">Support</a></li>
+                            <li><a href="https://www.datastax.com/dev/blog/">Developer blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+        
+        <!-- Search forms -->
+        
+        <span>
+            <div class=" wh_search_input "><form id="searchForm" method="get" action="../../search.html"><div><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" /><button type="submit" class="wh_search_button"><span>Search</span></button></div></form></div>
+        </span>
+        <div class="advanced-search">
+            <p><a href="http://docs.datastax.com"/en/advancedSearch.html">Search all docs</a></p>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+
+                <nav class="wh_tools hidden-print">
+                    <div class=" wh_breadcrumb "><ol class="hidden-print"><li><span class="home"><a href="../../index.html"><span>Home</span></a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html">CQL reference</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html">CQL shell commands</a></span></li><li class="active"><span class="topicref">Configuring cqlsh from a file</span></li></ol></div>
+
+                    <div class="wh_right_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cql/cql_reference/cqlsh.html" title="Starting cqlsh"></a></span>  
+<span class="navnext"><a class="link" href="../../cql/cql_reference/cqlshCapture.html" title="CAPTURE"></a></span>  </span></div>
+                        <div class=" wh_print_link print "><a href="javascript:window.print();" title="Print this page"></a></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wh_content_area  data-swiftype-index=true" id="annotate">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Configuring cqlsh from a file<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc" rel="internal"> </a></h1>
+
+  
+  <div class="body refbody"><p class="shortdesc">Customize the CQL shell configuration at start up from a properties file. </p>
+
+    <section class="section" id="cqlshUsingCqlshrc__aboutUsingCqlshrc">
+      <p class="p">The <span class="ph filepath">cqlshrc</span> file configures the cqlsh session when starting the
+        utility. Use the file by default by saving it in the <code class="ph codeph">~/.cassandra</code> directory
+        on the local computer or specify the directory that the file is in with the
+          <code class="ph codeph">--cqlshrc</code> option. Only one cqlshrc per directory.</p>
+
+      <p class="p">Pre-configure the following options:</p>
+
+      <ul class="ul">
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcAutomaticLogin">Automatically logging in and selecting a keyspace</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcDisplay">Changing the CQL shell display</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcVersion">Forcing the CQL version</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcConnection">Connecting to a CQL host</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcLimitSize">Limiting the field size</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcTracing">Setting tracing timeout</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcSSL">Configuring SSL</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcOverrideSSL">Overriding SSL local settings</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcCopy">Setting common COPY TO and COPY FROM options</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcCopyTo">Setting COPY TO specific options</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcCopyFrom">Setting COPY FROM specific options</a></li>
+
+        <li class="li"><a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcTableSpecific">Setting table specific COPY TO/FROM options</a></li>
+
+      </ul>
+
+    </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__synopsis"><h2 class="title sectiontitle">Synopsis<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__synopsis" rel="internal"> </a></h2>       
+      <div class="p">
+        <pre class="pre codeblock"><code>./cqlsh CQLSHRC="~/<var class="keyword varname">directory_name</var>"</code></pre>
+        <div class="note note"><span class="notetitle">Note:</span> Tilde (~) expands to the user's home directory; you can also specify the absolute
+          path, for example <code class="ph codeph">/Users/jdoe/cqlshprofiles/west</code>.</div>
+
+      </div>
+
+      
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table collapseOnLoad" frame="border" border="1" rules="all"><caption><span class="tablecap">Legend</span></caption><colgroup><col style="width:38.314176245210724%" /><col style="width:61.68582375478927%" /></colgroup><thead class="thead" style="text-align:left;">
+            <tr>
+              <th class="entry cellrowborder" style="vertical-align:top;" id="d63644e136">Syntax conventions</th>
+
+              <th class="entry cellrowborder" style="vertical-align:top;" id="d63644e139">Description</th>
+
+            </tr>
+
+          </thead>
+<tbody class="tbody">
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 ">UPPERCASE</td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Literal keyword. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 ">Lowercase</td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Not literal.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph"><var class="keyword varname">Italics</var></code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Variable value. Replace with a user-defined value.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">[]</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Optional. Square brackets (<code class="ph codeph"> [] </code>) surround optional command
+                arguments. Do not type the square brackets.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">( )</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Group. Parentheses ( <code class="ph codeph">( )</code> ) identify a group to choose from. Do
+                not type the parentheses. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph"> | </code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Or. A vertical bar (<code class="ph codeph"> | </code>) separates alternative elements. Type
+                any one of the elements. Do not type the vertical bar.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">...</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Repeatable. An ellipsis ( <code class="ph codeph">...</code> ) indicates that you can repeat
+                the syntax element as often as required. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">'<var class="keyword varname">Literal string</var>'</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Single quotation (<code class="ph codeph"> ' </code>) marks must surround literal strings in
+                CQL statements. Use single quotation marks to preserve upper case.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">{ <var class="keyword varname">key</var> : <var class="keyword varname">value</var> }</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Map collection. Braces (<code class="ph codeph"> { } </code>) enclose map collections or key
+                value pairs. A colon separates the key and the value. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">&lt;<var class="keyword varname">datatype1</var>,<var class="keyword varname">datatype2</var>&gt;</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Set, list, map, or tuple. Angle brackets ( <code class="ph codeph">&lt; &gt;</code> ) enclose
+                data types in a set, list, map, or tuple. Separate the data types with a comma.
+              </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph"><var class="keyword varname">cql_statement</var>;</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">End CQL statement. A semicolon (<code class="ph codeph"> ; </code>) terminates all CQL
+                statements.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">[--]</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Separate the command line options from the command arguments with two hyphens (
+                  <code class="ph codeph">--</code> ). This syntax is useful when arguments might be mistaken for
+                command line options. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">' <var class="keyword varname">&lt;schema&gt; ... &lt;/schema&gt;</var> '</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Search CQL only: Single quotation marks (<code class="ph codeph"> ' </code>) surround an
+                entire XML schema declaration.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e136 "><code class="ph codeph">@<var class="keyword varname">xml_entity</var>='<var class="keyword varname">xml_entity_type</var>'</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d63644e139 ">Search CQL only: Identify the entity and literal value to overwrite the XML
+                element in the schema and solrConfig files.</td>
+
+            </tr>
+
+          </tbody>
+</table>
+</div>
+
+    </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcSample"><h2 class="title sectiontitle">Using the cqlshrc.sample<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcSample" rel="internal"> </a></h2>
+      
+      <p class="p">A sample file is installed with Cassandra, <a href="#" class="cqlshrcsample open-popup-link"><span class="keyword filepath-popup">cqlshrc.sample</span></a>.
+        The file contains all the available settings. Some settings are commented out using a single
+        semi-colon. </p>
+
+      <div class="p">To use this file:<ol class="ol">
+          <li class="li">Copy the file to the <a href="#" class="home open-popup-link"><span class="keyword filepath-popup">home</span></a> directory.</li>
+
+          <li class="li">Rename it <span class="ph filepath">cqlshrc</span>.</li>
+
+          <li class="li">Remove the semi-colon to uncomment an option (options must be in brackets) and
+            corresponding settings, for example to import all CSV without a header row, uncomment
+            [copy] and header =
+            false:<pre class="pre codeblock no-highlight"><code>;; Options that are common to both COPY TO and COPY FROM<strong class="ph b">
+[copy]
+</strong>
+;; The string placeholder for null values
+; nullval = null
+
+;; For COPY TO, controls whether the first line in the CSV output file will
+;; contain the column names.  For COPY FROM, specifies whether the first
+;; line in the CSV file contains column names.<strong class="ph b">
+header = false</strong></code></pre></li>
+
+          <li class="li">Restart the CQL shell.</li>
+
+        </ol>
+
+      </div>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcAutomaticLogin"><h2 class="title sectiontitle title2">Automatically logging in and selecting
+        a keyspace<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcAutomaticLogin" rel="internal"> </a></h2>
+      
+      <p class="p">Set up credentials to automatically log in when CQL shell starts and/or choose a
+        keyspace.</p>
+
+      <div class="note note" id="cqlshUsingCqlshrc__internal-auth-note"><span class="notetitle">Note:</span> Only set a user name and password for hosts that use Cassandra
+        internal authentication, see <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/configuration/secureSSLIntro.html" target="_blank">Encrypting Cassandra with SSL</a>. </div>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[authentication] </strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__username">username<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__username" rel="internal"> </a></dt>
+
+          <dd class="dd">Log in account name. </dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__password">password<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__password" rel="internal"> </a></dt>
+
+          <dd class="dd">Log in password. </dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__keyspace">keyspace <a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__keyspace" rel="internal"> </a></dt>
+
+          <dd class="dd">Optional. Opens the specified keyspace. Equivalent to issuing a <a class="xref" href="cqlUse.html" title="Connects the client session to a keyspace.">USE</a>
+            <var class="keyword varname">keyspace</var> command immediately after starting cqlsh. (Does not require
+            internal Cassandra authentication).</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcDisplay"><h2 class="title sectiontitle title2">Changing the CQL shell display<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcDisplay" rel="internal"> </a></h2>
+      
+      <p class="p">The cqlsh console display and COPY TO date parsing settings.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[ui]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__color">color<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__color" rel="internal"> </a></dt>
+
+          <dd class="dd">Shows query results with color.</dd>
+
+          <dd class="dd ddexpand"><code class="ph codeph">on</code> In color.</dd>
+
+          <dd class="dd ddexpand"><code class="ph codeph">off</code> No color.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__datetimeformate">datetimeformat<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__datetimeformate" rel="internal"> </a></dt>
+
+          <dd class="dd">Configure the format of timestamps using <a class="xref" href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior" target="_blank">Python strftime</a> syntax.</dd>
+
+        
+        
+          <dt class="dt dlterm">timezone</dt>
+
+          <dd class="dd">Display timestamps in Etc/UTC.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__precision">float_precision, double_precision<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__precision" rel="internal"> </a></dt>
+
+          <dd class="dd">Sets the number of digits displayed after the decimal point for single and double
+            precision numbers.<div class="note note"><span class="notetitle">Note:</span> Increasing this to large numbers can result in unusual
+              values.</div>
+</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__completekey">completekey<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__completekey" rel="internal"> </a></dt>
+
+          <dd class="dd">Set the key for automatic completion of a cqlsh shell entry. Default is the tab
+            key.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__encoding">encoding<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__encoding" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph" id="cqlshUsingCqlshrc__encoding-ph">The encoding used for characters. The default is UTF8.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__browser">browser<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__browser" rel="internal"> </a></dt>
+
+          <dd class="dd">Sets the browser for cqlsh help. If the value is not specified, cqlsh uses the default
+            browser. Available browsers are those supported by the Python <a class="xref" href="https://docs.python.org/2/library/webbrowser.html" target="_blank">webbrowser module</a>. For example, to use Google Chrome:<ul class="ul">
+              <li class="li">Mac OSX: <code class="ph codeph">browser = open -a /Applications/Google\ Chrome.app
+                %s</code></li>
+
+              <li class="li">Linux: <code class="ph codeph">browser = /usr/bin/google-chrome-stable %s</code></li>
+
+            </ul>
+<p class="p">This setting can be overridden with the <code class="ph codeph">--browser</code> command line
+              option.</p>
+</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcVersion"><h2 class="title sectiontitle title2">Forcing the CQL version<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcVersion" rel="internal"> </a></h2>
+      
+      <p class="p">Use the specified version of CQL only.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[cql]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__version">version<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__version" rel="internal"> </a></dt>
+
+          <dd class="dd">Only use the specified version of CQL.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcConnection"><h2 class="title sectiontitle title2">Connecting to a CQL host<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcConnection" rel="internal"> </a></h2>
+      
+      <p class="p">Specify the host and connection details for the CQL shell session.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[connection] </strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__hostname">hostname<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__hostname" rel="internal"> </a></dt>
+
+          <dd class="dd">The host for the cqlsh connection.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__port">port<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__port" rel="internal"> </a></dt>
+
+          <dd class="dd">The connection port. Default: <code class="ph codeph">9042</code> (native protocol).</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__port2">ssl<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__port2" rel="internal"> </a></dt>
+
+          <dd class="dd">Always connect using SSL. Default: <code class="ph codeph">false</code>.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__timeout">timeout<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__timeout" rel="internal"> </a></dt>
+
+          <dd class="dd">Configures timeout in seconds when opening new connections.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__request-timeout">request_timeout<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__request-timeout" rel="internal"> </a></dt>
+
+          <dd class="dd">Configures the request timeout in seconds for executing queries. Set the number of
+            seconds of inactivity.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcLimitSize"><h2 class="title sectiontitle title2">Limiting the field size<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcLimitSize" rel="internal"> </a></h2>
+      
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[csv]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__field-size-limit">field_size_limit<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__field-size-limit" rel="internal"> </a></dt>
+
+          <dd class="dd">Set to a particular field size, such as <code class="ph codeph">field_size_limit =
+            1000000000</code>.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcTracing"><h2 class="title sectiontitle title2">Setting tracing timeout<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcTracing" rel="internal"> </a></h2>
+      
+      <p class="p">Specify the wait time for tracing.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[tracing]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__max-trace-wait">max_trace_wait<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__max-trace-wait" rel="internal"> </a></dt>
+
+          <dd class="dd">The maximum number of seconds to wait for a trace to complete.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcSSL"><h2 class="title sectiontitle title2">Configuring SSL<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcSSL" rel="internal"> </a></h2>
+      
+      <p class="p">Specify connection SSL settings.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[ssl] </strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__certfile">certfile<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__certfile" rel="internal"> </a></dt>
+
+          <dd class="dd">The path to the cassandra certificate. See <cite class="cite">Using cqlsh with SSL
+              encryption</cite> in the Cassandra documentation (<a class="xref" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__internal-auth-note">links above</a>).</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__validate">validate<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__validate" rel="internal"> </a></dt>
+
+          <dd class="dd">Optional. Default: <code class="ph codeph">true</code>.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__userkey">userkey<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__userkey" rel="internal"> </a></dt>
+
+          <dd class="dd">Must be provided when <code class="ph codeph">require_client_auth=true</code> in
+            <a href="#" class="cassandrayaml open-popup-link"><span class="keyword filepath-popup">cassandra.yaml</span></a>.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__usercert">usercert<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__usercert" rel="internal"> </a></dt>
+
+          <dd class="dd">Must be provided when <code class="ph codeph">require_client_auth=true</code> in
+            <a href="#" class="cassandrayaml open-popup-link"><span class="keyword filepath-popup">cassandra.yaml</span></a>.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcOverrideSSL"><h2 class="title sectiontitle title2">Overriding SSL local settings<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcOverrideSSL" rel="internal"> </a></h2>
+      
+      <p class="p">Overrides default <code class="ph codeph">certfiles</code> in [ssl] section. Create an entry for each
+        remote host.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[certfiles]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm"><var class="keyword varname">remote_host</var>=<var class="keyword varname">path_to_cert</var></dt>
+
+          <dd class="dd">Specify the IP address or remote host name and path to the certificate file on your
+            local system.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcCopy"><h2 class="title sectiontitle title2">Setting common COPY TO and COPY FROM
+        options<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcCopy" rel="internal"> </a></h2>
+      
+      <p class="p">Settings common to both <code class="ph codeph">COPY TO</code> and <code class="ph codeph">COPY FROM</code>.</p>
+
+      <p class="p">Also see the <a class="xref" href="cqlshCopy.html#cqlshCopy__copyOptions">COPY</a> table.</p>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[copy]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__nullval">nullval<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__nullval" rel="internal"> </a></dt>
+
+          <dd class="dd">The string placeholder for null values.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__header">header<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__header" rel="internal"> </a></dt>
+
+          <dd class="dd">For COPY TO, controls whether the first line in the CSV output file contains the
+            column names.</dd>
+
+          <dd class="dd ddexpand">For COPY FROM, specifies whether the first line in the CSV file contains column
+            names.</dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__decimalsep">decimalsep<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__decimalsep" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Separator for decimal values. Default value: period
+                    (<code class="ph codeph">.</code>).</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__thousandssep">thousandssep<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__thousandssep" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Separator for thousands digit groups. Default value:
+                    <code class="ph codeph">None</code>.</span> Default: empty string.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__boolstyle">boolstyle<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__boolstyle" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Boolean indicators for True and False. The values are
+                  case insensitive, for example: yes,no and YES,NO are the same. Default values:
+                    <code class="ph codeph">True,False</code>.</span></dd>
+
+        
+        
+          <dt class="dt dlterm">numprocesses </dt>
+
+          <dd class="dd">Sets the number of child worker processes.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxattempts">maxattempts<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxattempts" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum number of attempts for errors. Default value:
+                    <code class="ph codeph">5</code>.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__reportfrequency">reportfrequency<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__reportfrequency" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Frequency with which status is displayed in
+                  seconds. Default value: <code class="ph codeph">0.25</code>.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__ratefile">ratefile<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__ratefile" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Print output statistics to this file.</span></dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcCopyTo"><h2 class="title sectiontitle title2">Setting COPY TO specific options<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcCopyTo" rel="internal"> </a></h2>
+      
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[copy-to]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxrequests">maxrequests<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxrequests" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum number of requests each worker can process in
+                  parallel.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__pagesize">pagesize<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__pagesize" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Page size for fetching results.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__pagetimeout">pagetimeout<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__pagetimeout" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Page timeout for fetching results.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__begintoken">begintoken<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__begintoken" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Minimum token string for exporting data.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__endtoken">endtoken<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__endtoken" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum token string for exporting data.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxoutputsize">maxoutputsize<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxoutputsize" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum size of the output file, measured in number of
+                  lines. When set, the output file is split into segment when the value is exceeded.
+                  Use "-1" for no maximum.</span></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__encoding1">encoding<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__encoding1" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">The encoding used for characters. The default is UTF8.</span></dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcCopyFrom"><h2 class="title sectiontitle title2">Setting COPY FROM specific options<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcCopyFrom" rel="internal"> </a></h2>
+      
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[copy-from]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__ingestrate">ingestrate<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__ingestrate" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Approximate ingest rate in rows per second. Must be greater
+                  than the chunk size.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxrows">maxrows<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxrows" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum number of rows. Use "-1" for no maximum.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__skiprows">skiprows<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__skiprows" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Number of rows to skip.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__skipcols">skipcols<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__skipcols" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Comma-separated list of column names to skip.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxparseerrors">maxparseerrors<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxparseerrors" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum global number of parsing errors. Use "-1" for
+                  no maximum.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxinserterrors">maxinserterrors<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxinserterrors" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum global number of insert errors. Use "-1" for
+                  no maximum.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__errfile">errfile<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__errfile" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">File to store all rows that are not imported. If no value is
+                  set, the information is stored in
+                    import_<var class="keyword varname">ks</var>_<var class="keyword varname">table</var>.err where
+                    <var class="keyword varname">ks</var> is the keyspace and <var class="keyword varname">table</var> is the table
+                  name.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__maxbatchsize">maxbatchsize<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__maxbatchsize" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Maximum size of an import batch.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__minbatchsize">minbatchsize<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__minbatchsize" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Minimum size of an import batch.</span></dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__chunksize">chunksize<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__chunksize" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Chunk size passed to worker processes. Default value:
+                    <code class="ph codeph">1000</code></span></dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlshUsingCqlshrc__cqlshrcTableSpecific"><h2 class="title sectiontitle">Setting table specific COPY TO/FROM options<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__cqlshrcTableSpecific" rel="internal"> </a></h2>
+      <div class="p">Use these options to configure table specific settings; create a new entry for each table,
+        for example to set the chunk size for cyclist names and
+        rank:<pre class="pre codeblock no-highlight"><code>[copy:cycling.cyclist_names]
+chunksize = 1000</code></pre><pre class="pre codeblock no-highlight"><code>[copy:cycling.rank_by_year_and_name]
+chunksize = 10000</code></pre></div>
+
+      <dl class="dl">
+        
+          <dd class="ddhd"><strong>[copy:<var class="keyword varname">keyspace_name.table_name</var>]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__chunksize2">chunksize<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__chunksize2" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Chunk size passed to worker processes. Default value:
+                    <code class="ph codeph">1000</code></span></dd>
+
+        
+      </dl>
+<dl class="dl">
+        
+          <dd class="ddhd"><strong>[copy-from:<var class="keyword varname">keyspace_name.table_name</var>]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__ingestrate2">ingestrate<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__ingestrate2" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Approximate ingest rate in rows per second. Must be greater
+                  than the chunk size.</span></dd>
+
+        
+      </dl>
+<dl class="dl">
+        
+          <dd class="ddhd"><strong>[copy-to:<var class="keyword varname">keyspace_name.table_name</var>]</strong></dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlshUsingCqlshrc__pagetimeout2">pagetimeout<a class="headerlink" href="cqlshUsingCqlshrc.html#cqlshUsingCqlshrc__pagetimeout2" rel="internal"> </a></dt>
+
+          <dd class="dd"><span class="ph">Page timeout for fetching results.</span></dd>
+
+        
+      </dl>
+</section>
+
+    <section class="section">
+      <div class="p mfp-hide" id="cqlshUsingCqlshrc__home">The location of the
+          <span class="ph filepath">home</span> directory: <table cellpadding="4" cellspacing="0" summary="" border="1" class="simpletable"><col style="width:50%" /><col style="width:50%" /><thead></thead><tbody><tr class="strow">
+            <td style="vertical-align:top;" class="stentry">Linux installations</td>
+
+            <td style="vertical-align:top;" class="stentry"><span class="ph filepath"><var class="keyword varname">home</var>/.cassandra</span><p class="p">where
+                  <var class="keyword varname">home</var> is your home or client program directory.</p>
+</td>
+
+          </tr>
+</tbody></table>
+</div>
+
+      <div class="p mfp-hide" id="cqlshUsingCqlshrc__cqlshrcsample">The location of the
+          <span class="ph filepath">cqlshrc.sample</span> file depends on the type of installation:<table cellpadding="4" cellspacing="0" summary="" border="1" class="simpletable"><col style="width:50%" /><col style="width:50%" /><thead></thead><tbody><tr class="strow">
+            <td style="vertical-align:top;" class="stentry">Package installations</td>
+
+            <td style="vertical-align:top;" class="stentry"><span class="ph filepath">/etc/cassandra/cqlshrc.sample</span></td>
+
+          </tr>
+<tr class="strow">
+            <td style="vertical-align:top;" class="stentry">Tarball installations</td>
+
+            <td style="vertical-align:top;" class="stentry"><span class="ph filepath"><var class="keyword varname">install_location</var>/conf/cqlshrc.sample</span></td>
+
+          </tr>
+</tbody></table>
+</div>
+
+      <div class="p mfp-hide" id="cqlshUsingCqlshrc__cassandrayaml">The location of the
+          <span class="ph filepath">cassandra.yaml</span> file depends on the type of installation: <table cellpadding="4" cellspacing="0" summary="" border="1" class="simpletable"><col style="width:50%" /><col style="width:50%" /><thead></thead><tbody><tr class="strow">
+            <td style="vertical-align:top;" class="stentry">Package installations</td>
+
+            <td style="vertical-align:top;" class="stentry"><span class="ph filepath">/etc/cassandra/cassandra.yaml</span></td>
+
+          </tr>
+<tr class="strow">
+            <td style="vertical-align:top;" class="stentry">Tarball installations</td>
+
+            <td style="vertical-align:top;" class="stentry"><span class="ph filepath"><var class="keyword varname">install_location</var>/resources/cassandra/conf/cassandra.yaml</span></td>
+
+          </tr>
+</tbody></table>
+</div>
+ </section>
+
+  </div>
+
+</article></main></div>
+                        
+                        
+                        
+                        
+                    </div>
+                    <nav role="navigation" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 navbar" id="wh_side_toc">
+                        <div class=" wh_side_toc "><ul class="hidden-print"><li><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html">CQL reference</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/about_cql_ref_c.html">Introduction</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_lexicon_c.html">CQL lexical structure</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_data_types_c.html">CQL data types</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_function_r.html">Functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/refLimits.html">CQL limits</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html">CQL shell commands</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/cqlsh.html">Starting cqlsh</a></span></li><li class="active"><span class="topicref">Configuring cqlsh from a file</span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCapture.html">CAPTURE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshClear.html">CLEAR</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshConsistency.html">CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCopy.html">COPY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshDescribe.html">DESCRIBE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExpand.html">cqlshExpand</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExit.html">EXIT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshLogin.html">LOGIN</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshPaging.html">PAGING</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSerialConsistency.html">SERIAL CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshShow.html">SHOW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSource.html">SOURCE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshTracing.html">TRACING</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html">CQL commands</a></span></li></ul></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="hidden-print col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="text-center wh_bottom_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links bottom_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cql/cql_reference/cqlsh.html" title="Starting cqlsh"></a></span>  
+<span class="navnext"><a class="link" href="../../cql/cql_reference/cqlshCapture.html" title="CAPTURE"></a></span>  </span></div>
+                    </div>
+                </nav>
+            </div>
+        </div> 
+        <nav class="navbar navbar-default wh_footer">
+  <div class=" footer-container text-center ">
+    <div class="ds_footer_bottom">
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/docTips.html" target="_blank" title="Doc Tips">
+        <span class="flaticon-signs"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Email feedback guidelines">
+        <span class="flaticon-new-email-interface-symbol-of-black-closed-envelope"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Twitter feedback guidelines">
+        <span class="flaticon-twitter-logo-button"></span></a>
+      <a href="https://github.com/datastax/" target="_blank" title="DataStax GitHub">
+        <span class="flaticon-github-logo"></span></a>
+      <a href="http://docs.datastax.com"/en/cql/3.3/zip/cql33.zip" target="_blank" title="Zipped document">
+        <span class="flaticon-symbols"></span></a>
+      <div>
+        <span>DataStax Enterprise is powered by the best distribution of Apache Cassandra™</span>
+      </div>
+      <div>
+        <span>©</span>
+        <span id="copyrightdate"></span>
+        <script type="text/javascript">document.getElementById("copyrightdate").innerHTML = new Date().getFullYear();</script>
+        <span>DataStax, Inc. All rights reserved. Updated: 14 August 2017</span>
+        <span style="display: none">Build time: 14 August 2017 16:56:08.983</span>
+      </div>
+    </div>
+    <div>
+        <p>DataStax, Titan, and TitanDB are registered trademark of DataStax, Inc. and its subsidiaries in the United States and/or other countries.</p>
+        <p>Apache Cassandra, Apache, Tomcat, Lucene, Solr, Hadoop, Spark, TinkerPop, and Cassandra are trademarks of the 
+            <a href="https://www.apache.org/" target="_blank" title="Apache Software Foundation">Apache Software Foundation</a> 
+            or its subsidiaries in Canada, the United States and/or other countries.</p>
+    </div>
+  </div>
+</nav>
+ 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="../../oxygen-webhelp/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/template/resources/js/wt_default.js?buildId=2017062918" type="text/javascript"></script>
+        <!-- Expand/collapse support -->
+        <script src="../../oxygen-webhelp/template/resources/js/wt_expand.js?buildId=2017062918" type="text/javascript"></script>
+        <div>
+    <script>
+    <!--
+    var collapsibleSections = {
+        /* Selectors for the nodes that contain an expand/collapse button. */
+        "expand_buttons" : [
+            /* Table caption */
+            "table > caption > .wh_expand_btn",
+            /* Article title */
+            ".topic > .title > .wh_expand_btn",
+            /* Section title */
+            ".sectiontitle > .wh_expand_btn",
+            /* Index terms groups */
+            ".wh_term_group > .wh_first_letter > .wh_expand_btn"
+        ],
+        "collapse_by_default" : [
+            /* sections with collapseByDefault output class */
+            ".collapseOnLoad > .wh_expand_btn"
+        ]
+    };
+
+    $(document).ready(function () {
+        /* Collapse selected nodes. */
+        collapsibleSections.collapse_by_default.forEach(
+            function(selector) {
+                var matchedNodes =  $(document).find(selector);
+                // Change the button state
+                matchedNodes.toggleClass("expanded");
+                // Will collapse the siblings of the parent node, excepting the ones that were marked otherwise
+                var siblings = matchedNodes.parent().siblings(':not(.wh_not_expandable)');
+                siblings.toggle();
+            }
+        );
+    });
+    //-->
+    </script>
+</div>
+        
+        <!-- DataStax js -->
+        <script src="../../oxygen-webhelp/assets/js/details-shim.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/highlight.pack.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/magnific-popup.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/dsInit.js" type="text/javascript"></script>
+        <!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+        <script type="text/javascript">replaceNextPrevArrows();</script>
+        <script type="text/javascript">getVersionDropdown("cql", "cql33");</script>
+        
+        <!-- Search autocomplete -->
+        <script type="text/javascript" src="../../oxygen-webhelp/search/keywords.js?uniqueId=20170814045608"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchAutocomplete.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchHistoryItems.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchOptions.js?uniqueId=20170814045608"></script>
+        
+        <!-- Analytics scripts for IT -->
+        <script type="text/javascript">
+          (function() {
+            var didInit = false;
+            function initMunchkin() {
+              if(didInit === false) {
+                didInit = true;
+                Munchkin.init('259-IFZ-779');
+                }
+              }
+              var s = document.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+              s.onreadystatechange = function() {
+                if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                  initMunchkin();
+                }
+             };
+             s.onload = initMunchkin;
+             document.getElementsByTagName('head')[0].appendChild(s);
+        })();
+        </script>
+        
+        <!-- end analytics scripts for IT -->
+            
+        <!-- Swiftype search code -->
+        
+        <!-- script type="text/javascript">
+            // set up autocomplete
+            $("#st-search-input").swiftype({
+                engineKey: "35HEzyB2mn1a1qGMmCwN"
+            });
+            // set up search
+            $("#st-search-input").swiftypeSearch({
+                engineKey: "35HEzyB2mn1a1qGMmCwN",
+                resultContainingElement: "#st-results-container"
+            });
+        </script -->
+		<!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+    </body>
+</html>

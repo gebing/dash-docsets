@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+   <appContext helpID="cassandraAbout" path="cassandra/cassandraAbout.html"/>
+   <appContext helpID="features" path="cassandra/features.html"/>
+   <appContext helpID="archTOC" path="cassandra/architecture/archTOC.html"/>
+   <appContext helpID="archIntro" path="cassandra/architecture/archIntro.html"/>
+   <appContext helpID="archGossipAbout" path="cassandra/architecture/archGossipAbout.html"/>
+   <appContext helpID="archDataDistributeFailDetect"
+               path="cassandra/architecture/archDataDistributeFailDetect.html"/>
+   <appContext helpID="archDataDistributeAbout"
+               path="cassandra/architecture/archDataDistributeAbout.html"/>
+   <appContext helpID="archDataDistributeHashing"
+               path="cassandra/architecture/archDataDistributeHashing.html"/>
+   <appContext helpID="archDataDistributeVnodesUsing"
+               path="cassandra/architecture/archDataDistributeVnodesUsing.html"/>
+   <appContext helpID="archDataDistributeDistribute"
+               path="cassandra/architecture/archDataDistributeDistribute.html"/>
+   <appContext helpID="archDataDistributeReplication"
+               path="cassandra/architecture/archDataDistributeReplication.html"/>
+   <appContext helpID="archPartitionerAbout"
+               path="cassandra/architecture/archPartitionerAbout.html"/>
+   <appContext helpID="archPartitionerM3P"
+               path="cassandra/architecture/archPartitionerM3P.html"/>
+   <appContext helpID="archPartitionerRandom"
+               path="cassandra/architecture/archPartitionerRandom.html"/>
+   <appContext helpID="archPartitionerBOP"
+               path="cassandra/architecture/archPartitionerBOP.html"/>
+   <appContext helpID="archSnitchesAbout" path="cassandra/architecture/archSnitchesAbout.html"/>
+   <appContext helpID="archSnitchDynamic" path="cassandra/architecture/archSnitchDynamic.html"/>
+   <appContext helpID="archSnitchSimple" path="cassandra/architecture/archSnitchSimple.html"/>
+   <appContext helpID="archSnitchRackInf" path="cassandra/architecture/archSnitchRackInf.html"/>
+   <appContext helpID="archSnitchPFSnitch"
+               path="cassandra/architecture/archSnitchPFSnitch.html"/>
+   <appContext helpID="archsnitchGossipPF"
+               path="cassandra/architecture/archsnitchGossipPF.html"/>
+   <appContext helpID="archSnitchEC2" path="cassandra/architecture/archSnitchEC2.html"/>
+   <appContext helpID="archSnitchEC2MultiRegion"
+               path="cassandra/architecture/archSnitchEC2MultiRegion.html"/>
+   <appContext helpID="archSnitchGoogle" path="cassandra/architecture/archSnitchGoogle.html"/>
+   <appContext helpID="archSnitchCloudStack"
+               path="cassandra/architecture/archSnitchCloudStack.html"/>
+   <appContext helpID="dmlDatabaseInternalsTOC"
+               path="cassandra/dml/dmlDatabaseInternalsTOC.html"/>
+   <appContext helpID="dmlManageOndisk" path="cassandra/dml/dmlManageOndisk.html"/>
+   <appContext helpID="dmlIntro" path="cassandra/dml/dmlIntro.html"/>
+   <appContext helpID="dmlHowDataWritten" path="cassandra/dml/dmlHowDataWritten.html"/>
+   <appContext helpID="dmlHowDataMaintain" path="cassandra/dml/dmlHowDataMaintain.html"/>
+   <appContext helpID="dmlWriteUpdate" path="cassandra/dml/dmlWriteUpdate.html"/>
+   <appContext helpID="dmlAboutDeletes" path="cassandra/dml/dmlAboutDeletes.html"/>
+   <appContext helpID="dmlIndexInternals" path="cassandra/dml/dmlIndexInternals.html"/>
+   <appContext helpID="dmlAboutReads" path="cassandra/dml/dmlAboutReads.html"/>
+   <appContext helpID="dmlWritePatterns" path="cassandra/dml/dmlWritePatterns.html"/>
+   <appContext helpID="dmlDataConsistencyTOC" path="cassandra/dml/dmlDataConsistencyTOC.html"/>
+   <appContext helpID="dmlAboutDataConsistency"
+               path="cassandra/dml/dmlAboutDataConsistency.html"/>
+   <appContext helpID="dmlTransactionsDiffer" path="cassandra/dml/dmlTransactionsDiffer.html"/>
+   <appContext helpID="dmlLtwtTransactions" path="cassandra/dml/dmlLtwtTransactions.html"/>
+   <appContext helpID="dmlCLDiscovery" path="cassandra/dml/dmlCLDiscovery.html"/>
+   <appContext helpID="dmlConfigConsistency" path="cassandra/dml/dmlConfigConsistency.html"/>
+   <appContext helpID="dmlConfigSerialConsistency"
+               path="cassandra/dml/dmlConfigSerialConsistency.html"/>
+   <appContext helpID="dmlClientRequestsRead" path="cassandra/dml/dmlClientRequestsRead.html"/>
+   <appContext helpID="dmlClientRequestsReadExp"
+               path="cassandra/dml/dmlClientRequestsReadExp.html"/>
+   <appContext helpID="dmlClientRequestsWrite"
+               path="cassandra/dml/dmlClientRequestsWrite.html"/>
+   <appContext helpID="dmlClientRequestsMultiDCWrites"
+               path="cassandra/dml/dmlClientRequestsMultiDCWrites.html"/>
+   <appContext helpID="planPlanningAbout" path="cassandra/planning/planPlanningAbout.html"/>
+   <appContext helpID="installTOC" path="cassandra/install/installTOC.html"/>
+   <appContext helpID="installRHEL" path="cassandra/install/installRHEL.html"/>
+   <appContext helpID="installDeb" path="cassandra/install/installDeb.html"/>
+   <appContext helpID="installTarball" path="cassandra/install/installTarball.html"/>
+   <appContext helpID="installPriorVersions"
+               path="cassandra/install/installPriorVersions.html"/>
+   <appContext helpID="installRemove" path="cassandra/install/installRemove.html"/>
+   <appContext helpID="installCloudProviders"
+               path="cassandra/install/installCloudProviders.html"/>
+   <appContext helpID="installJDKabout" path="cassandra/install/installJDKabout.html"/>
+   <appContext helpID="installJdkRHEL" path="cassandra/install/installJdkRHEL.html"/>
+   <appContext helpID="installJdkDeb" path="cassandra/install/installJdkDeb.html"/>
+   <appContext helpID="installOpenJdkRHEL" path="cassandra/install/installOpenJdkRHEL.html"/>
+   <appContext helpID="installOpenJdkDeb" path="cassandra/install/installOpenJdkDeb.html"/>
+   <appContext helpID="installRecommendSettings"
+               path="cassandra/install/installRecommendSettings.html"/>
+   <appContext helpID="referenceInstallLocationsTOC"
+               path="cassandra/install/referenceInstallLocationsTOC.html"/>
+   <appContext helpID="referenceInstallLocateTar"
+               path="cassandra/install/referenceInstallLocateTar.html"/>
+   <appContext helpID="referenceInstallLocatePkg"
+               path="cassandra/install/referenceInstallLocatePkg.html"/>
+   <appContext helpID="configTOC" path="cassandra/configuration/configTOC.html"/>
+   <appContext helpID="configCassandra_yaml"
+               path="cassandra/configuration/configCassandra_yaml.html"/>
+   <appContext helpID="referenceInclude" path="cassandra/configuration/referenceInclude.html"/>
+   <appContext helpID="secureTOC" path="cassandra/configuration/secureTOC.html"/>
+   <appContext helpID="secureIntro" path="cassandra/configuration/secureIntro.html"/>
+   <appContext helpID="secureInternalAuthenticationTOC"
+               path="cassandra/configuration/secureInternalAuthenticationTOC.html"/>
+   <appContext helpID="secureAboutNativeAuth"
+               path="cassandra/configuration/secureAboutNativeAuth.html"/>
+   <appContext helpID="secureConfigNativeAuth"
+               path="cassandra/configuration/secureConfigNativeAuth.html"/>
+   <appContext helpID="secureLoginCqlsh" path="cassandra/configuration/secureLoginCqlsh.html"/>
+   <appContext helpID="secureInternalAuthorizationTOC"
+               path="cassandra/configuration/secureInternalAuthorizationTOC.html"/>
+   <appContext helpID="secureObjectPerms"
+               path="cassandra/configuration/secureObjectPerms.html"/>
+   <appContext helpID="secureConfigInternalAuth"
+               path="cassandra/configuration/secureConfigInternalAuth.html"/>
+   <appContext helpID="secureJMXAuthenticationTOC"
+               path="cassandra/configuration/secureJMXAuthenticationTOC.html"/>
+   <appContext helpID="secureAboutJMXAuth"
+               path="cassandra/configuration/secureAboutJMXAuth.html"/>
+   <appContext helpID="secureJmxAuthentication"
+               path="cassandra/configuration/secureJmxAuthentication.html"/>
+   <appContext helpID="secureNodetool" path="cassandra/configuration/secureNodetool.html"/>
+   <appContext helpID="secureJconsole" path="cassandra/configuration/secureJconsole.html"/>
+   <appContext helpID="secureSSLEncryptTOC"
+               path="cassandra/configuration/secureSSLEncryptTOC.html"/>
+   <appContext helpID="secureSSLIntro" path="cassandra/configuration/secureSSLIntro.html"/>
+   <appContext helpID="installJCE" path="cassandra/configuration/installJCE.html"/>
+   <appContext helpID="secureSSLCertificates"
+               path="cassandra/configuration/secureSSLCertificates.html"/>
+   <appContext helpID="secureSSLCertWithCA"
+               path="cassandra/configuration/secureSSLCertWithCA.html"/>
+   <appContext helpID="secureSSLNodeToNode"
+               path="cassandra/configuration/secureSSLNodeToNode.html"/>
+   <appContext helpID="secureSSLClientToNode"
+               path="cassandra/configuration/secureSSLClientToNode.html"/>
+   <appContext helpID="secureCqlshSSL" path="cassandra/configuration/secureCqlshSSL.html"/>
+   <appContext helpID="secureNodetoolSSL"
+               path="cassandra/configuration/secureNodetoolSSL.html"/>
+   <appContext helpID="secureJconsoleSSL"
+               path="cassandra/configuration/secureJconsoleSSL.html"/>
+   <appContext helpID="secureFireWall" path="cassandra/configuration/secureFireWall.html"/>
+   <appContext helpID="configGossipSettings"
+               path="cassandra/configuration/configGossipSettings.html"/>
+   <appContext helpID="configHeapDump" path="cassandra/configuration/configHeapDump.html"/>
+   <appContext helpID="configVirtualNodesTOC"
+               path="cassandra/configuration/configVirtualNodesTOC.html"/>
+   <appContext helpID="configVnodesEnable"
+               path="cassandra/configuration/configVnodesEnable.html"/>
+   <appContext helpID="configVnodesProduction"
+               path="cassandra/configuration/configVnodesProduction.html"/>
+   <appContext helpID="configMultiNetworks"
+               path="cassandra/configuration/configMultiNetworks.html"/>
+   <appContext helpID="configLoggingLevels"
+               path="cassandra/configuration/configLoggingLevels.html"/>
+   <appContext helpID="configLogArchive" path="cassandra/configuration/configLogArchive.html"/>
+   <appContext helpID="configCDCLogging" path="cassandra/configuration/configCDCLogging.html"/>
+   <appContext helpID="configGenTokens" path="cassandra/configuration/configGenTokens.html"/>
+   <appContext helpID="configHadoop" path="cassandra/configuration/configHadoop.html"/>
+   <appContext helpID="initTOC" path="cassandra/initialize/initTOC.html"/>
+   <appContext helpID="initSingleDS" path="cassandra/initialize/initSingleDS.html"/>
+   <appContext helpID="initMultipleDS" path="cassandra/initialize/initMultipleDS.html"/>
+   <appContext helpID="referenceStartStopTOC"
+               path="cassandra/initialize/referenceStartStopTOC.html"/>
+   <appContext helpID="referenceStartCservice"
+               path="cassandra/initialize/referenceStartCservice.html"/>
+   <appContext helpID="referenceStartCprocess"
+               path="cassandra/initialize/referenceStartCprocess.html"/>
+   <appContext helpID="referenceStopCservice_t"
+               path="cassandra/initialize/referenceStopCservice_t.html"/>
+   <appContext helpID="referenceStopCprocess"
+               path="cassandra/initialize/referenceStopCprocess.html"/>
+   <appContext helpID="referenceClearCpkgData"
+               path="cassandra/initialize/referenceClearCpkgData.html"/>
+   <appContext helpID="referenceClearCbinaryData"
+               path="cassandra/initialize/referenceClearCbinaryData.html"/>
+   <appContext helpID="operationsTOC" path="cassandra/operations/operationsTOC.html"/>
+   <appContext helpID="opsAddingRemovingNodeTOC"
+               path="cassandra/operations/opsAddingRemovingNodeTOC.html"/>
+   <appContext helpID="opsAddNodeToCluster"
+               path="cassandra/operations/opsAddNodeToCluster.html"/>
+   <appContext helpID="opsAddDCToCluster" path="cassandra/operations/opsAddDCToCluster.html"/>
+   <appContext helpID="opsReplaceNode" path="cassandra/operations/opsReplaceNode.html"/>
+   <appContext helpID="opsReplaceLiveNode"
+               path="cassandra/operations/opsReplaceLiveNode.html#opsReplaceLiveNode"/>
+   <appContext helpID="opsReplaceLiveNodeAlternate"
+               path="cassandra/operations/opsReplaceLiveNode.html#opsReplaceLiveNodeAlternate"/>
+   <appContext helpID="opsMoveNodeRack" path="cassandra/operations/opsMoveNodeRack.html"/>
+   <appContext helpID="opsDecomissionDC" path="cassandra/operations/opsDecomissionDC.html"/>
+   <appContext helpID="opsRemoveNode" path="cassandra/operations/opsRemoveNode.html"/>
+   <appContext helpID="opsSwitchSnitch" path="cassandra/operations/opsSwitchSnitch.html"/>
+   <appContext helpID="opsChangeKSStrategy"
+               path="cassandra/operations/opsChangeKSStrategy.html"/>
+   <appContext helpID="opsMoveCluster" path="cassandra/operations/opsMoveCluster.html"/>
+   <appContext helpID="opsAddRplSingleTokenNodes"
+               path="cassandra/operations/opsAddRplSingleTokenNodes.html"/>
+   <appContext helpID="opsAddDCSingleTokenNodes"
+               path="cassandra/operations/opsAddDCSingleTokenNodes.html"/>
+   <appContext helpID="opsReplaceSingleTokenNode"
+               path="cassandra/operations/opsReplaceSingleTokenNode.html"/>
+   <appContext helpID="opsBackupRestore" path="cassandra/operations/opsBackupRestore.html"/>
+   <appContext helpID="opsAboutSnapshots" path="cassandra/operations/opsAboutSnapshots.html"/>
+   <appContext helpID="opsBackupTakesSnapshot"
+               path="cassandra/operations/opsBackupTakesSnapshot.html"/>
+   <appContext helpID="opsBackupDeleteSnapshot"
+               path="cassandra/operations/opsBackupDeleteSnapshot.html"/>
+   <appContext helpID="opsBackupIncremental"
+               path="cassandra/operations/opsBackupIncremental.html"/>
+   <appContext helpID="opsBackupSnapshotRestore"
+               path="cassandra/operations/opsBackupSnapshotRestore.html"/>
+   <appContext helpID="opsSnapshotRestoreNewCluster"
+               path="cassandra/operations/opsSnapshotRestoreNewCluster.html"/>
+   <appContext helpID="opsRecoverUsingJBOD"
+               path="cassandra/operations/opsRecoverUsingJBOD.html"/>
+   <appContext helpID="opsRepairNodesTOC" path="cassandra/operations/opsRepairNodesTOC.html"/>
+   <appContext helpID="opsRepairNodesHintedHandoff"
+               path="cassandra/operations/opsRepairNodesHintedHandoff.html"/>
+   <appContext helpID="opsRepairNodesReadRepair"
+               path="cassandra/operations/opsRepairNodesReadRepair.html"/>
+   <appContext helpID="opsRepairNodesManualRepair"
+               path="cassandra/operations/opsRepairNodesManualRepair.html"/>
+   <appContext helpID="opsRepairNodesWhen" path="cassandra/operations/opsRepairNodesWhen.html"/>
+   <appContext helpID="opsRepairNodesMigration"
+               path="cassandra/operations/opsRepairNodesMigration.html"/>
+   <appContext helpID="monitoringCassandraTOC"
+               path="cassandra/operations/monitoringCassandraTOC.html"/>
+   <appContext helpID="opsMonitoring" path="cassandra/operations/opsMonitoring.html"/>
+   <appContext helpID="opsCompactionMetrics"
+               path="cassandra/operations/opsCompactionMetrics.html"/>
+   <appContext helpID="opsThreadPoolStats" path="cassandra/operations/opsThreadPoolStats.html"/>
+   <appContext helpID="opsTableStatistics" path="cassandra/operations/opsTableStatistics.html"/>
+   <appContext helpID="opsTuneJVM" path="cassandra/operations/opsTuneJVM.html"/>
+   <appContext helpID="opsDataCachingTOC" path="cassandra/operations/opsDataCachingTOC.html"/>
+   <appContext helpID="opsConfiguringCaches"
+               path="cassandra/operations/opsConfiguringCaches.html"/>
+   <appContext helpID="opsSetCaching" path="cassandra/operations/opsSetCaching.html"/>
+   <appContext helpID="opsCacheTips" path="cassandra/operations/opsCacheTips.html"/>
+   <appContext helpID="opsMonitoringCache" path="cassandra/operations/opsMonitoringCache.html"/>
+   <appContext helpID="opsMemtableThruput" path="cassandra/operations/opsMemtableThruput.html"/>
+   <appContext helpID="opsConfigureCompaction"
+               path="cassandra/operations/opsConfigureCompaction.html"/>
+   <appContext helpID="opsAboutConfigCompress"
+               path="cassandra/operations/opsAboutConfigCompress.html"/>
+   <appContext helpID="opsWhenCompress" path="cassandra/operations/opsWhenCompress.html"/>
+   <appContext helpID="opsConfigCompress" path="cassandra/operations/opsConfigCompress.html"/>
+   <appContext helpID="opsTestCompactCompress"
+               path="cassandra/operations/opsTestCompactCompress.html"/>
+   <appContext helpID="opsTuningBloomFilters"
+               path="cassandra/operations/opsTuningBloomFilters.html"/>
+   <appContext helpID="migrating" path="cassandra/operations/migrating.html"/>
+   <appContext helpID="opsGossipPurge" path="cassandra/operations/opsGossipPurge.html"/>
+   <appContext helpID="toolsTOC" path="cassandra/tools/toolsTOC.html"/>
+   <appContext helpID="toolsNodetool" path="cassandra/tools/toolsNodetool.html"/>
+   <appContext helpID="toolsAboutNodetool" path="cassandra/tools/toolsAboutNodetool.html"/>
+   <appContext helpID="toolsAssassinate" path="cassandra/tools/toolsAssassinate.html"/>
+   <appContext helpID="toolsBootstrap" path="cassandra/tools/toolsBootstrap.html"/>
+   <appContext helpID="toolsCfHistogramsRedirect"
+               path="cassandra/tools/toolsCfHistogramsRedirect.html"/>
+   <appContext helpID="toolsCfStatsRedirect" path="cassandra/tools/toolsCfStatsRedirect.html"/>
+   <appContext helpID="toolsCleanup" path="cassandra/tools/toolsCleanup.html"/>
+   <appContext helpID="toolsClearSnapShot" path="cassandra/tools/toolsClearSnapShot.html"/>
+   <appContext helpID="toolsCompact" path="cassandra/tools/toolsCompact.html"/>
+   <appContext helpID="toolsCompactionHistory"
+               path="cassandra/tools/toolsCompactionHistory.html"/>
+   <appContext helpID="toolsCompactionStats" path="cassandra/tools/toolsCompactionStats.html"/>
+   <appContext helpID="toolsDecommission" path="cassandra/tools/toolsDecommission.html"/>
+   <appContext helpID="toolsDescribeCluster" path="cassandra/tools/toolsDescribeCluster.html"/>
+   <appContext helpID="toolsDescribeRing" path="cassandra/tools/toolsDescribeRing.html"/>
+   <appContext helpID="toolsDisableAutoCompaction"
+               path="cassandra/tools/toolsDisableAutoCompaction.html"/>
+   <appContext helpID="toolsDisableBackup" path="cassandra/tools/toolsDisableBackup.html"/>
+   <appContext helpID="toolsDisableBinary" path="cassandra/tools/toolsDisableBinary.html"/>
+   <appContext helpID="toolsDisableGossip" path="cassandra/tools/toolsDisableGossip.html"/>
+   <appContext helpID="toolsDisableHandoff" path="cassandra/tools/toolsDisableHandoff.html"/>
+   <appContext helpID="toolsDisablehintsfordc"
+               path="cassandra/tools/toolsDisablehintsfordc.html"/>
+   <appContext helpID="toolsDisableThrift" path="cassandra/tools/toolsDisableThrift.html"/>
+   <appContext helpID="toolsDrain" path="cassandra/tools/toolsDrain.html"/>
+   <appContext helpID="toolsEnableAutoCompaction"
+               path="cassandra/tools/toolsEnableAutoCompaction.html"/>
+   <appContext helpID="toolsEnableBackup" path="cassandra/tools/toolsEnableBackup.html"/>
+   <appContext helpID="toolsEnableBinary" path="cassandra/tools/toolsEnableBinary.html"/>
+   <appContext helpID="toolsEnableGossip" path="cassandra/tools/toolsEnableGossip.html"/>
+   <appContext helpID="toolsEnableHandoff" path="cassandra/tools/toolsEnableHandoff.html"/>
+   <appContext helpID="toolsEnablehintsfordc"
+               path="cassandra/tools/toolsEnablehintsfordc.html"/>
+   <appContext helpID="toolsEnableThrift" path="cassandra/tools/toolsEnableThrift.html"/>
+   <appContext helpID="toolsFailureDetector" path="cassandra/tools/toolsFailureDetector.html"/>
+   <appContext helpID="toolsFlush" path="cassandra/tools/toolsFlush.html"/>
+   <appContext helpID="toolsGcstats" path="cassandra/tools/toolsGcstats.html"/>
+   <appContext helpID="toolsGetCompactionThreshold"
+               path="cassandra/tools/toolsGetCompactionThreshold.html"/>
+   <appContext helpID="toolsGetcompactionthroughput"
+               path="cassandra/tools/toolsGetcompactionthroughput.html"/>
+   <appContext helpID="toolsGetEndPoints" path="cassandra/tools/toolsGetEndPoints.html"/>
+   <appContext helpID="toolsGetInterDcStreamThroughPut"
+               path="cassandra/tools/toolsGetInterDcStreamThroughPut.html"/>
+   <appContext helpID="toolsGetLogLev" path="cassandra/tools/toolsGetLogLev.html"/>
+   <appContext helpID="toolsGetSstables" path="cassandra/tools/toolsGetSstables.html"/>
+   <appContext helpID="toolsGetStreamThroughput"
+               path="cassandra/tools/toolsGetStreamThroughput.html"/>
+   <appContext helpID="toolsGettimeout" path="cassandra/tools/toolsGettimeout.html"/>
+   <appContext helpID="toolsGetTraceProbability"
+               path="cassandra/tools/toolsGetTraceProbability.html"/>
+   <appContext helpID="toolsGossipInfo" path="cassandra/tools/toolsGossipInfo.html"/>
+   <appContext helpID="toolsHelp" path="cassandra/tools/toolsHelp.html"/>
+   <appContext helpID="toolsInfo" path="cassandra/tools/toolsInfo.html"/>
+   <appContext helpID="toolsInvalidatecountercache"
+               path="cassandra/tools/toolsInvalidatecountercache.html"/>
+   <appContext helpID="toolsInvalidateKeyCache"
+               path="cassandra/tools/toolsInvalidateKeyCache.html"/>
+   <appContext helpID="toolsInvalidateRowCache"
+               path="cassandra/tools/toolsInvalidateRowCache.html"/>
+   <appContext helpID="toolsJoin" path="cassandra/tools/toolsJoin.html"/>
+   <appContext helpID="toolsListSnapShots" path="cassandra/tools/toolsListSnapShots.html"/>
+   <appContext helpID="toolsMove" path="cassandra/tools/toolsMove.html"/>
+   <appContext helpID="toolsNetstats" path="cassandra/tools/toolsNetstats.html"/>
+   <appContext helpID="toolsPauseHandoff" path="cassandra/tools/toolsPauseHandoff.html"/>
+   <appContext helpID="toolsProxyHistograms" path="cassandra/tools/toolsProxyHistograms.html"/>
+   <appContext helpID="toolsRangeKeySample" path="cassandra/tools/toolsRangeKeySample.html"/>
+   <appContext helpID="toolsRebuild" path="cassandra/tools/toolsRebuild.html"/>
+   <appContext helpID="toolsRebuildIndex" path="cassandra/tools/toolsRebuildIndex.html"/>
+   <appContext helpID="toolsRefresh" path="cassandra/tools/toolsRefresh.html"/>
+   <appContext helpID="toolsRefreshSizeEstimates"
+               path="cassandra/tools/toolsRefreshSizeEstimates.html"/>
+   <appContext helpID="toolsReloadTriggers" path="cassandra/tools/toolsReloadTriggers.html"/>
+   <appContext helpID="toolsRelocateSSTables"
+               path="cassandra/tools/toolsRelocateSSTables.html"/>
+   <appContext helpID="toolsRemoveNode" path="cassandra/tools/toolsRemoveNode.html"/>
+   <appContext helpID="toolsRepair" path="cassandra/tools/toolsRepair.html"/>
+   <appContext helpID="toolsReplaybatchlog" path="cassandra/tools/toolsReplaybatchlog.html"/>
+   <appContext helpID="toolsResetLocalSchema"
+               path="cassandra/tools/toolsResetLocalSchema.html"/>
+   <appContext helpID="toolsResumeHandoff" path="cassandra/tools/toolsResumeHandoff.html"/>
+   <appContext helpID="toolsRing" path="cassandra/tools/toolsRing.html"/>
+   <appContext helpID="toolsScrub" path="cassandra/tools/toolsScrub.html"/>
+   <appContext helpID="toolsSetCacheCapacity"
+               path="cassandra/tools/toolsSetCacheCapacity.html"/>
+   <appContext helpID="toolsSetCacheKeysToSave"
+               path="cassandra/tools/toolsSetCacheKeysToSave.html"/>
+   <appContext helpID="toolsSetCompactionThreshold"
+               path="cassandra/tools/toolsSetCompactionThreshold.html"/>
+   <appContext helpID="toolsSetCompactionThroughput"
+               path="cassandra/tools/toolsSetCompactionThroughput.html"/>
+   <appContext helpID="toolsSetHHthrottle" path="cassandra/tools/toolsSetHHthrottle.html"/>
+   <appContext helpID="toolsSetInterDcStreamThroughput"
+               path="cassandra/tools/toolsSetInterDcStreamThroughput.html"/>
+   <appContext helpID="toolsSetLogLev" path="cassandra/tools/toolsSetLogLev.html"/>
+   <appContext helpID="toolsSetStreamThroughput"
+               path="cassandra/tools/toolsSetStreamThroughput.html"/>
+   <appContext helpID="toolsSettimeout" path="cassandra/tools/toolsSettimeout.html"/>
+   <appContext helpID="toolsSetTraceProbability"
+               path="cassandra/tools/toolsSetTraceProbability.html"/>
+   <appContext helpID="toolsSjk" path="cassandra/tools/toolsSjk.html"/>
+   <appContext helpID="toolsSnapShot" path="cassandra/tools/toolsSnapShot.html"/>
+   <appContext helpID="toolsStatus" path="cassandra/tools/toolsStatus.html"/>
+   <appContext helpID="toolsStatusBackup" path="cassandra/tools/toolsStatusBackup.html"/>
+   <appContext helpID="toolsStatusBinary" path="cassandra/tools/toolsStatusBinary.html"/>
+   <appContext helpID="toolsStatusGossip" path="cassandra/tools/toolsStatusGossip.html"/>
+   <appContext helpID="toolsStatusHandoff" path="cassandra/tools/toolsStatusHandoff.html"/>
+   <appContext helpID="toolsStatusThrift" path="cassandra/tools/toolsStatusThrift.html"/>
+   <appContext helpID="toolsStop" path="cassandra/tools/toolsStop.html"/>
+   <appContext helpID="toolsStopDaemon" path="cassandra/tools/toolsStopDaemon.html"/>
+   <appContext helpID="toolsTablehisto" path="cassandra/tools/toolsTablehisto.html"/>
+   <appContext helpID="toolsTablestats" path="cassandra/tools/toolsTablestats.html"/>
+   <appContext helpID="toolsToppartitions" path="cassandra/tools/toolsToppartitions.html"/>
+   <appContext helpID="toolsTPstats" path="cassandra/tools/toolsTPstats.html"/>
+   <appContext helpID="toolsTruncateHints" path="cassandra/tools/toolsTruncateHints.html"/>
+   <appContext helpID="toolsUpgradeSstables" path="cassandra/tools/toolsUpgradeSstables.html"/>
+   <appContext helpID="toolsVerify" path="cassandra/tools/toolsVerify.html"/>
+   <appContext helpID="toolsVersion" path="cassandra/tools/toolsVersion.html"/>
+   <appContext helpID="toolsCUtility" path="cassandra/tools/toolsCUtility.html"/>
+   <appContext helpID="toolsCStress" path="cassandra/tools/toolsCStress.html"/>
+   <appContext helpID="toolsCStressOutput" path="cassandra/tools/toolsCStressOutput.html"/>
+   <appContext helpID="toolsSSTableUtilitiesTOC"
+               path="cassandra/tools/toolsSSTableUtilitiesTOC.html"/>
+   <appContext helpID="ToolsSSTabledump" path="cassandra/tools/ToolsSSTabledump.html"/>
+   <appContext helpID="toolsSStabExpiredBlockers"
+               path="cassandra/tools/toolsSStabExpiredBlockers.html"/>
+   <appContext helpID="toolsSStabLevelReset" path="cassandra/tools/toolsSStabLevelReset.html"/>
+   <appContext helpID="toolsBulkloader" path="cassandra/tools/toolsBulkloader.html"/>
+   <appContext helpID="toolsSSTableMetadata" path="cassandra/tools/toolsSSTableMetadata.html"/>
+   <appContext helpID="toolsSStabOfflineRelevel"
+               path="cassandra/tools/toolsSStabOfflineRelevel.html"/>
+   <appContext helpID="toolsSStabRepairedSet"
+               path="cassandra/tools/toolsSStabRepairedSet.html"/>
+   <appContext helpID="toolsSSTableScrub" path="cassandra/tools/toolsSSTableScrub.html"/>
+   <appContext helpID="toolsSSTableSplit" path="cassandra/tools/toolsSSTableSplit.html"/>
+   <appContext helpID="ToolsSSTableupgrade" path="cassandra/tools/ToolsSSTableupgrade.html"/>
+   <appContext helpID="toolsSStabUtil" path="cassandra/tools/toolsSStabUtil.html"/>
+   <appContext helpID="toolsSStabVerify" path="cassandra/tools/toolsSStabVerify.html"/>
+   <appContext helpID="trblshootTOC" path="cassandra/troubleshooting/trblshootTOC.html"/>
+   <appContext helpID="releaseNotes" path="cassandra/releaseNotes.html"/>
+</map>

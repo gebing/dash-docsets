@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+   <appContext helpID="cqlIntro" path="cql/cqlIntro.html"/>
+   <appContext helpID="ddlCQLDataModelingTOC" path="cql/ddl/ddlCQLDataModelingTOC.html"/>
+   <appContext helpID="dataModelingApproach" path="cql/ddl/dataModelingApproach.html"/>
+   <appContext helpID="dataModelingAnalysis" path="cql/ddl/dataModelingAnalysis.html"/>
+   <appContext helpID="useAboutCQL" path="cql/cql_using/useAboutCQL.html"/>
+   <appContext helpID="startCqlLinuxMac" path="cql/cql_using/startCqlLinuxMac.html"/>
+   <appContext helpID="useCreateKeyspace" path="cql/cql_using/useCreateKeyspace.html"/>
+   <appContext helpID="useExampleCreatingKeyspace"
+               path="cql/cql_using/useExampleCreatingKeyspace.html"/>
+   <appContext helpID="useUpdateKeyspaceRF" path="cql/cql_using/useUpdateKeyspaceRF.html"/>
+   <appContext helpID="useCreateTableTOC" path="cql/cql_using/useCreateTableTOC.html"/>
+   <appContext helpID="useCreateTable" path="cql/cql_using/useCreateTable.html"/>
+   <appContext helpID="useKSQualifier" path="cql/cql_using/useKSQualifier.html"/>
+   <appContext helpID="useSimplePrimaryKeyConcept"
+               path="cql/cql_using/useSimplePrimaryKeyConcept.html#useSimplePrimaryKeyConcept"/>
+   <appContext helpID="useSimplePrimaryKey"
+               path="cql/cql_using/useSimplePrimaryKeyConcept.html#useSimplePrimaryKey"/>
+   <appContext helpID="useCompositePartitionKeyConcept"
+               path="cql/cql_using/useCompositePartitionKeyConcept.html#useCompositePartitionKeyConcept"/>
+   <appContext helpID="useCompositePartitionKey"
+               path="cql/cql_using/useCompositePartitionKeyConcept.html#useCompositePartitionKey"/>
+   <appContext helpID="useCompoundPrimaryKeyConcept"
+               path="cql/cql_using/useCompoundPrimaryKeyConcept.html"/>
+   <appContext helpID="useCompoundPrimaryKey" path="cql/cql_using/useCompoundPrimaryKey.html"/>
+   <appContext helpID="useCountersConcept" path="cql/cql_using/useCountersConcept.html"/>
+   <appContext helpID="useCounters" path="cql/cql_using/useCounters.html"/>
+   <appContext helpID="useCompactStorage" path="cql/cql_using/useCompactStorage.html"/>
+   <appContext helpID="useCreateTableCollisionFix"
+               path="cql/cql_using/useCreateTableCollisionFix.html"/>
+   <appContext helpID="useCreateMV" path="cql/cql_using/useCreateMV.html"/>
+   <appContext helpID="useAdvancedDataTypesTOC"
+               path="cql/cql_using/useAdvancedDataTypesTOC.html"/>
+   <appContext helpID="useCollections" path="cql/cql_using/useCollections.html"/>
+   <appContext helpID="useSet" path="cql/cql_using/useSet.html"/>
+   <appContext helpID="useList" path="cql/cql_using/useList.html"/>
+   <appContext helpID="useMap" path="cql/cql_using/useMap.html"/>
+   <appContext helpID="useCreateTableTuple" path="cql/cql_using/useCreateTableTuple.html"/>
+   <appContext helpID="useCreateUDT" path="cql/cql_using/useCreateUDT.html"/>
+   <appContext helpID="useCreateFunctionsTOC" path="cql/cql_using/useCreateFunctionsTOC.html"/>
+   <appContext helpID="useCreateUDF" path="cql/cql_using/useCreateUDF.html"/>
+   <appContext helpID="useCreateUDA" path="cql/cql_using/useCreateUDA.html"/>
+   <appContext helpID="useInsertDataTOC" path="cql/cql_using/useInsertDataTOC.html"/>
+   <appContext helpID="useInsertSimple" path="cql/cql_using/useInsertSimple.html"/>
+   <appContext helpID="useInsertSet" path="cql/cql_using/useInsertSet.html"/>
+   <appContext helpID="useInsertList" path="cql/cql_using/useInsertList.html"/>
+   <appContext helpID="useInsertMap" path="cql/cql_using/useInsertMap.html"/>
+   <appContext helpID="useInsertTuple" path="cql/cql_using/useInsertTuple.html"/>
+   <appContext helpID="useInsertUDT" path="cql/cql_using/useInsertUDT.html"/>
+   <appContext helpID="useInsertJSON" path="cql/cql_using/useInsertJSON.html"/>
+   <appContext helpID="useInsertLWT" path="cql/cql_using/useInsertLWT.html"/>
+   <appContext helpID="refStaticCol" path="cql/cql_using/refStaticCol.html"/>
+   <appContext helpID="useExpire" path="cql/cql_using/useExpire.html"/>
+   <appContext helpID="useExpireExample" path="cql/cql_using/useExpireExample.html"/>
+   <appContext helpID="useInsertCopyCSV" path="cql/cql_using/useInsertCopyCSV.html"/>
+   <appContext helpID="useBatchTOC" path="cql/cql_using/useBatchTOC.html"/>
+   <appContext helpID="useBatch" path="cql/cql_using/useBatch.html"/>
+   <appContext helpID="useBatchGoodExample" path="cql/cql_using/useBatchGoodExample.html"/>
+   <appContext helpID="useBatchBadExample" path="cql/cql_using/useBatchBadExample.html"/>
+   <appContext helpID="useQueryDataTOC" path="cql/cql_using/useQueryDataTOC.html"/>
+   <appContext helpID="useQueryColumnsSort" path="cql/cql_using/useQueryColumnsSort.html"/>
+   <appContext helpID="useQueryCollections" path="cql/cql_using/useQueryCollections.html"/>
+   <appContext helpID="useQueryJSON" path="cql/cql_using/useQueryJSON.html"/>
+   <appContext helpID="useQueryIN" path="cql/cql_using/useQueryIN.html"/>
+   <appContext helpID="useScanPartition" path="cql/cql_using/useScanPartition.html"/>
+   <appContext helpID="useQueryStdAggregate" path="cql/cql_using/useQueryStdAggregate.html"/>
+   <appContext helpID="useQueryUDF" path="cql/cql_using/useQueryUDF.html"/>
+   <appContext helpID="useQueryUDA" path="cql/cql_using/useQueryUDA.html"/>
+   <appContext helpID="useQuerySystem" path="cql/cql_using/useQuerySystem.html"/>
+   <appContext helpID="useQuerySystemTable" path="cql/cql_using/useQuerySystemTable.html"/>
+   <appContext helpID="useQuerySystemTableCluster"
+               path="cql/cql_using/useQuerySystemTableCluster.html"/>
+   <appContext helpID="useQuerySystemTableUserDefined"
+               path="cql/cql_using/useQuerySystemTableUserDefined.html"/>
+   <appContext helpID="usePrimaryIndex" path="cql/cql_using/usePrimaryIndex.html"/>
+   <appContext helpID="useWhenIndex" path="cql/cql_using/useWhenIndex.html"/>
+   <appContext helpID="useSecondaryIndex" path="cql/cql_using/useSecondaryIndex.html"/>
+   <appContext helpID="useMultIndexes" path="cql/cql_using/useMultIndexes.html"/>
+   <appContext helpID="useIndexColl" path="cql/cql_using/useIndexColl.html"/>
+   <appContext helpID="useAlterTableTOC" path="cql/cql_using/useAlterTableTOC.html"/>
+   <appContext helpID="useAlterColumn" path="cql/cql_using/useAlterColumn.html"/>
+   <appContext helpID="useAlterAddColl" path="cql/cql_using/useAlterAddColl.html"/>
+   <appContext helpID="useAlterColType" path="cql/cql_using/useAlterColType.html"/>
+   <appContext helpID="useAlterTabProp" path="cql/cql_using/useAlterTabProp.html"/>
+   <appContext helpID="useAlterMV" path="cql/cql_using/useAlterMV.html"/>
+   <appContext helpID="useAlterType" path="cql/cql_using/useAlterType.html"/>
+   <appContext helpID="useRemoveData" path="cql/cql_using/useRemoveData.html"/>
+   <appContext helpID="useDropKSTableMV" path="cql/cql_using/useDropKSTableMV.html"/>
+   <appContext helpID="useDropColumn" path="cql/cql_using/useDropColumn.html"/>
+   <appContext helpID="useDropUDF" path="cql/cql_using/useDropUDF.html"/>
+   <appContext helpID="useSecureTOC" path="cql/cql_using/useSecureTOC.html"/>
+   <appContext helpID="useSecureRoles" path="cql/cql_using/useSecureRoles.html"/>
+   <appContext helpID="useSecurePermission" path="cql/cql_using/useSecurePermission.html"/>
+   <appContext helpID="useSecureUsers" path="cql/cql_using/useSecureUsers.html"/>
+   <appContext helpID="useTracing" path="cql/cql_using/useTracing.html"/>
+   <appContext helpID="useTracingSetup" path="cql/cql_using/useTracingSetup.html"/>
+   <appContext helpID="useTracingTrace" path="cql/cql_using/useTracingTrace.html"/>
+   <appContext helpID="useTracingPerf" path="cql/cql_using/useTracingPerf.html"/>
+   <appContext helpID="useToken" path="cql/cql_using/useToken.html"/>
+   <appContext helpID="useTTL" path="cql/cql_using/useTTL.html"/>
+   <appContext helpID="useWritetime" path="cql/cql_using/useWritetime.html"/>
+   <appContext helpID="useLegacyTableTOC" path="cql/cql_using/useLegacyTableTOC.html"/>
+   <appContext helpID="useLegacyTables" path="cql/cql_using/useLegacyTables.html"/>
+   <appContext helpID="useQueryLegacyTables" path="cql/cql_using/useQueryLegacyTables.html"/>
+   <appContext helpID="useCQL3QueryLegacyTables"
+               path="cql/cql_using/useCQL3QueryLegacyTables.html"/>
+   <appContext helpID="cqlReferenceTOC" path="cql/cql_reference/cqlReferenceTOC.html"/>
+   <appContext helpID="about_cql_ref_c" path="cql/cql_reference/about_cql_ref_c.html"/>
+   <appContext helpID="cql_lexicon_c" path="cql/cql_reference/cql_lexicon_c.html"/>
+   <appContext helpID="ucase-lcase_r" path="cql/cql_reference/ucase-lcase_r.html"/>
+   <appContext helpID="ref-lexical-valid-chars"
+               path="cql/cql_reference/ref-lexical-valid-chars.html"/>
+   <appContext helpID="escape_char_r" path="cql/cql_reference/escape_char_r.html"/>
+   <appContext helpID="valid_literal_r" path="cql/cql_reference/valid_literal_r.html"/>
+   <appContext helpID="exponential_notation_r"
+               path="cql/cql_reference/exponential_notation_r.html"/>
+   <appContext helpID="cqlRefComment" path="cql/cql_reference/cqlRefComment.html"/>
+   <appContext helpID="keywords_r" path="cql/cql_reference/keywords_r.html"/>
+   <appContext helpID="cql_data_types_c" path="cql/cql_reference/cql_data_types_c.html"/>
+   <appContext helpID="blob_r" path="cql/cql_reference/blob_r.html"/>
+   <appContext helpID="collection_type_r" path="cql/cql_reference/collection_type_r.html"/>
+   <appContext helpID="counter_type" path="cql/cql_reference/counter_type.html"/>
+   <appContext helpID="uuid_type_r" path="cql/cql_reference/uuid_type_r.html"/>
+   <appContext helpID="timeuuid_functions_r"
+               path="cql/cql_reference/timeuuid_functions_r.html"/>
+   <appContext helpID="timestamp_type_r" path="cql/cql_reference/timestamp_type_r.html"/>
+   <appContext helpID="tupleType" path="cql/cql_reference/tupleType.html"/>
+   <appContext helpID="cqlRefUDType" path="cql/cql_reference/cqlRefUDType.html"/>
+   <appContext helpID="cql_function_r" path="cql/cql_reference/cql_function_r.html"/>
+   <appContext helpID="refLimits" path="cql/cql_reference/refLimits.html"/>
+   <appContext helpID="cqlshCommandsTOC" path="cql/cql_reference/cqlshCommandsTOC.html"/>
+   <appContext helpID="cqlsh" path="cql/cql_reference/cqlsh.html"/>
+   <appContext helpID="cqlshUsingCqlshrc" path="cql/cql_reference/cqlshUsingCqlshrc.html"/>
+   <appContext helpID="cqlshCapture" path="cql/cql_reference/cqlshCapture.html"/>
+   <appContext helpID="cqlshClear" path="cql/cql_reference/cqlshClear.html"/>
+   <appContext helpID="cqlshConsistency" path="cql/cql_reference/cqlshConsistency.html"/>
+   <appContext helpID="cqlshCopy" path="cql/cql_reference/cqlshCopy.html"/>
+   <appContext helpID="cqlshDescribe" path="cql/cql_reference/cqlshDescribe.html"/>
+   <appContext helpID="cqlshExpand" path="cql/cql_reference/cqlshExpand.html"/>
+   <appContext helpID="cqlshExit" path="cql/cql_reference/cqlshExit.html"/>
+   <appContext helpID="cqlshLogin" path="cql/cql_reference/cqlshLogin.html"/>
+   <appContext helpID="cqlshPaging" path="cql/cql_reference/cqlshPaging.html"/>
+   <appContext helpID="cqlshSerialConsistency"
+               path="cql/cql_reference/cqlshSerialConsistency.html"/>
+   <appContext helpID="cqlshShow" path="cql/cql_reference/cqlshShow.html"/>
+   <appContext helpID="cqlshSource" path="cql/cql_reference/cqlshSource.html"/>
+   <appContext helpID="cqlshTracing" path="cql/cql_reference/cqlshTracing.html"/>
+   <appContext helpID="cqlCommandsTOC" path="cql/cql_reference/cqlCommandsTOC.html"/>
+   <appContext helpID="cqlAlterKeyspace" path="cql/cql_reference/cqlAlterKeyspace.html"/>
+   <appContext helpID="cqlAlterMaterializedView"
+               path="cql/cql_reference/cqlAlterMaterializedView.html"/>
+   <appContext helpID="cqlAlterRole" path="cql/cql_reference/cqlAlterRole.html"/>
+   <appContext helpID="cqlAlterTable" path="cql/cql_reference/cqlAlterTable.html"/>
+   <appContext helpID="cqlAlterType" path="cql/cql_reference/cqlAlterType.html"/>
+   <appContext helpID="cqlAlterUser" path="cql/cql_reference/cqlAlterUser.html"/>
+   <appContext helpID="cqlBatch" path="cql/cql_reference/cqlBatch.html"/>
+   <appContext helpID="cqlCreateAggregate" path="cql/cql_reference/cqlCreateAggregate.html"/>
+   <appContext helpID="cqlCreateIndex" path="cql/cql_reference/cqlCreateIndex.html"/>
+   <appContext helpID="cqlCreateFunction" path="cql/cql_reference/cqlCreateFunction.html"/>
+   <appContext helpID="cqlCreateKeyspace" path="cql/cql_reference/cqlCreateKeyspace.html"/>
+   <appContext helpID="cqlCreateMaterializedView"
+               path="cql/cql_reference/cqlCreateMaterializedView.html"/>
+   <appContext helpID="cqlCreateTable"
+               path="cql/cql_reference/cqlCreateTable.html#cqlCreateTable"/>
+   <appContext helpID="refcolumndef" path="cql/cql_reference/cqlCreateTable.html#refcolumndef"/>
+   <appContext helpID="refPkCol" path="cql/cql_reference/cqlCreateTable.html#refPkCol"/>
+   <appContext helpID="tabProp" path="cql/cql_reference/cqlCreateTable.html#tabProp"/>
+   <appContext helpID="compressSubprop"
+               path="cql/cql_reference/cqlCreateTable.html#compressSubprop"/>
+   <appContext helpID="compactSubprop"
+               path="cql/cql_reference/cqlCreateTable.html#compactSubprop"/>
+   <appContext helpID="refClstrOrdr" path="cql/cql_reference/cqlCreateTable.html#refClstrOrdr"/>
+   <appContext helpID="cqlCreateTrigger" path="cql/cql_reference/cqlCreateTrigger.html"/>
+   <appContext helpID="cqlCreateType" path="cql/cql_reference/cqlCreateType.html"/>
+   <appContext helpID="cqlCreateRole" path="cql/cql_reference/cqlCreateRole.html"/>
+   <appContext helpID="cqlCreateUser" path="cql/cql_reference/cqlCreateUser.html"/>
+   <appContext helpID="cqlDelete" path="cql/cql_reference/cqlDelete.html"/>
+   <appContext helpID="cqlDropAggregate" path="cql/cql_reference/cqlDropAggregate.html"/>
+   <appContext helpID="cqlDropFunction" path="cql/cql_reference/cqlDropFunction.html"/>
+   <appContext helpID="cqlDropIndex" path="cql/cql_reference/cqlDropIndex.html"/>
+   <appContext helpID="cqlDropKeyspace" path="cql/cql_reference/cqlDropKeyspace.html"/>
+   <appContext helpID="cqlDropMatializedView"
+               path="cql/cql_reference/cqlDropMatializedView.html"/>
+   <appContext helpID="cqlDropRole" path="cql/cql_reference/cqlDropRole.html"/>
+   <appContext helpID="cqlDropTable" path="cql/cql_reference/cqlDropTable.html"/>
+   <appContext helpID="cqlDropTrigger" path="cql/cql_reference/cqlDropTrigger.html"/>
+   <appContext helpID="cqlDropType" path="cql/cql_reference/cqlDropType.html"/>
+   <appContext helpID="cqlDropUser" path="cql/cql_reference/cqlDropUser.html"/>
+   <appContext helpID="cqlGrant" path="cql/cql_reference/cqlGrant.html"/>
+   <appContext helpID="cqlInsert" path="cql/cql_reference/cqlInsert.html"/>
+   <appContext helpID="cqlListPermissions" path="cql/cql_reference/cqlListPermissions.html"/>
+   <appContext helpID="cqlListRoles" path="cql/cql_reference/cqlListRoles.html"/>
+   <appContext helpID="cqlListUsers" path="cql/cql_reference/cqlListUsers.html"/>
+   <appContext helpID="cqlRevoke" path="cql/cql_reference/cqlRevoke.html"/>
+   <appContext helpID="cqlSelect" path="cql/cql_reference/cqlSelect.html"/>
+   <appContext helpID="cqlTruncate" path="cql/cql_reference/cqlTruncate.html"/>
+   <appContext helpID="cqlUpdate" path="cql/cql_reference/cqlUpdate.html"/>
+   <appContext helpID="cqlUse" path="cql/cql_reference/cqlUse.html"/>
+</map>

@@ -1,0 +1,756 @@
+
+<!DOCTYPE html
+  PUBLIC "" "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" xml:lang="en-us" lang="en-us">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+      <meta name="title" content="How is data maintained?" /><meta name="description" content="Cassandra processes data at several stages on the write path. Compaction to maintain healthy SSTables is the last step in the write path process." /><title>How is data maintained?</title><!--  Generated with Oxygen version 19.0, build number 2017062918.  --><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="wh-path2root" content="../../index.html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta class="swiftype" name="version" data-type="string" content="3.0" />
+        <meta class="swiftype" name="book" data-type="string" content="Apache Cassandra™ 3.0" />
+        <meta class="swiftype" name="doc-name" data-type="string" content="cassandra30" />
+        <meta class="swiftype" name="site-priority-for-Corporate" data-type="integer" content="60" />
+        
+        <script>
+          function debug(msg, object){
+              console.log(msg, object);
+          }
+          function executeQuery(){
+              $('#searchForm').submit();
+              return true;
+          }
+        </script>
+      
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/commonltr.css?buildId=2017062918" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/webhelp_responsive_topic.css?buildId=2017062918" />
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap.min.css" />
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/js/jquery-ui.min.css" />
+        <!-- Changes and comments, as side-notes  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/p-side-notes.css?buildId=2017062918" />
+
+        <!-- Template default styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_default.css?buildId=2017062918" />
+        
+        <!-- Expand-collapse support styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_expand.css?buildId=2017062918" />
+
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-3.1.1.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/localization/strings.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/localization.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/parseuri.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-ui.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script>
+        
+        <!-- Swiftype jQuery and Autocomplete plugins -->
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.ba-hashchange.min.js"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.search.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/search.css" media="all" />
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.autocomplete.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/autocomplete.css" media="all" />
+        
+        <!-- end Swiftype plugins -->
+
+        <!-- DataStax-specific styles. -->
+        <link rel="shortcut icon" type="image/ico" href="../../oxygen-webhelp/assets/images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/details-shim.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/magnific-popup.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/datastax-highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/noshdesc.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/ds-skin-override.css" />
+        <!-- DataStax-specific scripts -->
+        <script src="../../oxygen-webhelp/assets/js/versionDropdown.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/navlinks.js" type="text/javascript"></script>
+        <script type="text/javascript">document.title = document.title + " | Apache Cassandra™ 3.0";</script>
+    <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/variants/tree/oxygen/skin.css?buildId=2017062918" /></head>
+
+    <body onload="highlightSearchTerm()" class="wh_topic_page frmBody" id="dmlHowDataMaintain">
+        <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TWSQ28" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TWSQ28');</script>
+        <!-- End Google Tag Manager -->
+        <!-- whc:include_html href="${webhelp.fragment.before.body}"/ -->
+        
+<div>
+    <div class="container-fluid">
+        <div class="wh_header_flex_container">
+            <div class="container">
+                <div class="col-sm-6 collapse navbar-collapse">
+                    <ul id="ds_sites_list">
+                        <li><a href="https://www.datastax.com" target="_blank">HOME</a></li>
+                        <li><a href="https://academy.datastax.com/" target="_blank">ACADEMY</a></li>
+                        <li><a href="/en" target="_self">DOCS</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 collapse navbar-collapse ds_buttons">
+                    <a class="ds_buttons_button" href="https://www.datastax.com/contactus" target="_blank">CONTACT US</a>
+                    <a class="ds_buttons_button" href="https://academy.datastax.com/downloads" target="_blank"><span class="pad-right">DOWNLOAD DATASTAX</span>
+                        <img src="https://www.datastax.com/wp-content/themes/datastax-2014-08/images/common/icon-dowload-ds.png" width="17" height="15" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color:#067A97; min-height:37px">
+        <div class="container">
+            <div class="col-sm-6 navbar-collapse ds_logo">
+                <a href="https://www.datastax.com/" class="wh_logo ds_logo_collapse" target="_blank">
+                    <img src="../../oxygen-webhelp/assets/images/logo.png" alt="DataStax Logo" />
+                </a>
+            </div>
+            <div class="col-sm-6 collapse navbar-collapse ds_global_menu">
+                <ul id="ds_links_list">
+                    <li><a href="http://docs.datastax.com"/en/glossary/doc/" target="_blank">GLOSSARY</a></li>
+                    <li><a href="https://support.datastax.com/" target="_blank">SUPPORT</a></li>
+                    <li><a href="https://www.datastax.com/dev/blog/" target="_blank">DEVELOPER
+                        BLOGS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default wh_header">
+        <div class="container">
+            <div class="wh_header_flex_container">
+                <div class="hidden-xs">
+                    <span id="version-dropdown" style="display: none;">
+                        <form id="version-dropdown-form">
+                            <select></select>
+                        </form>
+                    </span>
+                </div>
+                <div class="wh_logo_and_publication_title_container">
+                    <div class="wh_logo_and_publication_title">
+                        
+                        <!-- whc:webhelp_logo class="hidden-xs"/ -->
+                    <div class=" wh_publication_title "><a href="../../index.html"><span class="title">Apache Cassandra™ 3.0 <span class="ph red">(Supported)</span>  </span></a></div>
+                    
+                </div>
+                    <button type="button" data-target=".wh_top_menu_and_indexterms_link" data-toggle="collapse" class="navbar-toggle collapsed wh_toggle_button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            
+                <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse">
+                    <!--whc:include_html href="${webhelp.fragment.before.top_menu}"/-->
+                    <div class=" wh_top_menu "><ul><li class=" has-children "><span class="topicref"><a href="../../cassandra/cassandraAbout.html" data-id="cassandraAbout">About Apache Cassandra</a></span><ul><li><span class="topicref"><a href="../../cassandra/features.html" data-id="features">What's new?</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archTOC.html" data-id="archTOC">Understanding the architecture</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archIntro.html" data-id="archIntro">Architecture in brief</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archGossipAbout.html" data-id="archGossipAbout">Internode communications (gossip)</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeFailDetect.html" data-id="archDataDistributeFailDetect">Failure detection and recovery</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeAbout.html" data-id="archDataDistributeAbout">Data distribution and replication</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeHashing.html" data-id="archDataDistributeHashing">Consistent hashing</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeVnodesUsing.html" data-id="archDataDistributeVnodesUsing">Virtual nodes</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archDataDistributeReplication.html" data-id="archDataDistributeReplication">Data replication</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archPartitionerAbout.html" data-id="archPartitionerAbout">Partitioners</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archPartitionerM3P.html" data-id="archPartitionerM3P">Murmur3Partitioner</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archPartitionerRandom.html" data-id="archPartitionerRandom">RandomPartitioner</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archPartitionerBOP.html" data-id="archPartitionerBOP">ByteOrderedPartitioner</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/architecture/archSnitchesAbout.html" data-id="archSnitchesAbout">Snitches</a></span><ul><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchDynamic.html" data-id="archSnitchDynamic">Dynamic snitching</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchSimple.html" data-id="archSnitchSimple">SimpleSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchRackInf.html" data-id="archSnitchRackInf">RackInferringSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchPFSnitch.html" data-id="archSnitchPFSnitch">PropertyFileSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archsnitchGossipPF.html" data-id="archsnitchGossipPF">GossipingPropertyFileSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchEC2.html" data-id="archSnitchEC2">Ec2Snitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchEC2MultiRegion.html" data-id="archSnitchEC2MultiRegion">Ec2MultiRegionSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchGoogle.html" data-id="archSnitchGoogle">GoogleCloudSnitch</a></span></li><li><span class="topicref"><a href="../../cassandra/architecture/archSnitchCloudStack.html" data-id="archSnitchCloudStack">CloudstackSnitch</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/dml/dmlDatabaseInternalsTOC.html" data-id="dmlDatabaseInternalsTOC">Database internals</a></span><ul><li><span class="topicref"><a href="../../cassandra/dml/dmlManageOndisk.html" data-id="dmlManageOndisk">Storage engine</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/dml/dmlIntro.html" data-id="dmlIntro">How Cassandra reads and writes data</a></span><ul><li><span class="topicref"><a href="../../cassandra/dml/dmlHowDataWritten.html" data-id="dmlHowDataWritten">How is data written?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlHowDataMaintain.html" data-id="dmlHowDataMaintain">How is data maintained?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlWriteUpdate.html" data-id="dmlWriteUpdate">How is data updated?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutDeletes.html" data-id="dmlAboutDeletes">How is data deleted?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlIndexInternals.html" data-id="dmlIndexInternals">How are indexes stored and updated?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutReads.html" data-id="dmlAboutReads">How is data read?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlWritePatterns.html" data-id="dmlWritePatterns">How do write patterns affect reads?</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/dml/dmlDataConsistencyTOC.html" data-id="dmlDataConsistencyTOC">Data consistency</a></span><ul><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutDataConsistency.html" data-id="dmlAboutDataConsistency">How are consistent read and write operations handled?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlTransactionsDiffer.html" data-id="dmlTransactionsDiffer">How are Cassandra transactions different from RDBMS transactions?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlLtwtTransactions.html" data-id="dmlLtwtTransactions">How do I accomplish lightweight transactions with linearizable consistency?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlCLDiscovery.html" data-id="dmlCLDiscovery">How do I discover consistency level performance?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlConfigConsistency.html" data-id="dmlConfigConsistency">How is the consistency level configured?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlConfigSerialConsistency.html" data-id="dmlConfigSerialConsistency">How is the serial consistency level configured?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlClientRequestsRead.html" data-id="dmlClientRequestsRead">How are read requests accomplished?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlClientRequestsWrite.html" data-id="dmlClientRequestsWrite">How are write requests accomplished?</a></span></li></ul></li></ul></li><li><span class="topicref"><a href="../../cassandra/planning/planPlanningAbout.html" data-id="planPlanningAbout">Planning a cluster deployment</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/install/installTOC.html" data-id="installTOC">Installing</a></span><ul><li><span class="topicref"><a href="../../cassandra/install/installRHEL.html" data-id="installRHEL">Using the Yum repository</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installDeb.html" data-id="installDeb">Using the APT repository</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installTarball.html" data-id="installTarball">Installing from the binary tarball</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installPriorVersions.html" data-id="installPriorVersions">Installing earlier releases</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installRemove.html" data-id="installRemove">Uninstalling Cassandra</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installCloudProviders.html" data-id="installCloudProviders">Installing on cloud providers</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/install/installJDKabout.html" data-id="installJDKabout">Installing the JDK</a></span><ul><li><span class="topicref"><a href="../../cassandra/install/installJdkRHEL.html" data-id="installJdkRHEL">Installing Oracle JDK on RHEL-based Systems</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installJdkDeb.html" data-id="installJdkDeb">Installing Oracle JDK on Debian-based systems</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installOpenJdkRHEL.html" data-id="installOpenJdkRHEL">Installing OpenJDK on RHEL-based systems</a></span></li><li><span class="topicref"><a href="../../cassandra/install/installOpenJdkDeb.html" data-id="installOpenJdkDeb">Installing OpenJDK on Debian-based systems</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/install/installRecommendSettings.html" data-id="installRecommendSettings">Recommended production settings</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/install/referenceInstallLocationsTOC.html" data-id="referenceInstallLocationsTOC">Install locations</a></span><ul><li><span class="topicref"><a href="../../cassandra/install/referenceInstallLocateTar.html" data-id="referenceInstallLocateTar">Tarball installation directories</a></span></li><li><span class="topicref"><a href="../../cassandra/install/referenceInstallLocatePkg.html" data-id="referenceInstallLocatePkg">Package installation directories</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/configuration/configTOC.html" data-id="configTOC">Configuration</a></span><ul><li><span class="topicref"><a href="../../cassandra/configuration/configCassandra_yaml.html" data-id="configCassandra_yaml">cassandra.yaml</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/referenceInclude.html" data-id="referenceInclude">Cassandra include file</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/configuration/secureTOC.html" data-id="secureTOC">Security</a></span><ul><li><span class="topicref"><a href="../../cassandra/configuration/secureIntro.html" data-id="secureIntro">Securing Cassandra</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureInternalAuthenticationTOC.html" data-id="secureInternalAuthenticationTOC">Internal authentication</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureInternalAuthorizationTOC.html" data-id="secureInternalAuthorizationTOC">Internal authorization</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureJMXAuthenticationTOC.html" data-id="secureJMXAuthenticationTOC">JMX authentication and authorization</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureSSLEncryptTOC.html" data-id="secureSSLEncryptTOC">SSL encryption</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/secureFireWall.html" data-id="secureFireWall">Configuring firewall port access</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/configuration/configGossipSettings.html" data-id="configGossipSettings">Configuring gossip settings</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configHeapDump.html" data-id="configHeapDump">Configuring the heap dump directory</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/configuration/configVirtualNodesTOC.html" data-id="configVirtualNodesTOC">Configuring virtual nodes</a></span><ul><li><span class="topicref"><a href="../../cassandra/configuration/configVnodesEnable.html" data-id="configVnodesEnable">Enabling virtual nodes on a new cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configVnodesProduction.html" data-id="configVnodesProduction">Enabling virtual nodes on an existing production cluster</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/configuration/configMultiNetworks.html" data-id="configMultiNetworks">Using multiple network interfaces</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configLoggingLevels.html" data-id="configLoggingLevels">Configuring logging</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configLogArchive.html" data-id="configLogArchive">Commit log archive configuration</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configCDCLogging.html" data-id="configCDCLogging">Change Data Capture (CDC) logging</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configGenTokens.html" data-id="configGenTokens">Generating tokens</a></span></li><li><span class="topicref"><a href="../../cassandra/configuration/configHadoop.html" data-id="configHadoop">Hadoop support</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/initialize/initTOC.html" data-id="initTOC">Initializing a cluster</a></span><ul><li><span class="topicref"><a href="../../cassandra/initialize/initSingleDS.html" data-id="initSingleDS">Initializing a multiple node cluster (single datacenter)</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/initMultipleDS.html" data-id="initMultipleDS">Initializing a multiple node cluster (multiple datacenters)</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/initialize/referenceStartStopTOC.html" data-id="referenceStartStopTOC">Starting and stopping Cassandra</a></span><ul><li><span class="topicref"><a href="../../cassandra/initialize/referenceStartCservice.html" data-id="referenceStartCservice">Starting Cassandra as a service</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceStartCprocess.html" data-id="referenceStartCprocess">Starting Cassandra as a stand-alone process</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceStopCservice_t.html" data-id="referenceStopCservice_t">Stopping Cassandra as a service</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceStopCprocess.html" data-id="referenceStopCprocess">Stopping Cassandra as a stand-alone process</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceClearCpkgData.html" data-id="referenceClearCpkgData">Clearing the data as a service</a></span></li><li><span class="topicref"><a href="../../cassandra/initialize/referenceClearCbinaryData.html" data-id="referenceClearCbinaryData">Clearing the data as a stand-alone process</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/operationsTOC.html" data-id="operationsTOC">Operations</a></span><ul><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsAddingRemovingNodeTOC.html" data-id="opsAddingRemovingNodeTOC">Adding or removing nodes, datacenters, or clusters</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsAddNodeToCluster.html" data-id="opsAddNodeToCluster">Adding nodes to an existing cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsAddDCToCluster.html" data-id="opsAddDCToCluster">Adding a datacenter to a cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsReplaceNode.html" data-id="opsReplaceNode">Replacing a dead node or dead seed node</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsReplaceLiveNode.html#opsReplaceLiveNode" data-id="opsReplaceLiveNode">Replacing a running node</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsMoveNodeRack.html" data-id="opsMoveNodeRack">Moving a node from one rack to another</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsDecomissionDC.html" data-id="opsDecomissionDC">Decommissioning a datacenter</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRemoveNode.html" data-id="opsRemoveNode">Removing a node</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsSwitchSnitch.html" data-id="opsSwitchSnitch">Switching snitches</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsChangeKSStrategy.html" data-id="opsChangeKSStrategy">Changing keyspace replication strategy</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsMoveCluster.html" data-id="opsMoveCluster">Edge cases for transitioning or migrating a cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsAddRplSingleTokenNodes.html" data-id="opsAddRplSingleTokenNodes">Adding single-token nodes to a cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsAddDCSingleTokenNodes.html" data-id="opsAddDCSingleTokenNodes">Adding a datacenter to a single-token architecture cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsReplaceSingleTokenNode.html" data-id="opsReplaceSingleTokenNode">Replacing a dead node in a single-architecture cluster</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsBackupRestore.html" data-id="opsBackupRestore">Backing up and restoring data</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsAboutSnapshots.html" data-id="opsAboutSnapshots">About snapshots</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupTakesSnapshot.html" data-id="opsBackupTakesSnapshot">Taking a snapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupDeleteSnapshot.html" data-id="opsBackupDeleteSnapshot">Deleting snapshot files</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupIncremental.html" data-id="opsBackupIncremental">Enabling incremental backups</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsBackupSnapshotRestore.html" data-id="opsBackupSnapshotRestore">Restoring from a snapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsSnapshotRestoreNewCluster.html" data-id="opsSnapshotRestoreNewCluster">Restoring a snapshot into a new cluster</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRecoverUsingJBOD.html" data-id="opsRecoverUsingJBOD">Recovering from a single disk failure using JBOD</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesTOC.html" data-id="opsRepairNodesTOC">Repairing nodes</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesHintedHandoff.html" data-id="opsRepairNodesHintedHandoff">Hinted Handoff: repair during write path</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesReadRepair.html" data-id="opsRepairNodesReadRepair">Read Repair: repair during read path</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesManualRepair.html" data-id="opsRepairNodesManualRepair">Manual repair: Anti-entropy repair</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsRepairNodesMigration.html" data-id="opsRepairNodesMigration">Migrating to incremental repairs</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/monitoringCassandraTOC.html" data-id="monitoringCassandraTOC">Monitoring Cassandra</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsMonitoring.html" data-id="opsMonitoring">Monitoring a Cassandra cluster</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/operations/opsTuneJVM.html" data-id="opsTuneJVM">Tuning Java resources</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsDataCachingTOC.html" data-id="opsDataCachingTOC">Data caching</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsConfiguringCaches.html" data-id="opsConfiguringCaches">Configuring data caches</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsMonitoringCache.html" data-id="opsMonitoringCache">Monitoring and adjusting caching</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/operations/opsMemtableThruput.html" data-id="opsMemtableThruput">Configuring memtable thresholds</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsConfigureCompaction.html" data-id="opsConfigureCompaction">Configuring compaction</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/operations/opsAboutConfigCompress.html" data-id="opsAboutConfigCompress">Compression</a></span><ul><li><span class="topicref"><a href="../../cassandra/operations/opsWhenCompress.html" data-id="opsWhenCompress">When to compress data</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsConfigCompress.html" data-id="opsConfigCompress">Configuring compression</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/operations/opsTestCompactCompress.html" data-id="opsTestCompactCompress">Testing compaction and compression</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsTuningBloomFilters.html" data-id="opsTuningBloomFilters">Tuning Bloom filters</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/migrating.html" data-id="migrating">Moving data to or from other databases</a></span></li><li><span class="topicref"><a href="../../cassandra/operations/opsGossipPurge.html" data-id="opsGossipPurge">Purging gossip state on a node</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsTOC.html" data-id="toolsTOC">Cassandra tools</a></span><ul><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsNodetool.html" data-id="toolsNodetool">The nodetool utility</a></span><ul><li><span class="topicref"><a href="../../cassandra/tools/toolsAboutNodetool.html" data-id="toolsAboutNodetool">About the nodetool utility</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsAssassinate.html" data-id="toolsAssassinate">assassinate</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsBootstrap.html" data-id="toolsBootstrap">bootstrap</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCfHistogramsRedirect.html" data-id="toolsCfHistogramsRedirect">cfhistograms</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCfStatsRedirect.html" data-id="toolsCfStatsRedirect">cfstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCleanup.html" data-id="toolsCleanup">cleanup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsClearSnapShot.html" data-id="toolsClearSnapShot">clearsnapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCompact.html" data-id="toolsCompact">compact</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCompactionHistory.html" data-id="toolsCompactionHistory">compactionhistory</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCompactionStats.html" data-id="toolsCompactionStats">compactionstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDecommission.html" data-id="toolsDecommission">decommission</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDescribeCluster.html" data-id="toolsDescribeCluster">describecluster</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDescribeRing.html" data-id="toolsDescribeRing">describering</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableAutoCompaction.html" data-id="toolsDisableAutoCompaction">disableautocompaction</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableBackup.html" data-id="toolsDisableBackup">disablebackup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableBinary.html" data-id="toolsDisableBinary">disablebinary</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableGossip.html" data-id="toolsDisableGossip">disablegossip</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableHandoff.html" data-id="toolsDisableHandoff">disablehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisablehintsfordc.html" data-id="toolsDisablehintsfordc">disablehintsfordc</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDisableThrift.html" data-id="toolsDisableThrift">disablethrift</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsDrain.html" data-id="toolsDrain">drain</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableAutoCompaction.html" data-id="toolsEnableAutoCompaction">enableautocompaction</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableBackup.html" data-id="toolsEnableBackup">enablebackup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableBinary.html" data-id="toolsEnableBinary">enablebinary</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableGossip.html" data-id="toolsEnableGossip">enablegossip</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableHandoff.html" data-id="toolsEnableHandoff">enablehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnablehintsfordc.html" data-id="toolsEnablehintsfordc">enablehintsfordc</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsEnableThrift.html" data-id="toolsEnableThrift">enablethrift</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsFailureDetector.html" data-id="toolsFailureDetector">failuredetector</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsFlush.html" data-id="toolsFlush">flush</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGcstats.html" data-id="toolsGcstats">gcstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetCompactionThreshold.html" data-id="toolsGetCompactionThreshold">getcompactionthreshold</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetcompactionthroughput.html" data-id="toolsGetcompactionthroughput">getcompactionthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetEndPoints.html" data-id="toolsGetEndPoints">getendpoints</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetInterDcStreamThroughPut.html" data-id="toolsGetInterDcStreamThroughPut">getinterdcstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetLogLev.html" data-id="toolsGetLogLev">getlogginglevels</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetSstables.html" data-id="toolsGetSstables">getsstables</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetStreamThroughput.html" data-id="toolsGetStreamThroughput">getstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGettimeout.html" data-id="toolsGettimeout">gettimeout</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGetTraceProbability.html" data-id="toolsGetTraceProbability">gettraceprobability</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsGossipInfo.html" data-id="toolsGossipInfo">gossipinfo</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsHelp.html" data-id="toolsHelp">help</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInfo.html" data-id="toolsInfo">info</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInvalidatecountercache.html" data-id="toolsInvalidatecountercache">invalidatecountercache</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInvalidateKeyCache.html" data-id="toolsInvalidateKeyCache">invalidatekeycache</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsInvalidateRowCache.html" data-id="toolsInvalidateRowCache">invalidaterowcache</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsJoin.html" data-id="toolsJoin">join</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsListSnapShots.html" data-id="toolsListSnapShots">listsnapshots</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsMove.html" data-id="toolsMove">move</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsNetstats.html" data-id="toolsNetstats">netstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsPauseHandoff.html" data-id="toolsPauseHandoff">pausehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsProxyHistograms.html" data-id="toolsProxyHistograms">proxyhistograms</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRangeKeySample.html" data-id="toolsRangeKeySample">rangekeysample</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRebuild.html" data-id="toolsRebuild">rebuild</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRebuildIndex.html" data-id="toolsRebuildIndex">rebuild_index</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRefresh.html" data-id="toolsRefresh">refresh</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRefreshSizeEstimates.html" data-id="toolsRefreshSizeEstimates">refreshsizeestimates</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsReloadTriggers.html" data-id="toolsReloadTriggers">reloadtriggers</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRelocateSSTables.html" data-id="toolsRelocateSSTables">relocatesstables</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRemoveNode.html" data-id="toolsRemoveNode">removenode</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRepair.html" data-id="toolsRepair">repair</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsReplaybatchlog.html" data-id="toolsReplaybatchlog">replaybatchlog</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsResetLocalSchema.html" data-id="toolsResetLocalSchema">resetlocalschema</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsResumeHandoff.html" data-id="toolsResumeHandoff">resumehandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsRing.html" data-id="toolsRing">ring</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsScrub.html" data-id="toolsScrub">scrub</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCacheCapacity.html" data-id="toolsSetCacheCapacity">setcachecapacity</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCacheKeysToSave.html" data-id="toolsSetCacheKeysToSave">setcachekeystosave</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCompactionThreshold.html" data-id="toolsSetCompactionThreshold">setcompactionthreshold</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetCompactionThroughput.html" data-id="toolsSetCompactionThroughput">setcompactionthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetHHthrottle.html" data-id="toolsSetHHthrottle">sethintedhandoffthrottlekb</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetInterDcStreamThroughput.html" data-id="toolsSetInterDcStreamThroughput">setinterdcstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetLogLev.html" data-id="toolsSetLogLev">setlogginglevel</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetStreamThroughput.html" data-id="toolsSetStreamThroughput">setstreamthroughput</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSettimeout.html" data-id="toolsSettimeout">settimeout</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSetTraceProbability.html" data-id="toolsSetTraceProbability">settraceprobability</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSjk.html" data-id="toolsSjk">sjk</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSnapShot.html" data-id="toolsSnapShot">snapshot</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatus.html" data-id="toolsStatus">status</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusBackup.html" data-id="toolsStatusBackup">statusbackup</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusBinary.html" data-id="toolsStatusBinary">statusbinary</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusGossip.html" data-id="toolsStatusGossip">statusgossip</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusHandoff.html" data-id="toolsStatusHandoff">statushandoff</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStatusThrift.html" data-id="toolsStatusThrift">statusthrift</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStop.html" data-id="toolsStop">stop</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsStopDaemon.html" data-id="toolsStopDaemon">stopdaemon</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTablehisto.html" data-id="toolsTablehisto">tablehistograms</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTablestats.html" data-id="toolsTablestats">tablestats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsToppartitions.html" data-id="toolsToppartitions">toppartitions</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTPstats.html" data-id="toolsTPstats">tpstats</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsTruncateHints.html" data-id="toolsTruncateHints">truncatehints</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsUpgradeSstables.html" data-id="toolsUpgradeSstables">upgradesstables</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsVerify.html" data-id="toolsVerify">verify</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsVersion.html" data-id="toolsVersion">version</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/tools/toolsCUtility.html" data-id="toolsCUtility">The cassandra utility</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsCStress.html" data-id="toolsCStress">The cassandra-stress tool</a></span><ul><li><span class="topicref"><a href="../../cassandra/tools/toolsCStressOutput.html" data-id="toolsCStressOutput">Interpreting the output of cassandra-stress</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cassandra/tools/toolsSSTableUtilitiesTOC.html" data-id="toolsSSTableUtilitiesTOC">SSTable utilities</a></span><ul><li><span class="topicref"><a href="../../cassandra/tools/ToolsSSTabledump.html" data-id="ToolsSSTabledump">sstabledump</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabExpiredBlockers.html" data-id="toolsSStabExpiredBlockers">sstableexpiredblockers</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabLevelReset.html" data-id="toolsSStabLevelReset">sstablelevelreset</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsBulkloader.html" data-id="toolsBulkloader">sstableloader (Cassandra bulk loader)</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSSTableMetadata.html" data-id="toolsSSTableMetadata">sstablemetadata</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabOfflineRelevel.html" data-id="toolsSStabOfflineRelevel">sstableofflinerelevel</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabRepairedSet.html" data-id="toolsSStabRepairedSet">sstablerepairedset</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSSTableScrub.html" data-id="toolsSSTableScrub">sstablescrub</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSSTableSplit.html" data-id="toolsSSTableSplit">sstablesplit</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/ToolsSSTableupgrade.html" data-id="ToolsSSTableupgrade">sstableupgrade</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabUtil.html" data-id="toolsSStabUtil">sstableutil</a></span></li><li><span class="topicref"><a href="../../cassandra/tools/toolsSStabVerify.html" data-id="toolsSStabVerify">sstableverify</a></span></li></ul></li></ul></li><li><span class="topicref"><a href="../../cassandra/troubleshooting/trblshootTOC.html" data-id="trblshootTOC">Troubleshooting</a></span></li><li><span class="topicref"><a href="../../cassandra/releaseNotes.html" data-id="releaseNotes">Release notes</a></span></li></ul></div>
+                    
+                    <!--whc:include_html href="${webhelp.fragment.after.top_menu}"/-->
+                    <div class="ds_top_menu_collapse">
+                        <ul>
+                            <li><a href="https://www.datastax.com">Home</a></li>
+                            <li><a href="https://academy.datastax.com/">Academy</a></li>
+                            <li><a href="/en">Docs home</a></li>
+                            <li><a href="https://www.datastax.com/contactus">Contact us</a></li>
+                            <li><a href="https://academy.datastax.com/downloads">Download
+                                DataStax</a></li>
+                            <li><a href="http://docs.datastax.com"/en/glossary/doc/">Glossary</a></li>
+                            <li><a href="https://support.datastax.com/">Support</a></li>
+                            <li><a href="https://www.datastax.com/dev/blog/">Developer blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+        
+        <!-- Search forms -->
+        
+        <span>
+            <div class=" wh_search_input "><form id="searchForm" method="get" action="../../search.html"><div><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" /><button type="submit" class="wh_search_button"><span>Search</span></button></div></form></div>
+        </span>
+        <div class="advanced-search">
+            <p><a href="http://docs.datastax.com"/en/advancedSearch.html">Search all docs</a></p>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+
+                <nav class="wh_tools hidden-print">
+                    <div class=" wh_breadcrumb "><ol class="hidden-print"><li><span class="home"><a href="../../index.html"><span>Home</span></a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlDatabaseInternalsTOC.html">Database internals</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlIntro.html">How Cassandra reads and writes data</a></span></li><li class="active"><span class="topicref">How is data maintained?</span></li></ol></div>
+
+                    <div class="wh_right_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cassandra/dml/dmlHowDataWritten.html" title="How is data written?"></a></span>  
+<span class="navnext"><a class="link" href="../../cassandra/dml/dmlWriteUpdate.html" title="How is data updated?"></a></span>  </span></div>
+                        <div class=" wh_print_link print "><a href="javascript:window.print();" title="Print this page"></a></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wh_content_area  data-swiftype-index=true" id="annotate">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">How is data maintained?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain" rel="internal"> </a></h1>
+
+  
+  <div class="body conbody"><p class="shortdesc">Cassandra processes data at several stages on the write path. Compaction to maintain
+    healthy SSTables is the last step in the write path process.</p>
+
+    <p class="p">The Cassandra write process stores data in files called SSTables. SSTables are immutable.
+      Instead of overwriting existing rows with inserts or updates, Cassandra writes new timestamped
+      versions of the inserted or updated data in new SSTables. Cassandra does not perform deletes
+      by removing the deleted data: instead, Cassandra marks it with <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_tombstone.html" target="_blank">tombstones</a>. </p>
+
+    <p class="p">Over time, Cassandra may write many versions of a row in different SSTables. Each version may
+      have a unique set of columns stored with a different timestamp. As SSTables accumulate, the
+      distribution of data can require accessing more and more SSTables to retrieve a complete
+      row.</p>
+
+    <p class="p">To keep the database healthy, Cassandra periodically merges SSTables and discards old data.
+      This process is called compaction.</p>
+
+    <section class="section" id="dmlHowDataMaintain__dml-compaction"><h2 class="title sectiontitle">Compaction<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml-compaction" rel="internal"> </a></h2>
+      
+      <p class="p">Compaction works on a collection of SSTables. From these SSTables, compaction collects all
+        versions of each unique row and assembles one complete row, using the most up-to-date
+        version (by timestamp) of each of the row's columns. The merge process is performant,
+        because rows are sorted by <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_partition_key.html" target="_blank">partition key</a> within each SSTable, and the merge
+        process does not use random I/O. The new versions of each row is written to a new SSTable.
+        The old versions, along with any rows that are ready for deletion, are left in the old
+        SSTables, and are deleted as soon as pending reads are completed.</p>
+
+      <p class="p"><div class="img-popup" data-mfp-src="../images/dml_compaction.png"><img class="image" src="../images/dml_compaction.png" /></div></p>
+
+      <p class="p">Compaction causes a temporary spike in disk space usage and disk I/O while old and new
+        SSTables co-exist. As it completes, compaction frees up disk space occupied by old SSTables.
+        It improves read performance by incrementally replacing old SSTables with compacted
+        SSTables. Cassandra can read data directly from the new SSTable even before it finishes
+        writing, instead of waiting for the entire compaction process to finish.</p>
+
+      <p class="p">As Cassandra processes writes and reads, it replaces the old SSTables with new SSTables in
+        the page cache. The process of caching the new SSTable, while directing reads away from the
+        old one, is incremental — it does not cause a the dramatic cache miss. Cassandra provides
+        predictable high performance even under heavy load.</p>
+
+    </section>
+
+    <section class="section" id="dmlHowDataMaintain__dml_types_of_compaction"><h2 class="title sectiontitle">Compaction strategies<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml_types_of_compaction" rel="internal"> </a></h2>
+      
+      <p class="p">Cassandra supports different compaction strategies, which control how which SSTables are
+        chosen for compaction, and how the compacted rows are sorted into new SSTables. Each
+        strategy has its own strengths. The sections that follow explain each of Cassandra's
+        compaction strategies.</p>
+
+      <p class="p">Although each of the following sections starts with a generalized recommendation, many
+        factors complicate the choice of a compaction strategy. See <a class="xref" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml_which_compaction_strategy_is_best">Which compaction
+          strategy is best?</a>.</p>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__stcs-compaction">SizeTieredCompactionStrategy (STCS)<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__stcs-compaction" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p">Recommended for write-intensive workloads.</p>
+
+            <p class="p">The SizeTieredCompactionStrategy (STCS) initiates compaction when Cassandra has
+              accumulated a set number (default: 4) of similar-sized SSTables. STCS merges these
+              SSTables into one larger SSTable. As these larger SSTables accumulate, STCS merges
+              these into even larger SSTables. At any given time, several SSTables of varying sizes
+              are present. </p>
+
+            <figure class="fig fignone" id="dmlHowDataMaintain__fig_pcr_zlh_1w"><span class="figcap">Size tiered compaction after many inserts</span>
+              
+              <div class="img-popup" data-mfp-src="../images/dml-how-maintained-STCS-1.png"><img class="image" id="dmlHowDataMaintain__image_qcr_zlh_1w" src="../images/dml-how-maintained-STCS-1.png" /></div>
+            </figure>
+
+            <p class="p">While STCS works well to compact a write-intensive workload, it makes reads slower
+              because the merge-by-size process does not group data by rows. This makes it more
+              likely that versions of a particular row may be spread over many SSTables. Also, STCS
+              does not evict deleted data predictably because its trigger for compaction is SSTable
+              size, and SSTables might not grow quickly enough to merge and evict old data. As the
+              largest SSTables grow in size, the amount of disk space needed for both the new and
+              old SSTables simultaneously during STCS compaction can outstrip a typical amount of
+              disk space on a node.</p>
+
+            <ul class="ul" id="dmlHowDataMaintain__ul_xgy_jwy_zv">
+              <li class="li"><strong class="ph b">Pros:</strong> Compacts write-intensive workload very well.</li>
+
+              <li class="li"><strong class="ph b">Cons:</strong> Can hold onto stale data too long. Amount of memory needed increases
+                over time.</li>
+
+            </ul>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__lcs-compaction">LeveledCompactionStrategy (LCS)<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__lcs-compaction" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p">Recommended for read-intensive workloads.</p>
+
+            <p class="p">The LeveledCompactionStrategy (LCS) alleviates some of the read operation issues with
+              STCS. This strategy works with a series of levels. First, data in memtables is flushed
+              to SSTables in the first level (L0). LCS compaction merges these first SSTables with
+              larger SSTables in level L1. </p>
+
+            <figure class="fig fignone" id="dmlHowDataMaintain__fig_uxj_fmh_1w"><span class="figcap">Leveled compaction — adding SSTables</span>
+              
+              <div class="img-popup" data-mfp-src="../images/dml-how-maintained-leveled-1.png"><img class="image" id="dmlHowDataMaintain__image_l31_4mh_1w" src="../images/dml-how-maintained-leveled-1.png" /></div>
+            </figure>
+
+            <p class="p">The SSTables in levels greater than L1 are merged into SSTables with a size greater
+              than or equal to <code class="ph codeph">sstable_size_in_mb</code> (default: 160 MB). If a L1
+              SSTable stores data of a partition that is larger than L2, LCS moves the SSTable past
+              L2 to the next level up. </p>
+
+            <figure class="fig fignone"><span class="figcap">Leveled compaction after many inserts</span>
+              
+              <div class="img-popup" data-mfp-src="../images/dml-how-maintained-leveled-2.png"><img class="image" id="dmlHowDataMaintain__image_lcs_2" src="../images/dml-how-maintained-leveled-2.png" /></div>
+            </figure>
+
+            <p class="p">In each of the levels above L0, LCS creates SSTables that are about the same size.
+              Each level is 10X the size of the last level, so level L1 has 10X as many SSTables as
+              L0, and level L2 has 100X as many. If the result of the compaction is more than 10
+              SSTables in level L1, the excess SSTables are moved to level L2.</p>
+
+            <p class="p">The LCS compaction process guarantees that the SSTables within each level starting
+              with L1 have non-overlapping data. For many reads, this process enables Cassandra to
+              retrieve all the required data from only one or two SSTables. In fact, 90% of all
+              reads can be satisfied from one SSTable. Since LCS does not compact L0 tables,
+              however, resource-intensive reads involving many L0 SSTables may still occur. </p>
+
+            <p class="p">At levels beyond L0, LCS requires less disk space for compacting — generally, 10X the
+              fixed size of the SSTable. Obsolete data is evicted more often, so deleted data uses
+              smaller portions of the SSTables on disk. However, LCS compaction operations take
+              place more often and place more I/O burden on the node. For write-intensive workloads,
+              the payoff of using this strategy is generally not worth the performance loss to I/O
+              operations. In many cases, tests of LCS-configured tables reveal I/O saturation on
+              writes and compactions.</p>
+
+            <div class="p">
+              <div class="note note"><span class="notetitle">Note:</span> Cassandra bypasses compaction operations when <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_bootstrap.html" target="_blank">bootstrapping</a> a new node using LCS into a cluster. The
+                original data is moved directly to the correct level because there is no existing
+                data, so no partition overlap per level is present. For more information, see <a class="xref" href="https://www.datastax.com/dev/blog/bootstrapping-performance-improvements-for-leveled-compaction" target="_blank">Apache Cassandra 2.2 - Bootstrapping Performance
+                  Improvements for Leveled Compaction</a>.</div>
+
+            </div>
+
+            <ul class="ul" id="dmlHowDataMaintain__ul_vng_wcz_zv">
+              <li class="li"><strong class="ph b">Pros:</strong> Disk requirements are easier to predict. Read operation latency is
+                more predictable. Stale data is evicted more frequently.</li>
+
+              <li class="li"><strong class="ph b">Cons:</strong> Much higher I/O utilization impacting operation latency</li>
+
+            </ul>
+
+          </dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__twcs">TimeWindowCompactionStrategy (TWCS)<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__twcs" rel="internal"> </a></dt>
+
+          <dd class="dd"><p class="p">Recommended for time series and expiring TTL workloads.</p>
+<p class="p">The
+              TimeWindowCompactionStrategy (TWCS) is similar to DTCS with simpler settings. TWCS
+              groups SSTables using a series of time windows. During compaction, TWCS applies STCS
+              to uncompacted SSTables in the most recent time window. At the end of a time window,
+              TWCS compacts all SSTables that fall into that time window into a single SSTable based
+              on the SSTable maximum timestamp. Once the major compaction for a time window is
+              completed, no further compaction of the data will ever occur. The process starts over
+              with the SSTables written in the next time window.</p>
+
+            <div class="img-popup" data-mfp-src="../images/dml-how-maintained-TWCS-1.png"><img class="image" id="dmlHowDataMaintain__image_twcs-1" src="../images/dml-how-maintained-TWCS-1.png" /></div><p class="p">As the figure shows, from 10 AM to 11 AM, the memtables are flushed
+              from memory into 100MB SSTables. These SSTables are compacted into larger SSTables
+              using STCS. At 11 AM, all these SSTables are compacted into a single SSTable, and
+              never compacted again by TWCS. At 12 NOON, the new SSTables created between 11 AM and
+              12 NOON are compacted using STCS, and at the end of the time window the TWCS
+              compaction repeats. Notice that each TWCS time window contains varying amounts of
+              data.</p>
+<div class="note note"><span class="notetitle">Note:</span> For an animated explanation, see the <a class="xref" href="https://academy.datastax.com/courses/ds210-datastax-enterprise-operations-apache-cassandra/time-windowed-compaction" target="_blank">Datastax Academy Time Window Compaction
+                Strategy</a> video.</div>
+<p dir="ltr" class="p">The TWCS configuration has two main
+              property settings:</p>
+<ul class="ul" id="dmlHowDataMaintain__ul_sv5_hn5_jx">
+              <li dir="ltr" class="li"><span class="keyword parmname">compaction_window_unit</span>: time unit used to define
+                the window size (milliseconds, seconds, hours, and so on)</li>
+
+              <li dir="ltr" class="li"><span class="keyword parmname">compaction_window_size</span>: how many units per window
+                (1,2,3, and so on)</li>
+
+            </ul>
+<p dir="ltr" class="p">The configuration for the above example:
+                <code class="ph codeph">compaction_window_unit = ‘minutes’</code>,<code class="ph codeph">compaction_window_size =
+                60</code></p>
+<p dir="ltr" class="p"><strong class="ph b">Pros</strong>: Used for time series data, stored in tables
+              that use the default TTL for all data. Simpler configuration than that of DTCS. </p>
+<p dir="ltr" class="p"><strong class="ph b">Cons</strong>: Not appropriate if out-of-sequence time data is required, since
+              SSTables will not compact as well. Also, not appropriate for data without a TTL, as
+              storage will grow without bound. Less fine-tuned configuration is possible than with
+              DTCS.</p>
+
+          </dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__dtcs-compaction">DateTieredCompactionStrategy (DTCS)<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dtcs-compaction" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p">Deprecated in Cassandra 3.0.8/3.8.</p>
+
+            <p class="p">The DateTieredCompactionStrategy (DTCS) is similar to STCS. But instead of compacting
+              based on SSTable size, DTCS compacts based on SSTable age. (Each column in an SSTable
+              is marked with the timestamp at write time. As the <em class="ph i">age</em> of an SSTable, DTCS uses
+              the oldest (minimum) timestamp of any column the SSTable contains.) </p>
+
+            <p class="p">Configuring the DTCS time window ensures that new and old data are not mixed in
+              merged SSTables. In fact, using Time-To-Live (TTL) timestamps, DTCS can eject whole
+              SSTables containing expired data. This strategy often generates similar-sized SSTables
+              if time series data is ingested at a steady rate. </p>
+
+            <p class="p">DTCS compacts SSTables into larger tables, as with STCS, when the system accumulates
+              a configurable number of SSTables within a configurable time interval. However, DTCS
+              skips compacting SSTables that reach a configurable age. This logic reduces the number
+              of times data is rewritten. Queries that ask for data in a particular last time
+              interval, such as an hour, can be executed very efficiently on DTCS-compacted SSTables
+              (particularly if the requested time interval is coordinated with the configured
+              interval for compaction).</p>
+
+            <p class="p">One use case that can cause difficulty with this strategy is out-of-sequence writing.
+              For example, an operation that writes a timestamped record with a timestamp outside
+              the current time window. Read repairs can inject out-of-sequence timestamps, so be
+              sure to turn off read repairs when using DTCS. For more information, see <a class="xref" href="https://www.datastax.com/dev/blog/dtcs-notes-from-the-field" target="_blank">DateTieredCompactionStrategy: Notes from the Field</a>.</p>
+
+            <ul class="ul" id="dmlHowDataMaintain__DTCS-pros-cons">
+              <li class="li">
+                <p class="p"><strong class="ph b">Pros</strong>: Specifically designed for time series data, stored in tables that
+                  use the default TTL. DTCS is a better choice when fine-tuning is required to meet
+                  space-related SLAs.</p>
+
+              </li>
+
+              <li class="li">
+                <p class="p"><strong class="ph b">Cons</strong>: Insertion of records out of time sequence (by repairs or hint
+                  replaying) can increase latency or cause errors. In some cases, it may be
+                  necessary to turn off read repair and carefully test and control the use of
+                  TIMESTAMP options in BATCH, DELETE, INSERT and UPDATE CQL commands.</p>
+
+              </li>
+
+            </ul>
+
+          </dd>
+
+        
+      </dl>
+
+    </section>
+
+    <section class="section" id="dmlHowDataMaintain__dml_which_compaction_strategy_is_best"><h2 class="title sectiontitle">Which compaction strategy is best?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml_which_compaction_strategy_is_best" rel="internal"> </a></h2>
+      
+      <div class="p">To implement the best compaction strategy:<ol class="ol" id="dmlHowDataMaintain__ul_dqs_2fz_zv">
+          <li class="li">Review your application's requirements.</li>
+
+          <li class="li">Configure the table to use the most appropriate strategy.</li>
+
+          <li class="li">Test the compaction strategies against your data.</li>
+
+        </ol>
+The following questions are based on the experiences of Cassandra developers and users
+        with the strategies described above. </div>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__time-series">Does your table process time series data?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__time-series" rel="internal"> </a></dt>
+
+          <dd class="dd">If so, your best choices are TWCS or DTCS. For details, read the descriptions on this
+            page.</dd>
+
+        
+      </dl>
+
+      <p class="p">If your table is not focused on time series data, the choice becomes more complicated. The
+        following questions introduce other considerations that may guide your choice.</p>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__more-reads-than-writes">Does your table handle more reads than writes, or more writes than reads?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__more-reads-than-writes" rel="internal"> </a></dt>
+
+          <dd class="dd">LCS is a good choice if your table processes twice as many reads as writes or more –
+            especially randomized reads. If the proportion of reads to writes is closer, the
+            performance hit exacted by LCS may not be worth the benefit. Be aware that LCS can be
+            quickly overwhelmed by a high volume of writes.</dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__change-often">Does the data in your table change often?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__change-often" rel="internal"> </a></dt>
+
+          <dd class="dd">One advantage of LCS is that it keeps related data in a small set of SSTables. If your
+            data is <em class="ph i">immutable</em> or not subject to frequent <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_upsert.html" target="_blank">upserts</a>, STCS accomplishes the same type of grouping without the LCS
+            performance hit.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__predictable">Do you require predictable levels of read and write activity?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__predictable" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p">LCS keeps the SSTables within predictable sizes and numbers. For example, if your
+              table's read/write ratio is small, and it is expected to conform to a Service Level
+              Agreements (SLAs) for reads, it may be worth taking the write performance penalty of
+              LCS in order to keep read rates and latency at predictable levels. And you may be able
+              to overcome this write penalty through horizontal scaling (adding more nodes).</p>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__batch-process">Will your table be populated by a batch process?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__batch-process" rel="internal"> </a></dt>
+
+          <dd class="dd">On both batch reads and batch writes, STCS performs better than LCS. The batch process
+            causes little or no fragmentation, so the benefits of LCS are not realized; batch
+            processes can overwhelm LCS-configured tables. </dd>
+
+        
+      </dl>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__limited-disk-space">Does your system have limited disk space?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__limited-disk-space" rel="internal"> </a></dt>
+
+          <dd class="dd">LCS handles disk space more efficiently than STCS: it requires about 10%
+              <em class="ph i">headroom</em> in addition to the space occupied by the data is handles. STCS and
+            DTCS generally require, in some cases, as much as 50% more than the data space. </dd>
+
+        
+        
+          <dt class="dt dlterm" id="dmlHowDataMaintain__reaching-io-limits">Is your system reaching its limits for I/O?<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__reaching-io-limits" rel="internal"> </a></dt>
+
+          <dd class="dd">LCS is significantly more I/O intensive than DTCS or STCS. Switching to LCS may
+            introduce extra I/O load that offsets the advantages.</dd>
+
+        
+      </dl>
+
+    </section>
+
+    <section class="section" id="dmlHowDataMaintain__dml_testing_compaction_strategies"><h2 class="title sectiontitle">Testing compaction strategies<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml_testing_compaction_strategies" rel="internal"> </a></h2>
+      
+      <div class="p">Suggestions for determining which compaction strategy is best for your system:<ul class="ul" id="dmlHowDataMaintain__ul_yfc_w4z_zv">
+          <li class="li">Create a three-node cluster using one of the compaction strategies, stress test the
+            cluster using cassandra-stress, and measure the results.</li>
+
+          <li class="li">Set up a node on your existing cluster and use Cassandra's write survey mode to sample
+            live data. See <a class="xref" href="https://www.datastax.com/dev/blog/whats-new-in-cassandra-1-1-live-traffic-sampling" target="_blank">What’s new in Cassandra 1.1: live traffic
+              sampling</a>.</li>
+
+        </ul>
+</div>
+
+    </section>
+
+    <section class="section" id="dmlHowDataMaintain__dml_starting_compaction"><h2 class="title sectiontitle">Configuring and running compaction<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml_starting_compaction" rel="internal"> </a></h2>
+      
+      <p class="p">Set the compaction strategy for a table in the parameters for the <span class="keyword cmdname">CREATE
+          TABLE</span> or <span class="keyword cmdname">ALTER TABLE</span> command. For details, see <a class="xref" href="http://docs.datastax.com"/en/cql/3.3/cql/cql_reference/cqlCreateTable.html#tabProp__moreCompaction" target="_blank">Table properties</a>.</p>
+
+      <p class="p">You can start compaction manually using the <a class="xref" href="../tools/toolsCompact.html" title="Forces a major compaction on one or more tables.">nodetool
+          compact</a> command.</p>
+
+    </section>
+
+    <section class="section" id="dmlHowDataMaintain__dml-more-information-about-contraction"><h2 class="title sectiontitle">More information about compaction<a class="headerlink" href="dmlHowDataMaintain.html#dmlHowDataMaintain__dml-more-information-about-contraction" rel="internal"> </a></h2>
+      
+      <div class="p">The following blog posts and videos provide more information from developers that have
+        tested compaction strategies:<ul class="ul" id="dmlHowDataMaintain__ul_u2x_4pz_zv">
+          <li class="li"><a class="xref" href="https://www.datastax.com/dev/blog/when-to-use-leveled-compaction" target="_blank">When to Use Leveled Compaction</a></li>
+
+          <li class="li"><a class="xref" href="https://www.datastax.com/dev/blog/leveled-compaction-in-apache-cassandra" target="_blank">Leveled compaction in Apache Cassandra</a></li>
+
+          <li class="li"><a class="xref" href="https://www.youtube.com/watch?v=PWtekUWCIaw" target="_blank">Using TimeWindowCompactionStrategy for Time Series
+            Workloads</a></li>
+
+          <li class="li"><a class="xref" href="https://www.datastax.com/dev/blog/dtcs-notes-from-the-field" target="_blank">DateTieredCompactionStrategy: Notes from the Field</a></li>
+
+          <li class="li"><a class="xref" href="https://labs.spotify.com/2014/12/18/date-tiered-compaction/" target="_blank">Date-Tiered Compaction in Cassandra</a></li>
+
+          <li class="li"><a class="xref" href="https://www.datastax.com/dev/blog/datetieredcompactionstrategy" target="_blank">DateTieredCompactionStrategy: Compaction for Time
+              Series Data</a>.</li>
+
+          <li class="li"><a class="xref" href="http://stackoverflow.com/questions/27862808/what-delays-a-tombstone-purge-when-using-lcs-in-cassandra" target="_blank">What delays a tombstone purge when using LCS in
+              Cassandra</a></li>
+
+        </ul>
+</div>
+
+    </section>
+
+  </div>
+
+</article></main></div>
+                        
+                        
+                        
+                        
+                    </div>
+                    <nav role="navigation" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 navbar" id="wh_side_toc">
+                        <div class=" wh_side_toc "><ul class="hidden-print"><li><span class="topicref"><a href="../../cassandra/dml/dmlDatabaseInternalsTOC.html">Database internals</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cassandra/dml/dmlManageOndisk.html">Storage engine</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlIntro.html">How Cassandra reads and writes data</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cassandra/dml/dmlHowDataWritten.html">How is data written?</a></span></li><li class="active"><span class="topicref">How is data maintained?</span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlWriteUpdate.html">How is data updated?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutDeletes.html">How is data deleted?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlIndexInternals.html">How are indexes stored and updated?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlAboutReads.html">How is data read?</a></span></li><li><span class="topicref"><a href="../../cassandra/dml/dmlWritePatterns.html">How do write patterns affect reads?</a></span></li></ul></li><li><span class="topicref"><a href="../../cassandra/dml/dmlDataConsistencyTOC.html">Data consistency</a></span></li></ul></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="hidden-print col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="text-center wh_bottom_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links bottom_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cassandra/dml/dmlHowDataWritten.html" title="How is data written?"></a></span>  
+<span class="navnext"><a class="link" href="../../cassandra/dml/dmlWriteUpdate.html" title="How is data updated?"></a></span>  </span></div>
+                    </div>
+                </nav>
+            </div>
+        </div> 
+        <nav class="navbar navbar-default wh_footer">
+  <div class=" footer-container text-center ">
+    <div class="ds_footer_bottom">
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/docTips.html" target="_blank" title="Doc Tips">
+        <span class="flaticon-signs"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Email feedback guidelines">
+        <span class="flaticon-new-email-interface-symbol-of-black-closed-envelope"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Twitter feedback guidelines">
+        <span class="flaticon-twitter-logo-button"></span></a>
+      <a href="https://github.com/datastax/" target="_blank" title="DataStax GitHub">
+        <span class="flaticon-github-logo"></span></a>
+      <a href="http://docs.datastax.com"/en/cassandra/3.0/zip/cassandra30.zip" target="_blank" title="Zipped document">
+        <span class="flaticon-symbols"></span></a>
+      <div>
+        <span>DataStax Enterprise is powered by the best distribution of Apache Cassandra™</span>
+      </div>
+      <div>
+        <span>©</span>
+        <span id="copyrightdate"></span>
+        <script type="text/javascript">document.getElementById("copyrightdate").innerHTML = new Date().getFullYear();</script>
+        <span>DataStax, Inc. All rights reserved. Updated: 31 August 2017</span>
+        <span style="display: none">Build time: 31 August 2017 07:45:10.908</span>
+      </div>
+    </div>
+    <div>
+        <p>DataStax, Titan, and TitanDB are registered trademark of DataStax, Inc. and its subsidiaries in the United States and/or other countries.</p>
+        <p>Apache Cassandra, Apache, Tomcat, Lucene, Solr, Hadoop, Spark, TinkerPop, and Cassandra are trademarks of the 
+            <a href="https://www.apache.org/" target="_blank" title="Apache Software Foundation">Apache Software Foundation</a> 
+            or its subsidiaries in Canada, the United States and/or other countries.</p>
+    </div>
+  </div>
+</nav>
+ 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="../../oxygen-webhelp/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/template/resources/js/wt_default.js?buildId=2017062918" type="text/javascript"></script>
+        <!-- Expand/collapse support -->
+        <script src="../../oxygen-webhelp/template/resources/js/wt_expand.js?buildId=2017062918" type="text/javascript"></script>
+        <div>
+    <script>
+    <!--
+    var collapsibleSections = {
+        /* Selectors for the nodes that contain an expand/collapse button. */
+        "expand_buttons" : [
+            /* Table caption */
+            "table > caption > .wh_expand_btn",
+            /* Article title */
+            ".topic > .title > .wh_expand_btn",
+            /* Section title */
+            ".sectiontitle > .wh_expand_btn",
+            /* Index terms groups */
+            ".wh_term_group > .wh_first_letter > .wh_expand_btn"
+        ],
+        "collapse_by_default" : [
+            /* sections with collapseByDefault output class */
+            ".collapseOnLoad > .wh_expand_btn"
+        ]
+    };
+
+    $(document).ready(function () {
+        /* Collapse selected nodes. */
+        collapsibleSections.collapse_by_default.forEach(
+            function(selector) {
+                var matchedNodes =  $(document).find(selector);
+                // Change the button state
+                matchedNodes.toggleClass("expanded");
+                // Will collapse the siblings of the parent node, excepting the ones that were marked otherwise
+                var siblings = matchedNodes.parent().siblings(':not(.wh_not_expandable)');
+                siblings.toggle();
+            }
+        );
+    });
+    //-->
+    </script>
+</div>
+        
+        <!-- DataStax js -->
+        <script src="../../oxygen-webhelp/assets/js/details-shim.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/highlight.pack.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/magnific-popup.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/dsInit.js" type="text/javascript"></script>
+        <!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+        <script type="text/javascript">replaceNextPrevArrows();</script>
+        <script type="text/javascript">getVersionDropdown("cassandra", "cassandra30");</script>
+        
+        <!-- Search autocomplete -->
+        <script type="text/javascript" src="../../oxygen-webhelp/search/keywords.js?uniqueId=20170831074510"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchAutocomplete.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchHistoryItems.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchOptions.js?uniqueId=20170831074510"></script>
+        
+        <!-- Analytics scripts for IT -->
+        <script type="text/javascript">
+          (function() {
+            var didInit = false;
+            function initMunchkin() {
+              if(didInit === false) {
+                didInit = true;
+                Munchkin.init('259-IFZ-779');
+                }
+              }
+              var s = document.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+              s.onreadystatechange = function() {
+                if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                  initMunchkin();
+                }
+             };
+             s.onload = initMunchkin;
+             document.getElementsByTagName('head')[0].appendChild(s);
+        })();
+        </script>
+        
+        <!-- end analytics scripts for IT -->
+            
+        <!-- Swiftype search code -->
+        
+        <!-- script type="text/javascript">
+            // set up autocomplete
+            $("#st-search-input").swiftype({
+                engineKey: "35HEzyB2mn1a1qGMmCwN"
+            });
+            // set up search
+            $("#st-search-input").swiftypeSearch({
+                engineKey: "35HEzyB2mn1a1qGMmCwN",
+                resultContainingElement: "#st-results-container"
+            });
+        </script -->
+		<!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+    </body>
+</html>

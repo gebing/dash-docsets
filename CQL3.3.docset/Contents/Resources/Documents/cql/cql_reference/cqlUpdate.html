@@ -1,0 +1,991 @@
+
+<!DOCTYPE html
+  PUBLIC "" "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" xml:lang="en-us" lang="en-us">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+      <meta name="title" content="UPDATE" /><meta name="description" content="Update columns in a row." /><title>UPDATE</title><!--  Generated with Oxygen version 19.0, build number 2017062918.  --><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="wh-path2root" content="../../index.html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta class="swiftype" name="version" data-type="string" content="3.3" />
+        <meta class="swiftype" name="book" data-type="string" content="CQL for Cassandra 3.0" />
+        <meta class="swiftype" name="doc-name" data-type="string" content="cql33" />
+        <meta class="swiftype" name="site-priority-for-Corporate" data-type="integer" content="60" />
+        
+        <script>
+          function debug(msg, object){
+              console.log(msg, object);
+          }
+          function executeQuery(){
+              $('#searchForm').submit();
+              return true;
+          }
+        </script>
+      
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/commonltr.css?buildId=2017062918" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/webhelp_responsive_topic.css?buildId=2017062918" />
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap.min.css" />
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/js/jquery-ui.min.css" />
+        <!-- Changes and comments, as side-notes  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/p-side-notes.css?buildId=2017062918" />
+
+        <!-- Template default styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_default.css?buildId=2017062918" />
+        
+        <!-- Expand-collapse support styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_expand.css?buildId=2017062918" />
+
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-3.1.1.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/localization/strings.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/localization.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/parseuri.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-ui.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script>
+        
+        <!-- Swiftype jQuery and Autocomplete plugins -->
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.ba-hashchange.min.js"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.search.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/search.css" media="all" />
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.autocomplete.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/autocomplete.css" media="all" />
+        
+        <!-- end Swiftype plugins -->
+
+        <!-- DataStax-specific styles. -->
+        <link rel="shortcut icon" type="image/ico" href="../../oxygen-webhelp/assets/images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/details-shim.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/magnific-popup.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/datastax-highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/noshdesc.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/ds-skin-override.css" />
+        <!-- DataStax-specific scripts -->
+        <script src="../../oxygen-webhelp/assets/js/versionDropdown.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/navlinks.js" type="text/javascript"></script>
+        <script type="text/javascript">document.title = document.title + " | CQL for Cassandra 3.0";</script>
+    <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/variants/tree/oxygen/skin.css?buildId=2017062918" /></head>
+
+    <body onload="highlightSearchTerm()" class="wh_topic_page frmBody" id="cqlUpdate">
+        <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TWSQ28" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TWSQ28');</script>
+        <!-- End Google Tag Manager -->
+        <!-- whc:include_html href="${webhelp.fragment.before.body}"/ -->
+        
+<div>
+    <div class="container-fluid">
+        <div class="wh_header_flex_container">
+            <div class="container">
+                <div class="col-sm-6 collapse navbar-collapse">
+                    <ul id="ds_sites_list">
+                        <li><a href="https://www.datastax.com" target="_blank">HOME</a></li>
+                        <li><a href="https://academy.datastax.com/" target="_blank">ACADEMY</a></li>
+                        <li><a href="/en" target="_self">DOCS</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 collapse navbar-collapse ds_buttons">
+                    <a class="ds_buttons_button" href="https://www.datastax.com/contactus" target="_blank">CONTACT US</a>
+                    <a class="ds_buttons_button" href="https://academy.datastax.com/downloads" target="_blank"><span class="pad-right">DOWNLOAD DATASTAX</span>
+                        <img src="https://www.datastax.com/wp-content/themes/datastax-2014-08/images/common/icon-dowload-ds.png" width="17" height="15" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color:#067A97; min-height:37px">
+        <div class="container">
+            <div class="col-sm-6 navbar-collapse ds_logo">
+                <a href="https://www.datastax.com/" class="wh_logo ds_logo_collapse" target="_blank">
+                    <img src="../../oxygen-webhelp/assets/images/logo.png" alt="DataStax Logo" />
+                </a>
+            </div>
+            <div class="col-sm-6 collapse navbar-collapse ds_global_menu">
+                <ul id="ds_links_list">
+                    <li><a href="http://docs.datastax.com"/en/glossary/doc/" target="_blank">GLOSSARY</a></li>
+                    <li><a href="https://support.datastax.com/" target="_blank">SUPPORT</a></li>
+                    <li><a href="https://www.datastax.com/dev/blog/" target="_blank">DEVELOPER
+                        BLOGS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default wh_header">
+        <div class="container">
+            <div class="wh_header_flex_container">
+                <div class="hidden-xs">
+                    <span id="version-dropdown" style="display: none;">
+                        <form id="version-dropdown-form">
+                            <select></select>
+                        </form>
+                    </span>
+                </div>
+                <div class="wh_logo_and_publication_title_container">
+                    <div class="wh_logo_and_publication_title">
+                        
+                        <!-- whc:webhelp_logo class="hidden-xs"/ -->
+                    <div class=" wh_publication_title "><a href="../../index.html"><span class="title">CQL for Apache Cassandra™ 3.0 <span class="ph red">(Supported)</span>  </span></a></div>
+                    
+                </div>
+                    <button type="button" data-target=".wh_top_menu_and_indexterms_link" data-toggle="collapse" class="navbar-toggle collapsed wh_toggle_button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            
+                <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse">
+                    <!--whc:include_html href="${webhelp.fragment.before.top_menu}"/-->
+                    <div class=" wh_top_menu "><ul><li><span class="topicref"><a href="../../cql/cqlIntro.html" data-id="cqlIntro">Introduction to Cassandra Query Language</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/ddl/ddlCQLDataModelingTOC.html" data-id="ddlCQLDataModelingTOC">CQL data modeling</a></span><ul><li><span class="topicref"><a href="../../cql/ddl/dataModelingApproach.html" data-id="dataModelingApproach">Data modeling concepts</a></span></li><li><span class="topicref"><a href="../../cql/ddl/dataModelingAnalysis.html" data-id="dataModelingAnalysis">Data modeling analysis</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAboutCQL.html" data-id="useAboutCQL">Using CQL</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/startCqlLinuxMac.html" data-id="startCqlLinuxMac">Starting cqlsh on Linux and Mac OS X</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateKeyspace.html" data-id="useCreateKeyspace">Creating and updating a keyspace</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useExampleCreatingKeyspace.html" data-id="useExampleCreatingKeyspace">Example of creating a keyspace</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useUpdateKeyspaceRF.html" data-id="useUpdateKeyspaceRF">Updating the replication factor</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateTableTOC.html" data-id="useCreateTableTOC">Creating a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCreateTable.html" data-id="useCreateTable">Creating a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useKSQualifier.html" data-id="useKSQualifier">Using the keyspace qualifier</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSimplePrimaryKeyConcept.html#useSimplePrimaryKeyConcept" data-id="useSimplePrimaryKeyConcept">Simple Primary Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompositePartitionKeyConcept.html#useCompositePartitionKeyConcept" data-id="useCompositePartitionKeyConcept">Composite Partition Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompoundPrimaryKeyConcept.html" data-id="useCompoundPrimaryKeyConcept">Compound Primary Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCountersConcept.html" data-id="useCountersConcept">Creating a counter table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompactStorage.html" data-id="useCompactStorage">Create table with COMPACT STORAGE</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateTableCollisionFix.html" data-id="useCreateTableCollisionFix">Table schema collision fix</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateMV.html" data-id="useCreateMV">Creating a materialized view</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAdvancedDataTypesTOC.html" data-id="useAdvancedDataTypesTOC">Creating advanced data types in tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCollections.html" data-id="useCollections">Creating collections</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateTableTuple.html" data-id="useCreateTableTuple">Creating a table with a tuple</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDT.html" data-id="useCreateUDT">Creating a user-defined type (UDT)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateFunctionsTOC.html" data-id="useCreateFunctionsTOC">Creating functions</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDF.html" data-id="useCreateUDF">Creating user-defined function (UDF)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDA.html" data-id="useCreateUDA">Creating User-Defined Aggregate Function (UDA)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useInsertDataTOC.html" data-id="useInsertDataTOC">Inserting and updating data</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useInsertSimple.html" data-id="useInsertSimple">Inserting simple data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertSet.html" data-id="useInsertSet">Inserting and updating data into a set</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertList.html" data-id="useInsertList">Inserting and updating data into a list</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertMap.html" data-id="useInsertMap">Inserting and updating data into a map</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertTuple.html" data-id="useInsertTuple">Inserting tuple data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertUDT.html" data-id="useInsertUDT">Inserting or updating data into a user-defined type (UDT)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertJSON.html" data-id="useInsertJSON">Inserting JSON data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertLWT.html" data-id="useInsertLWT">Using lightweight transactions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/refStaticCol.html" data-id="refStaticCol">Sharing a static column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useExpire.html" data-id="useExpire">Expiring data with time-to-live</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useBatchTOC.html" data-id="useBatchTOC">Batching data insertion and updates</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useBatch.html" data-id="useBatch">Batching inserts, updates and deletes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useBatchGoodExample.html" data-id="useBatchGoodExample">Good use of BATCH statement</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useBatchBadExample.html" data-id="useBatchBadExample">Misuse of BATCH statement</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useQueryDataTOC.html" data-id="useQueryDataTOC">Querying tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useQueryColumnsSort.html" data-id="useQueryColumnsSort">Retrieval and sorting results</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryCollections.html" data-id="useQueryCollections">Retrieval using collections</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryJSON.html" data-id="useQueryJSON">Retrieval using JSON</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryIN.html" data-id="useQueryIN">Retrieval using the IN keyword</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useScanPartition.html" data-id="useScanPartition">Retrieval by scanning a partition</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryStdAggregate.html" data-id="useQueryStdAggregate">Retrieval using standard aggregate functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryUDF.html" data-id="useQueryUDF">Retrieval using a user-defined function (UDF)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryUDA.html" data-id="useQueryUDA">Retrieval using user-defined aggregate (UDA) functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQuerySystem.html" data-id="useQuerySystem">Querying a system table</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/usePrimaryIndex.html" data-id="usePrimaryIndex">Indexing</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useWhenIndex.html" data-id="useWhenIndex">When to use an index</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecondaryIndex.html" data-id="useSecondaryIndex">Using a secondary index</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useMultIndexes.html" data-id="useMultIndexes">Using multiple indexes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useIndexColl.html" data-id="useIndexColl">Indexing a collection</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAlterTableTOC.html" data-id="useAlterTableTOC">Altering a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useAlterColumn.html" data-id="useAlterColumn">Altering columns in a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterAddColl.html" data-id="useAlterAddColl">Altering a table to add a collection</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterColType.html" data-id="useAlterColType">Altering the data type of a column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterTabProp.html" data-id="useAlterTabProp">Altering the table properties</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterMV.html" data-id="useAlterMV">Altering a materialized view</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterType.html" data-id="useAlterType">Altering a user-defined type</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useRemoveData.html" data-id="useRemoveData">Removing a keyspace, schema, or data</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useDropKSTableMV.html" data-id="useDropKSTableMV">Dropping a keyspace, table or materialized view</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useDropColumn.html" data-id="useDropColumn">Deleting columns and rows</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useDropUDF.html" data-id="useDropUDF">Dropping a user-defined function (UDF)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useSecureTOC.html" data-id="useSecureTOC">Securing a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useSecureRoles.html" data-id="useSecureRoles">Database roles</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecurePermission.html" data-id="useSecurePermission">Database Permissions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecureUsers.html" data-id="useSecureUsers">Database users</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useTracing.html" data-id="useTracing">Tracing consistency changes</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useTracingSetup.html" data-id="useTracingSetup">Setup to trace consistency changes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTracingTrace.html" data-id="useTracingTrace">Trace reads at different consistency levels</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTracingPerf.html" data-id="useTracingPerf">How consistency affects performance</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useToken.html" data-id="useToken">Displaying rows from an unordered partitioner with the TOKEN function</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTTL.html" data-id="useTTL">Determining time-to-live (TTL) for a column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useWritetime.html" data-id="useWritetime">Determining the date/time of a write</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useLegacyTableTOC.html" data-id="useLegacyTableTOC">Legacy tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useLegacyTables.html" data-id="useLegacyTables">Working with legacy applications</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryLegacyTables.html" data-id="useQueryLegacyTables">Querying a legacy table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCQL3QueryLegacyTables.html" data-id="useCQL3QueryLegacyTables">Using a CQL legacy table query</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html" data-id="cqlReferenceTOC">CQL reference</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/about_cql_ref_c.html" data-id="about_cql_ref_c">Introduction</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cql_lexicon_c.html" data-id="cql_lexicon_c">CQL lexical structure</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/ucase-lcase_r.html" data-id="ucase-lcase_r">Uppercase and lowercase</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/escape_char_r.html" data-id="escape_char_r">Escaping characters</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/valid_literal_r.html" data-id="valid_literal_r">Valid literals</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/exponential_notation_r.html" data-id="exponential_notation_r">Exponential notation</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRefComment.html" data-id="cqlRefComment">CQL code comments</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/keywords_r.html" data-id="keywords_r">CQL Keywords</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cql_data_types_c.html" data-id="cql_data_types_c">CQL data types</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/blob_r.html" data-id="blob_r">Blob type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/collection_type_r.html" data-id="collection_type_r">Collection type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/counter_type.html" data-id="counter_type">Counter type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/uuid_type_r.html" data-id="uuid_type_r">UUID and timeuuid types</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/timeuuid_functions_r.html" data-id="timeuuid_functions_r">UUID and timeuuid functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/timestamp_type_r.html" data-id="timestamp_type_r">Timestamp type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/tupleType.html" data-id="tupleType">Tuple type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRefUDType.html" data-id="cqlRefUDType">User-defined type</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_function_r.html" data-id="cql_function_r">Functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/refLimits.html" data-id="refLimits">CQL limits</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html" data-id="cqlshCommandsTOC">CQL shell commands</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/cqlsh.html" data-id="cqlsh">Starting cqlsh</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshUsingCqlshrc.html" data-id="cqlshUsingCqlshrc">Configuring cqlsh from a file</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCapture.html" data-id="cqlshCapture">CAPTURE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshClear.html" data-id="cqlshClear">CLEAR</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshConsistency.html" data-id="cqlshConsistency">CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCopy.html" data-id="cqlshCopy">COPY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshDescribe.html" data-id="cqlshDescribe">DESCRIBE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExpand.html" data-id="cqlshExpand">cqlshExpand</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExit.html" data-id="cqlshExit">EXIT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshLogin.html" data-id="cqlshLogin">LOGIN</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshPaging.html" data-id="cqlshPaging">PAGING</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSerialConsistency.html" data-id="cqlshSerialConsistency">SERIAL CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshShow.html" data-id="cqlshShow">SHOW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSource.html" data-id="cqlshSource">SOURCE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshTracing.html" data-id="cqlshTracing">TRACING</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html" data-id="cqlCommandsTOC">CQL commands</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterKeyspace.html" data-id="cqlAlterKeyspace">ALTER KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterMaterializedView.html" data-id="cqlAlterMaterializedView">ALTER MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterRole.html" data-id="cqlAlterRole">ALTER ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterTable.html" data-id="cqlAlterTable">ALTER TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterType.html" data-id="cqlAlterType">ALTER TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterUser.html" data-id="cqlAlterUser">ALTER USER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlBatch.html" data-id="cqlBatch">BATCH</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateAggregate.html" data-id="cqlCreateAggregate">CREATE AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateIndex.html" data-id="cqlCreateIndex">CREATE INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateFunction.html" data-id="cqlCreateFunction">CREATE FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateKeyspace.html" data-id="cqlCreateKeyspace">CREATE KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateMaterializedView.html" data-id="cqlCreateMaterializedView">CREATE MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#cqlCreateTable" data-id="cqlCreateTable">CREATE TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTrigger.html" data-id="cqlCreateTrigger">CREATE TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateType.html" data-id="cqlCreateType">CREATE TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateRole.html" data-id="cqlCreateRole">CREATE ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateUser.html" data-id="cqlCreateUser">CREATE USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDelete.html" data-id="cqlDelete">DELETE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropAggregate.html" data-id="cqlDropAggregate">DROP AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropFunction.html" data-id="cqlDropFunction">DROP FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropIndex.html" data-id="cqlDropIndex">DROP INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropKeyspace.html" data-id="cqlDropKeyspace">DROP KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropMatializedView.html" data-id="cqlDropMatializedView">DROP MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropRole.html" data-id="cqlDropRole">DROP ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTable.html" data-id="cqlDropTable">DROP TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTrigger.html" data-id="cqlDropTrigger">DROP TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropType.html" data-id="cqlDropType">DROP TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropUser.html" data-id="cqlDropUser">DROP USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlGrant.html" data-id="cqlGrant">GRANT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlInsert.html" data-id="cqlInsert">INSERT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListPermissions.html" data-id="cqlListPermissions">LIST PERMISSIONS</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListRoles.html" data-id="cqlListRoles">LIST ROLES</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListUsers.html" data-id="cqlListUsers">LIST USERS (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRevoke.html" data-id="cqlRevoke">REVOKE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlSelect.html" data-id="cqlSelect">SELECT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlTruncate.html" data-id="cqlTruncate">TRUNCATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUpdate.html" data-id="cqlUpdate">UPDATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUse.html" data-id="cqlUse">USE</a></span></li></ul></li></ul></li></ul></div>
+                    
+                    <!--whc:include_html href="${webhelp.fragment.after.top_menu}"/-->
+                    <div class="ds_top_menu_collapse">
+                        <ul>
+                            <li><a href="https://www.datastax.com">Home</a></li>
+                            <li><a href="https://academy.datastax.com/">Academy</a></li>
+                            <li><a href="/en">Docs home</a></li>
+                            <li><a href="https://www.datastax.com/contactus">Contact us</a></li>
+                            <li><a href="https://academy.datastax.com/downloads">Download
+                                DataStax</a></li>
+                            <li><a href="http://docs.datastax.com"/en/glossary/doc/">Glossary</a></li>
+                            <li><a href="https://support.datastax.com/">Support</a></li>
+                            <li><a href="https://www.datastax.com/dev/blog/">Developer blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+        
+        <!-- Search forms -->
+        
+        <span>
+            <div class=" wh_search_input "><form id="searchForm" method="get" action="../../search.html"><div><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" /><button type="submit" class="wh_search_button"><span>Search</span></button></div></form></div>
+        </span>
+        <div class="advanced-search">
+            <p><a href="http://docs.datastax.com"/en/advancedSearch.html">Search all docs</a></p>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+
+                <nav class="wh_tools hidden-print">
+                    <div class=" wh_breadcrumb "><ol class="hidden-print"><li><span class="home"><a href="../../index.html"><span>Home</span></a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html">CQL reference</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html">CQL commands</a></span></li><li class="active"><span class="topicref">UPDATE</span></li></ol></div>
+
+                    <div class="wh_right_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cql/cql_reference/cqlTruncate.html" title="TRUNCATE"></a></span>  
+<span class="navnext"><a class="link" href="../../cql/cql_reference/cqlUse.html" title="USE"></a></span>  </span></div>
+                        <div class=" wh_print_link print "><a href="javascript:window.print();" title="Print this page"></a></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wh_content_area  data-swiftype-index=true" id="annotate">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">UPDATE<a class="headerlink" href="cqlUpdate.html#cqlUpdate" rel="internal"> </a></h1>
+
+  
+  <div class="body refbody"><p class="shortdesc">Update columns in a row.</p>
+
+    <section class="section">
+      <p class="p">Update columns in a row.</p>
+ </section>
+
+    <section class="section refsyn"><h2 class="title sectiontitle">Synopsis</h2>
+      
+      <pre class="pre codeblock"><code><span class="keyword">UPDATE</span> [<var class="keyword varname">keyspace_name</var>.] <var class="keyword varname">table_name</var>
+[<strong class="ph b">USING TTL</strong> <var class="keyword varname">time_value</var> | <strong class="ph b">USING TIMESTAMP</strong> <var class="keyword varname">timestamp_value</var>]
+<strong class="ph b">SET</strong> <var class="keyword varname">assignment</var> [, <var class="keyword varname">assignment</var>] . . . 
+<strong class="ph b">WHERE</strong> <var class="keyword varname">row_specification</var>
+[<strong class="ph b">IF EXISTS</strong> | <strong class="ph b">IF NOT EXISTS</strong> | <strong class="ph b">IF</strong> <var class="keyword varname">condition</var> [<strong class="ph b">AND</strong> <var class="keyword varname">condition</var>] . . .] <strong class="ph b">;</strong>
+</code></pre>
+      
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table collapseOnLoad" frame="border" border="1" rules="all"><caption><span class="tablecap">Legend</span></caption><colgroup><col style="width:38.314176245210724%" /><col style="width:61.68582375478927%" /></colgroup><thead class="thead" style="text-align:left;">
+            <tr>
+              <th class="entry cellrowborder" style="vertical-align:top;" id="d44092e106">Syntax conventions</th>
+
+              <th class="entry cellrowborder" style="vertical-align:top;" id="d44092e109">Description</th>
+
+            </tr>
+
+          </thead>
+<tbody class="tbody">
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 ">UPPERCASE</td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Literal keyword. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 ">Lowercase</td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Not literal.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph"><var class="keyword varname">Italics</var></code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Variable value. Replace with a user-defined value.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">[]</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Optional. Square brackets (<code class="ph codeph"> [] </code>) surround optional command
+                arguments. Do not type the square brackets.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">( )</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Group. Parentheses ( <code class="ph codeph">( )</code> ) identify a group to choose from. Do
+                not type the parentheses. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph"> | </code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Or. A vertical bar (<code class="ph codeph"> | </code>) separates alternative elements. Type
+                any one of the elements. Do not type the vertical bar.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">...</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Repeatable. An ellipsis ( <code class="ph codeph">...</code> ) indicates that you can repeat
+                the syntax element as often as required. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">'<var class="keyword varname">Literal string</var>'</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Single quotation (<code class="ph codeph"> ' </code>) marks must surround literal strings in
+                CQL statements. Use single quotation marks to preserve upper case.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">{ <var class="keyword varname">key</var> : <var class="keyword varname">value</var> }</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Map collection. Braces (<code class="ph codeph"> { } </code>) enclose map collections or key
+                value pairs. A colon separates the key and the value. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">&lt;<var class="keyword varname">datatype1</var>,<var class="keyword varname">datatype2</var>&gt;</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Set, list, map, or tuple. Angle brackets ( <code class="ph codeph">&lt; &gt;</code> ) enclose
+                data types in a set, list, map, or tuple. Separate the data types with a comma.
+              </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph"><var class="keyword varname">cql_statement</var>;</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">End CQL statement. A semicolon (<code class="ph codeph"> ; </code>) terminates all CQL
+                statements.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">[--]</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Separate the command line options from the command arguments with two hyphens (
+                  <code class="ph codeph">--</code> ). This syntax is useful when arguments might be mistaken for
+                command line options. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">' <var class="keyword varname">&lt;schema&gt; ... &lt;/schema&gt;</var> '</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Search CQL only: Single quotation marks (<code class="ph codeph"> ' </code>) surround an
+                entire XML schema declaration.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e106 "><code class="ph codeph">@<var class="keyword varname">xml_entity</var>='<var class="keyword varname">xml_entity_type</var>'</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e109 ">Search CQL only: Identify the entity and literal value to overwrite the XML
+                element in the schema and solrConfig files.</td>
+
+            </tr>
+
+          </tbody>
+</table>
+</div>
+
+    </section>
+
+    
+    <section class="section" id="cqlUpdate__description"><h2 class="title sectiontitle">Description<a class="headerlink" href="cqlUpdate.html#cqlUpdate__description" rel="internal"> </a></h2>
+      
+      <p class="p"><span class="keyword cmdname">UPDATE</span> writes one or more column values to a row in a Cassandra table.
+        Like <a class="xref" href="cqlInsert.html" title="Inserts an entire row or upserts data into existing rows.">INSERT</a>, <span class="keyword cmdname">UPDATE</span> is an <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_upsert.html" target="_blank">upsert</a> operation: if the specified row does not exist, the command creates it. All
+          <span class="keyword cmdname">UPDATE</span>s within the same partition key are applied atomically and in
+        isolation. </p>
+
+      <p class="p">The <span class="keyword">USING</span> clause can add a <em class="ph i">time to live</em> (<a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_ttl.html" target="_blank">TTL</a>)
+        value to the row. You cannot apply TTLs to counter columns.</p>
+
+      <div class="p">Assign new values to the row's columns in the <span class="keyword">SET</span> clause.
+          <span class="keyword cmdname">UPDATE</span> cannot update the values of a row's primary key fields. To
+        update a counter in a counter table, specify the increment or decrement to the counter
+        column. <div class="note note"><span class="notetitle">Note:</span>  Unlike the INSERT command, the UPDATE command supports counters. Otherwise,
+          the <span class="keyword cmdname">UPDATE</span> and <span class="keyword cmdname">INSERT</span> operations are
+          identical.</div>
+</div>
+
+      <p class="p">The <span class="keyword">WHERE</span> clause specifies the row or rows to be updated. To specify a
+        row, the <span class="keyword">WHERE</span> clause must provide a value for each column of the row's
+        primary key. To specify more than one row, you can use the <span class="keyword">IN</span>  keyword to
+        introduce a list of possible values. You can only do this for the last column of the primary
+        key.</p>
+
+      <div class="p">The <span class="keyword">IF EXISTS</span> or <span class="keyword">IF</span> keywords introduce a lightweight
+        transaction:<pre class="pre codeblock"><code>UPDATE cycling.cyclist_name
+SET comments ='='Rides hard, gets along with others, a real winner'
+WHERE id = fb372533-eb95-4bb4-8685-6ef61e994caa IF EXISTS;</code></pre>Use
+        the <span class="keyword">IF</span> keyword to introduce a condition that must return TRUE for the
+        update to succeed. Using an <span class="keyword">IF</span> condition incurs a performance hit
+        associated with using Paxos to support <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_linearizable_consistency.html" target="_blank">linearizable consistency</a>. </div>
+
+      <p class="p">The <span class="keyword cmdname">UPDATE</span> command does not return any result unless it includes
+          <span class="keyword">IF EXISTS</span>.</p>
+ </section>
+
+    <section class="section" id="cqlUpdate__cql-update-parameters"><h2 class="title sectiontitle">Parameters<a class="headerlink" href="cqlUpdate.html#cqlUpdate__cql-update-parameters" rel="internal"> </a></h2>
+      
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="cqlUpdate__keyspace-name">keyspace_name<a class="headerlink" href="cqlUpdate.html#cqlUpdate__keyspace-name" rel="internal"> </a></dt>
+
+          <dd class="dd">The name of the keyspace containing the table to be updated. Not needed if the
+            keyspace has been set for the session with the <span class="keyword cmdname">USE</span> command.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlUpdate__table-name">table_name<a class="headerlink" href="cqlUpdate.html#cqlUpdate__table-name" rel="internal"> </a></dt>
+
+          <dd class="dd">The name of the table to be updated.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlUpdate__time-value">time_value<a class="headerlink" href="cqlUpdate.html#cqlUpdate__time-value" rel="internal"> </a></dt>
+
+          <dd class="dd">The value for <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_ttl.html" target="_blank">TTL</a> is a number of seconds. Column values in a command marked
+            with <span class="keyword option">TTL</span> are automatically marked as deleted (with a tombstone) after
+            the specified number of seconds. The <span class="keyword option">TTL</span> applies to the marked column
+            values, not the column itself. Any subsequent update of the column resets the value to
+            the <span class="keyword option">TTL</span> specified in the update. By default, values never expire. You
+            cannot set a <span class="keyword option">time_value</span> for data in a counter column.<p class="p">You can set a default TTL for an entire table by setting the table's
+          <a class="xref" href="cqlCreateTable.html#tabProp__cqlTableDefaultTTL">default_time_to_live</a> property. If you try to set a TTL for a
+        specific column that is longer than the time defined by the table TTL, Cassandra returns an
+        error.</p>
+<p class="p">In addition, you can delete a column's TTL by
+              setting its <code class="ph codeph">time_value</code> to zero.</p>
+</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlUpdate__timestamp-value">timestamp_value<a class="headerlink" href="cqlUpdate.html#cqlUpdate__timestamp-value" rel="internal"> </a></dt>
+
+          <dd class="dd">If <span class="keyword option">TIMESTAMP</span> is used, the inserted column is marked with its value –
+            a timestamp in microseconds. If a <span class="keyword option">TIMESTAMP</span> value is not set, Cassandra
+            uses the time (in microseconds) that the update occurred to the column.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlUpdate__assignment">assignment<a class="headerlink" href="cqlUpdate.html#cqlUpdate__assignment" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <div class="p">Assigns a value to an existing element. Can be one
+              of:<pre class="pre codeblock"><code><var class="keyword varname">column_name</var> = <var class="keyword varname">column_value</var> [, <var class="keyword varname">column_name</var> = <var class="keyword varname">column_value</var>] . . . 
+| <var class="keyword varname">counter_column_name</var> = <var class="keyword varname">counter_column_name</var> <strong class="ph b">+</strong> | <strong class="ph b">-</strong> <var class="keyword varname">counter_offset</var>
+| <var class="keyword varname">list_name</var> <strong class="ph b">=</strong> <strong class="ph b">['</strong><var class="keyword varname">list_item</var><strong class="ph b">'</strong> [<strong class="ph b">, '</strong><var class="keyword varname">list_item</var><strong class="ph b">'</strong>] . . . <strong class="ph b">]</strong>
+| <var class="keyword varname">list_name</var> <strong class="ph b">=</strong> <var class="keyword varname">list_name</var> <strong class="ph b">+</strong> | <strong class="ph b">-</strong> <strong class="ph b">['</strong><var class="keyword varname">list_item</var><strong class="ph b">'</strong> [, '<var class="keyword varname">list_item</var><strong class="ph b">'</strong>] . . . <strong class="ph b">]</strong> 
+| <var class="keyword varname">list_name</var> <strong class="ph b">= ['</strong><var class="keyword varname">list_item</var><strong class="ph b">'</strong> [, <strong class="ph b">'</strong><var class="keyword varname">list_item</var><strong class="ph b">'</strong>] . . . <strong class="ph b">] + </strong><var class="keyword varname">list_name</var>  
+| <var class="keyword varname">map_name</var> = <var class="keyword varname">map_name</var> <strong class="ph b">+</strong> | <strong class="ph b">-</strong> <strong class="ph b">{</strong> <var class="keyword varname">map_key</var> <var class="keyword varname">:</var> <var class="keyword varname">map_value</var> [, <var class="keyword varname">map_key</var> <var class="keyword varname">:</var> <var class="keyword varname">map_value</var> . . . <strong class="ph b">}</strong>
+| <var class="keyword varname">map_name</var><strong class="ph b">[</strong> <var class="keyword varname">index</var> <strong class="ph b">]</strong> = <var class="keyword varname">map_value</var>
+| <var class="keyword varname">set_name</var> <strong class="ph b">=</strong> <var class="keyword varname">set_name</var> <strong class="ph b">+</strong> | <strong class="ph b">-</strong> <strong class="ph b">{</strong> [<strong class="ph b">'</strong><var class="keyword varname">set_item</var>'] <strong class="ph b">}</strong> 
+</code></pre></div>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="cqlUpdate__table_pvy_mfc_hx" class="table" frame="border" border="1" rules="all"><colgroup><col style="width:28.57142857142857%" /><col style="width:71.42857142857143%" /></colgroup><thead class="thead" style="text-align:left;">
+                  <tr>
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d44092e710">Variable</th>
+
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d44092e713">Description</th>
+
+                  </tr>
+
+                </thead>
+<tbody class="tbody">
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">column_name</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The name of the column to be updated.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">column_value</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The value to be inserted for the specified column name.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">counter_column_name</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The name of the counter column to be updated.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">counter_offset</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The value by which the specified counter is be incremented or decremented
+                      (depending on whether the counter_offset is preceded by "=" or "-").</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">list_name</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The name of the list to be updated. Format of a
+                        list:<pre class="pre codeblock"><code>[list_item , list_item , list_item]</code></pre><p class="p">Note the
+                        use of square brackets.</p>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">list_item</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The value to be added to the list, or removed from it.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">map_name</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The name of the map to be updated. Format of a
+                        map:<pre class="pre codeblock"><code>{ key : value , key: value , key: value . . . }</code></pre><p class="p">Note
+                        the use of curly brackets ( { } ).</p>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">map_key</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The first term or <em class="ph i">key</em>in a map entry.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">map_value</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The second term or <em class="ph i">value</em> in a map entry.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">set_name</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">
+                      <div class="p">The name of the set to be updated. Format of a
+                        set:<pre class="pre codeblock"><code>{ set_item , set_item , set_item . . . }</code></pre></div>
+
+                      <p class="p">Note the use of curly brackets ( { } ).</p>
+
+                    </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e710 "><var class="keyword varname">set_item</var></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d44092e713 ">The literal value included in a set. <div class="note note"><span class="notetitle">Note:</span> The difference between a list
+                        and a set: each item in a set must be unique.</div>
+</td>
+
+                  </tr>
+
+                </tbody>
+</table>
+</div>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlUpdate__row-specification">row_specification<a class="headerlink" href="cqlUpdate.html#cqlUpdate__row-specification" rel="internal"> </a></dt>
+
+          <dd class="dd">The <code class="ph codeph">WHERE</code> clause must identify the row or rows to be updated by
+            primary key:<ul class="ul" id="cqlUpdate__ul_nsh_qwy_gv">
+              <li class="li">To specify one row, use <code class="ph codeph"><var class="keyword varname">primary_key_name</var> =
+                    <var class="keyword varname">primary_key_value</var></code>. If the primary key is a
+                combination of elements, follow this with <code class="ph codeph">AND
+                    <var class="keyword varname">primary_key_name</var> = <var class="keyword varname">primary_key_value</var>
+                  ...</code>. The <span class="keyword">WHERE</span> clause must specify a value for every
+                component of the primary key.</li>
+
+              <li class="li">To specify more than one row, use <code class="ph codeph"><var class="keyword varname">primary_key_name</var> IN (
+                    <var class="keyword varname">primary_key_value</var>, <var class="keyword varname">primary_key_value</var> …
+                  )</code>. This only works for the last component of the primary key.</li>
+
+            </ul>
+<div class="note note"><span class="notetitle">Note:</span> To update a static column, you only need to specify the partition
+            key.</div>
+</dd>
+
+        
+        
+          <dt class="dt dlterm" id="cqlUpdate__if-exists">IF EXISTS / IF NOT EXISTS | IF condition<a class="headerlink" href="cqlUpdate.html#cqlUpdate__if-exists" rel="internal"> </a></dt>
+
+          <dd class="dd">An <span class="keyword">IF</span> clause can limit the command's action on rows that match the
+              <span class="keyword">WHERE</span> clause:<ul class="ul" id="cqlUpdate__ul_or5_1dz_gv">
+              <li class="li">Use <span class="keyword">IF EXISTS</span> to make the <span class="keyword cmdname">UPDATE</span> fail when
+                rows match the <code class="ph codeph">WHERE</code> conditions.</li>
+
+              <li class="li">Use <span class="keyword">IF NOT EXISTS</span> to make the <span class="keyword cmdname">UPDATE</span> fail
+                when no rows exist match the <code class="ph codeph">WHERE</code> conditions.</li>
+
+              <li class="li">Use <span class="keyword">IF</span> to specify one or more conditions that must test true
+                for the values in the specified row or rows.</li>
+
+            </ul>
+When an <span class="keyword">IF</span> is used, the command returns a result to standard
+            output. For examples, see <a class="xref" href="cqlUpdate.html#cqlUpdate__conditionally-updating-columns">Conditionally updating columns</a>.</dd>
+
+        
+      </dl>
+ </section>
+
+    <section class="section" id="cqlUpdate__examples-of-updating-a-column"><h2 class="title sectiontitle">Examples: updating a column<a class="headerlink" href="cqlUpdate.html#cqlUpdate__examples-of-updating-a-column" rel="internal"> </a></h2>
+      
+      <p class="p">Update a column in several rows at once:</p>
+
+      <div class="p">
+        <pre class="pre codeblock"><code>UPDATE users
+  SET state = 'TX'
+  WHERE user_uuid
+  IN (88b8fd18-b1ed-4e96-bf79-4280797cba80,
+    06a8913c-c0d6-477c-937d-6c1b69a95d43,
+    bc108776-7cb5-477f-917d-869c12dfffa8);</code></pre>
+        CQL supports an empty list of values in the <span class="keyword">IN</span> clause, useful in Java
+        Driver applications when passing empty arrays as arguments for the IN clause.</div>
+
+      <p class="p title2">Update several columns in a single row: </p>
+
+      <div class="p">
+        <pre class="pre codeblock"><code>UPDATE cycling.cyclists
+  SET firstname = 'Marianne,
+  lastname = 'VOS'
+  WHERE id = 88b8fd18-b1ed-4e96-bf79-4280797cba80;</code></pre>
+      </div>
+
+      <p class="p title2">Update a row in a table with a complex primary key:</p>
+
+      <p class="p">To do this, specify all keys in a table having compound and clustering columns. For
+        example, update the value of a column in a table having a compound primary key, userid and
+        url:</p>
+
+      <pre class="pre codeblock"><code>UPDATE excelsior.clicks USING TTL 432000
+  SET user_name = 'bob'
+  WHERE userid=cfd66ccc-d857-4e90-b1e5-df98a3d40cd6 AND
+    url='http://google.com';
+UPDATE Movies SET col1 = val1, col2 = val2 WHERE movieID = key1;
+UPDATE Movies SET col3 = val3 WHERE movieID IN (key1, key2, key3);
+UPDATE Movies SET col4 = 22 WHERE movieID = key4;</code></pre>
+      <div class="note note"><span class="notetitle">Note:</span> You cannot insert any value larger than 64K bytes into a clustering column.</div>
+ </section>
+
+    <section class="section" id="cqlUpdate__update-counter"><h2 class="title sectiontitle">Updating a counter column<a class="headerlink" href="cqlUpdate.html#cqlUpdate__update-counter" rel="internal"> </a></h2>
+      
+      <p class="p">To update a counter column value in a counter table, specify the increment or decrement to
+        apply to the current value. </p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.popular_count SET popularity = popularity + 2 WHERE id = 6ab09bec-e68e-48d9-a5f8-97e6fb4c9b47;</code></pre>
+      <p class="p">To use a lightweight transaction on a counter column to ensure accuracy, put one or more
+        counter updates in the <a class="xref" href="cqlBatch.html" title="Applies multiple data modification language (DML) statements with atomicity and/or in isolation.">batch statement</a>. For details, see
+          <a class="xref" href="cqlUpdate.html#cqlUpdate__performing-conditional-batches">Performing conditional updates in
+          a batch</a>.</p>
+ </section>
+
+    <section class="section" id="cqlUpdate__section_w4d_brb_hx"><h2 class="title sectiontitle">Creating a partition using UPDATE<a class="headerlink" href="cqlUpdate.html#cqlUpdate__section_w4d_brb_hx" rel="internal"> </a></h2>
+      
+      <div class="p">Since Cassandra processes an <span class="keyword cmdname">UPDATE</span> as an upsert, it is possible to
+        create a new row by <em class="ph i">updating</em> it in a table. Example:  to create a new partition in
+        the <code class="ph codeph">cyclists</code> table, whose primary key is <code class="ph codeph">(id)</code>, you can
+        UPDATE the partition with id <code class="ph codeph">e7cd5752-bc0d-4157-a80f-7523add8dbcd</code>, even
+        though it does not exist
+        yet:<pre class="pre codeblock"><code>UPDATE cycling.cyclists
+SET firstname = 'Anna', lastname = 'VAN DER BREGGEN' WHERE id = e7cd5752-bc0d-4157-a80f-7523add8dbcd;</code></pre></div>
+ </section>
+
+    <section class="section" id="cqlUpdate__using-a-collection-list"><h2 class="title sectiontitle">Updating a list<a class="headerlink" href="cqlUpdate.html#cqlUpdate__using-a-collection-list" rel="internal"> </a></h2>
+      
+      <p class="p">To insert values into the list:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET events = ['Criterium du Dauphine','Tour de Suisse'];</code></pre>
+      <p class="p">To prepend an element to the list, enclose it in square brackets and use the addition (+)
+        operator:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET events = ['Tour de France'] + events WHERE year=2015 AND month=06;</code></pre>
+      <p class="p">To append an element to the list, switch the order of the new element data and the list
+        name:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET events = events + ['Tour de France'] WHERE year=2017 AND month=05;</code></pre>
+      <p class="p">To add an element at a particular position, use the list index position in square brackets: </p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET events[4] = 'Tour de France' WHERE year=2016 AND month=07;</code></pre>
+      <p class="p">To remove all elements having a particular value, use the subtraction operator (-) and put
+        the list value in square brackets:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET events = events - ['Criterium du Dauphine'] WHERE year=2016 AND month=07;</code></pre>
+      <p class="p">To update data in a collection column of a user-defined type, enclose components of the
+        type in parentheses within the curly brackets, as shown in <a class="xref" href="../cql_using/useInsertUDT.html" title="How to insert or update data into a user-defined type (UDT).">"Using a user-defined type."</a></p>
+
+      <div class="cautiontitle">CAUTION:</div><div class="note caution">The Java List Index is not thread safe. The <code class="ph codeph">set</code> or
+          <code class="ph codeph">map</code> collection types are safer for updates.</div>
+ </section>
+
+    <section class="section" id="cqlUpdate__using-a-collection-set"><h2 class="title sectiontitle">Updating a set<a class="headerlink" href="cqlUpdate.html#cqlUpdate__using-a-collection-set" rel="internal"> </a></h2>
+      
+      <p class="p">To add an element to a set, use the <span class="keyword cmdname">UPDATE</span> command and the addition (+)
+        operator:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.cyclist_career_teams
+SET teams = teams + {'Team DSB - Ballast Nedam'} WHERE id=5b6962dd-3f90-4c93-8f61-eabfa4a803e2;</code></pre>
+      <p class="p">To remove an element from a set, use the subtraction (-) operator:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.cyclist_career_teams
+SET teams = teams - {'DSB Bank Nederland bloeit'} WHERE id=5b6962dd-3f90-4c93-8f61-eabfa4a803e2;</code></pre>
+      <p class="p">To remove all elements from a set:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.cyclist_career_teams
+SET teams = {} WHERE id=5b6962dd-3f90-4c93-8f61-eabfa4a803e2;</code></pre> </section>
+
+    <section class="section" id="cqlUpdate__using-a-collection-map"><h2 class="title sectiontitle">Updating a map<a class="headerlink" href="cqlUpdate.html#cqlUpdate__using-a-collection-map" rel="internal"> </a></h2>
+      
+      <p class="p">To set or replace map data, enclose the values in map syntax: strings in curly brackets,
+        separated by a colon.</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET description = description + {'Criterium du Dauphine' : 'Easy race'} WHERE year = 2015;
+</code></pre>
+      <p class="p">To update or set a specific element, such as adding a new race to the calendar in a map
+        named <code class="ph codeph">events</code>:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET events[2] = 'Vuelta Ciclista a Venezuela' WHERE year = 2016 AND month = 06;</code></pre>
+      <p class="p">To set the a TTL for each map element:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar USING TTL &lt;ttl_value&gt;
+SET events[2] = 'Vuelta Ciclista a Venezuela' WHERE year = 2016 AND month = 06;</code></pre>
+      <p class="p">You can update the map by adding one or more elements separated by commas:</p>
+
+      <div class="p">
+        <pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET description = description + {'Criterium du Dauphine' : 'Easy race', 'Tour du Suisse' : 'Hard uphill race'}
+WHERE year = 2015 AND month = 6;</code></pre>
+      </div>
+
+      <p class="p">Remove elements from a map in the same way using - instead of +.</p>
+ </section>
+
+    <section class="section" id="cqlUpdate__section_k5s_zjg_xw"><h2 class="title sectiontitle">About updating sets and maps caution<a class="headerlink" href="cqlUpdate.html#cqlUpdate__section_k5s_zjg_xw" rel="internal"> </a></h2>
+      
+      <p class="p">CQL supports alternate methods for updating sets and maps. These alternatives may seem to
+        accomplish the same tasks, but Cassandra handles them differently in important ways.</p>
+
+      <div class="p">For example: CQL provides a straightforward method for creating a new row containing a
+        collection
+        map:<pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET description = 
+{'Criterium du Dauphine' : 'Easy race', 
+ 'Tour du Suisse' : 'Hard uphill race'} 
+WHERE year = 2015 AND month = 6;</code></pre></div>
+
+      <div class="p">The easiest way to add a new entry to the map is to use the <code class="ph codeph">+</code> operator as
+        described
+        above:<pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET description = description + { 'Tour de France' : 'Very competitive'} 
+WHERE year = 2015 AND month = 6;</code></pre></div>
+
+      <div class="p">You may, however, try to add the new entry with a command that overwrites the first two and
+        adds the new
+        one:<pre class="pre codeblock"><code>UPDATE cycling.upcoming_calendar 
+SET description = 
+{'Criterium du Dauphine' : 'Easy race', 
+ 'Tour du Suisse' : 'Hard uphill race',
+ 'Tour de France' : 'Very competitive'} 
+WHERE year = 2015 AND month = 6;</code></pre></div>
+
+      <p class="p">These two statements seem to do the same thing. But behind the scenes, Cassandra processes
+        the second statement by deleting the entire collection and replacing it with a new
+        collection containing three entries. This creates tombstones for the deleted entries, even
+        though these entries are identical to the entries in the new map collection. If your code
+        updates all map collections this way, it generates many tombstones, which may slow the
+        system down.</p>
+
+      <p class="p">The examples above use map collections, but the same caution applies to updating sets.</p>
+ </section>
+
+    <section class="section" id="cqlUpdate__conditionally-updating-columns"><h2 class="title sectiontitle">Conditionally updating columns<a class="headerlink" href="cqlUpdate.html#cqlUpdate__conditionally-updating-columns" rel="internal"> </a></h2>
+      
+      <p class="p">In Conditionally update columns using <span class="keyword">IF</span> or <span class="keyword">IF
+        EXISTS</span>.</p>
+
+      <p class="p">Add <span class="keyword">IF EXISTS</span> to the command to ensure that the operation is not
+        performed if the specified row exists:</p>
+
+      <pre class="pre codeblock"><code>UPDATE cycling.cyclist_id SET age = 28 WHERE lastname = 'WELTEN' and firstname = 'Bram' IF EXISTS;</code></pre>
+      <p class="p">Without <span class="keyword">IF EXISTS</span>, the command proceeds with no standard output. If
+          <span class="keyword">IF EXISTS</span> returns true (if a row with this primary key does exist),
+        standard output displays a table like the following: </p>
+
+      <p class="p"><div class="img-popup" data-mfp-src="../images/screenshots/delete-if-exists-or-if-true.jpg"><img class="image" id="cqlUpdate__image_qwv_5cr_hv" src="../images/screenshots/delete-if-exists-or-if-true.jpg" alt="Standard output if UPDATE ... IF EXISTS returns TRUE" /></div></p>
+
+      <p class="p">If no such row exists, however, the condition returns FALSE and the command fails. In this
+        case, standard output looks like:</p>
+
+      <p class="p"><div class="img-popup" data-mfp-src="../images/screenshots/delete-if-exists-false.jpg"><img class="image" id="cqlUpdate__image_adw_gdr_hv" src="../images/screenshots/delete-if-exists-false.jpg" alt="Standard output if UPDATE ... IS EXISTS returns FALSE" /></div></p>
+
+      <div class="p">Use <span class="keyword">IF</span>
+        <span class="keyword option">condition</span> to apply tests to one or more column values in the selected
+        row:<pre class="pre codeblock"><code>UPDATE cyclist_id SET id = 15a116fc-b833-4da6-ab9a-4a3775750239 where lastname = 'WELTEN' and firstname = 'Bram' IF age = 18;</code></pre>If
+        all the conditions return TRUE, standard output is the same as if <span class="keyword">IF
+          EXISTS</span> returned true (see above). If any of the conditions fails, standard
+        output displays <code class="ph codeph">False</code> in the <code class="ph codeph">[applied]</code> column and also
+        displays information about the condition that failed:</div>
+
+      <p class="p"><div class="img-popup" data-mfp-src="../images/screenshots/delete-if-false.jpg"><img class="image" id="cqlUpdate__image_wxc_ydr_hv" src="../images/screenshots/delete-if-false.jpg" alt="Standard output if UPDATE ... IF returns FALSE" /></div></p>
+
+      <p class="p">Conditional updates are examples of <em class="ph i">lightweight transactions</em>. They incur a
+        non-negligible performance cost and should be used sparingly.</p>
+ </section>
+
+    <section class="section" id="cqlUpdate__performing-conditional-batches"><h2 class="title sectiontitle">Performing conditional updates in a BATCH<a class="headerlink" href="cqlUpdate.html#cqlUpdate__performing-conditional-batches" rel="internal"> </a></h2>
+      
+      <p class="p">The <span class="keyword cmdname">UPDATE</span> command can create new rows. The new <em class="ph i">updated</em> rows are
+        immediately available for lightweight transactions (for example, conditional statements
+        added to <span class="keyword cmdname">UPDATE</span> commands) when both the <span class="keyword cmdname">UPDATE</span> and the
+        conditional statements are applied in the same <span class="keyword cmdname">BATCH</span>. </p>
+
+      <p class="p">For example, consider a simple table with four defined columns:</p>
+
+      <pre class="pre codeblock"><code>CREATE TABLE mytable (a int, b int, s int static, d text, PRIMARY KEY (a, b))
+
+BEGIN BATCH
+     INSERT INTO mytable (a, b, d) values (7, 7, 'a')
+     UPDATE mytable SET s = 7 WHERE a = 7 IF s = NULL;
+APPLY BATCH
+</code></pre>
+      <p class="p">In the first batch above, the <span class="keyword cmdname">insert</span> command creates a partition with
+        primary key values (7,7) but does not set a value for the <code class="ph codeph">s</code> column. Even
+        though the <code class="ph codeph">s</code> column was not defined for this row, the <code class="ph codeph">IF s =
+          NULL</code> conditional succeeds, so the batch succeeds. (In previous versions of
+        Cassandra, the conditional would have failed,and that failure would have caused the entire
+        batch to fail.)</p>
+
+      <p class="p">The second batch demonstrates more complex handling of a lightweight transaction:</p>
+
+      <pre class="pre codeblock"><code>BEGIN BATCH
+     INSERT INTO mytable (a, b, d) values (7, 7, 'a')
+     UPDATE mytable SET s = 1 WHERE a = 1 IF s = NULL;
+APPLY BATCH</code></pre>
+      <p class="p">In this case, the <code class="ph codeph">IF</code> statement tests the value of a column in a partition
+        that does not even exist before it is created by the <span class="keyword cmdname">UPDATE</span>. Even so,
+        Cassandra recognizes the implicit presence of the partition and its column
+          <code class="ph codeph">s</code>, and lets the conditional test succeed. This allows the batch to
+        succeed.</p>
+ </section>
+
+  </div>
+
+</article></main></div>
+                        
+                        
+                        
+                        
+                    </div>
+                    <nav role="navigation" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 navbar" id="wh_side_toc">
+                        <div class=" wh_side_toc "><ul class="hidden-print"><li><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html">CQL reference</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/about_cql_ref_c.html">Introduction</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_lexicon_c.html">CQL lexical structure</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_data_types_c.html">CQL data types</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_function_r.html">Functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/refLimits.html">CQL limits</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html">CQL shell commands</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html">CQL commands</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterKeyspace.html">ALTER KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterMaterializedView.html">ALTER MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterRole.html">ALTER ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterTable.html">ALTER TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterType.html">ALTER TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterUser.html">ALTER USER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlBatch.html">BATCH</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateAggregate.html">CREATE AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateIndex.html">CREATE INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateFunction.html">CREATE FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateKeyspace.html">CREATE KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateMaterializedView.html">CREATE MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#cqlCreateTable">CREATE TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTrigger.html">CREATE TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateType.html">CREATE TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateRole.html">CREATE ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateUser.html">CREATE USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDelete.html">DELETE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropAggregate.html">DROP AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropFunction.html">DROP FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropIndex.html">DROP INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropKeyspace.html">DROP KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropMatializedView.html">DROP MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropRole.html">DROP ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTable.html">DROP TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTrigger.html">DROP TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropType.html">DROP TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropUser.html">DROP USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlGrant.html">GRANT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlInsert.html">INSERT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListPermissions.html">LIST PERMISSIONS</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListRoles.html">LIST ROLES</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListUsers.html">LIST USERS (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRevoke.html">REVOKE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlSelect.html">SELECT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlTruncate.html">TRUNCATE</a></span></li><li class="active"><span class="topicref">UPDATE</span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUse.html">USE</a></span></li></ul></li></ul></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="hidden-print col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="text-center wh_bottom_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links bottom_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cql/cql_reference/cqlTruncate.html" title="TRUNCATE"></a></span>  
+<span class="navnext"><a class="link" href="../../cql/cql_reference/cqlUse.html" title="USE"></a></span>  </span></div>
+                    </div>
+                </nav>
+            </div>
+        </div> 
+        <nav class="navbar navbar-default wh_footer">
+  <div class=" footer-container text-center ">
+    <div class="ds_footer_bottom">
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/docTips.html" target="_blank" title="Doc Tips">
+        <span class="flaticon-signs"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Email feedback guidelines">
+        <span class="flaticon-new-email-interface-symbol-of-black-closed-envelope"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Twitter feedback guidelines">
+        <span class="flaticon-twitter-logo-button"></span></a>
+      <a href="https://github.com/datastax/" target="_blank" title="DataStax GitHub">
+        <span class="flaticon-github-logo"></span></a>
+      <a href="http://docs.datastax.com"/en/cql/3.3/zip/cql33.zip" target="_blank" title="Zipped document">
+        <span class="flaticon-symbols"></span></a>
+      <div>
+        <span>DataStax Enterprise is powered by the best distribution of Apache Cassandra™</span>
+      </div>
+      <div>
+        <span>©</span>
+        <span id="copyrightdate"></span>
+        <script type="text/javascript">document.getElementById("copyrightdate").innerHTML = new Date().getFullYear();</script>
+        <span>DataStax, Inc. All rights reserved. Updated: 14 August 2017</span>
+        <span style="display: none">Build time: 14 August 2017 16:56:08.983</span>
+      </div>
+    </div>
+    <div>
+        <p>DataStax, Titan, and TitanDB are registered trademark of DataStax, Inc. and its subsidiaries in the United States and/or other countries.</p>
+        <p>Apache Cassandra, Apache, Tomcat, Lucene, Solr, Hadoop, Spark, TinkerPop, and Cassandra are trademarks of the 
+            <a href="https://www.apache.org/" target="_blank" title="Apache Software Foundation">Apache Software Foundation</a> 
+            or its subsidiaries in Canada, the United States and/or other countries.</p>
+    </div>
+  </div>
+</nav>
+ 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="../../oxygen-webhelp/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/template/resources/js/wt_default.js?buildId=2017062918" type="text/javascript"></script>
+        <!-- Expand/collapse support -->
+        <script src="../../oxygen-webhelp/template/resources/js/wt_expand.js?buildId=2017062918" type="text/javascript"></script>
+        <div>
+    <script>
+    <!--
+    var collapsibleSections = {
+        /* Selectors for the nodes that contain an expand/collapse button. */
+        "expand_buttons" : [
+            /* Table caption */
+            "table > caption > .wh_expand_btn",
+            /* Article title */
+            ".topic > .title > .wh_expand_btn",
+            /* Section title */
+            ".sectiontitle > .wh_expand_btn",
+            /* Index terms groups */
+            ".wh_term_group > .wh_first_letter > .wh_expand_btn"
+        ],
+        "collapse_by_default" : [
+            /* sections with collapseByDefault output class */
+            ".collapseOnLoad > .wh_expand_btn"
+        ]
+    };
+
+    $(document).ready(function () {
+        /* Collapse selected nodes. */
+        collapsibleSections.collapse_by_default.forEach(
+            function(selector) {
+                var matchedNodes =  $(document).find(selector);
+                // Change the button state
+                matchedNodes.toggleClass("expanded");
+                // Will collapse the siblings of the parent node, excepting the ones that were marked otherwise
+                var siblings = matchedNodes.parent().siblings(':not(.wh_not_expandable)');
+                siblings.toggle();
+            }
+        );
+    });
+    //-->
+    </script>
+</div>
+        
+        <!-- DataStax js -->
+        <script src="../../oxygen-webhelp/assets/js/details-shim.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/highlight.pack.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/magnific-popup.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/dsInit.js" type="text/javascript"></script>
+        <!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+        <script type="text/javascript">replaceNextPrevArrows();</script>
+        <script type="text/javascript">getVersionDropdown("cql", "cql33");</script>
+        
+        <!-- Search autocomplete -->
+        <script type="text/javascript" src="../../oxygen-webhelp/search/keywords.js?uniqueId=20170814045608"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchAutocomplete.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchHistoryItems.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchOptions.js?uniqueId=20170814045608"></script>
+        
+        <!-- Analytics scripts for IT -->
+        <script type="text/javascript">
+          (function() {
+            var didInit = false;
+            function initMunchkin() {
+              if(didInit === false) {
+                didInit = true;
+                Munchkin.init('259-IFZ-779');
+                }
+              }
+              var s = document.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+              s.onreadystatechange = function() {
+                if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                  initMunchkin();
+                }
+             };
+             s.onload = initMunchkin;
+             document.getElementsByTagName('head')[0].appendChild(s);
+        })();
+        </script>
+        
+        <!-- end analytics scripts for IT -->
+            
+        <!-- Swiftype search code -->
+        
+        <!-- script type="text/javascript">
+            // set up autocomplete
+            $("#st-search-input").swiftype({
+                engineKey: "35HEzyB2mn1a1qGMmCwN"
+            });
+            // set up search
+            $("#st-search-input").swiftypeSearch({
+                engineKey: "35HEzyB2mn1a1qGMmCwN",
+                resultContainingElement: "#st-results-container"
+            });
+        </script -->
+		<!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+    </body>
+</html>

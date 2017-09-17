@@ -1,0 +1,1759 @@
+
+<!DOCTYPE html
+  PUBLIC "" "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" xml:lang="en-us" lang="en-us">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
+      <meta name="title" content="CREATE TABLE" /><meta name="description" content="Define a new table." /><title>CREATE TABLE</title><!--  Generated with Oxygen version 19.0, build number 2017062918.  --><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="wh-path2root" content="../../index.html" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta class="swiftype" name="version" data-type="string" content="3.3" />
+        <meta class="swiftype" name="book" data-type="string" content="CQL for Cassandra 3.0" />
+        <meta class="swiftype" name="doc-name" data-type="string" content="cql33" />
+        <meta class="swiftype" name="site-priority-for-Corporate" data-type="integer" content="60" />
+        
+        <script>
+          function debug(msg, object){
+              console.log(msg, object);
+          }
+          function executeQuery(){
+              $('#searchForm').submit();
+              return true;
+          }
+        </script>
+      
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/commonltr.css?buildId=2017062918" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/webhelp_responsive_topic.css?buildId=2017062918" />
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap.min.css" />
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="../../oxygen-webhelp/resources/js/jquery-ui.min.css" />
+        <!-- Changes and comments, as side-notes  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/resources/css/p-side-notes.css?buildId=2017062918" />
+
+        <!-- Template default styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_default.css?buildId=2017062918" />
+        
+        <!-- Expand-collapse support styles  -->
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/resources/css/wt_expand.css?buildId=2017062918" />
+
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-3.1.1.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/localization/strings.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/localization.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/parseuri.js?buildId=2017062918"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery-ui.min.js"><!----></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script>
+        
+        <!-- Swiftype jQuery and Autocomplete plugins -->
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.ba-hashchange.min.js"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.search.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/search.css" media="all" />
+        
+        <script type="text/javascript" src="../../oxygen-webhelp/assets/js/jquery.swiftype.autocomplete.js"></script>
+        <link type="text/css" rel="stylesheet" href="../../oxygen-webhelp/assets/css/autocomplete.css" media="all" />
+        
+        <!-- end Swiftype plugins -->
+
+        <!-- DataStax-specific styles. -->
+        <link rel="shortcut icon" type="image/ico" href="../../oxygen-webhelp/assets/images/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/details-shim.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/magnific-popup.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/datastax-highlight.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/noshdesc.css" />
+        <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/assets/css/ds-skin-override.css" />
+        <!-- DataStax-specific scripts -->
+        <script src="../../oxygen-webhelp/assets/js/versionDropdown.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/navlinks.js" type="text/javascript"></script>
+        <script type="text/javascript">document.title = document.title + " | CQL for Cassandra 3.0";</script>
+    <link rel="stylesheet" type="text/css" href="../../oxygen-webhelp/template/variants/tree/oxygen/skin.css?buildId=2017062918" /></head>
+
+    <body onload="highlightSearchTerm()" class="wh_topic_page frmBody">
+        <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TWSQ28" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TWSQ28');</script>
+        <!-- End Google Tag Manager -->
+        <!-- whc:include_html href="${webhelp.fragment.before.body}"/ -->
+        
+<div>
+    <div class="container-fluid">
+        <div class="wh_header_flex_container">
+            <div class="container">
+                <div class="col-sm-6 collapse navbar-collapse">
+                    <ul id="ds_sites_list">
+                        <li><a href="https://www.datastax.com" target="_blank">HOME</a></li>
+                        <li><a href="https://academy.datastax.com/" target="_blank">ACADEMY</a></li>
+                        <li><a href="/en" target="_self">DOCS</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 collapse navbar-collapse ds_buttons">
+                    <a class="ds_buttons_button" href="https://www.datastax.com/contactus" target="_blank">CONTACT US</a>
+                    <a class="ds_buttons_button" href="https://academy.datastax.com/downloads" target="_blank"><span class="pad-right">DOWNLOAD DATASTAX</span>
+                        <img src="https://www.datastax.com/wp-content/themes/datastax-2014-08/images/common/icon-dowload-ds.png" width="17" height="15" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color:#067A97; min-height:37px">
+        <div class="container">
+            <div class="col-sm-6 navbar-collapse ds_logo">
+                <a href="https://www.datastax.com/" class="wh_logo ds_logo_collapse" target="_blank">
+                    <img src="../../oxygen-webhelp/assets/images/logo.png" alt="DataStax Logo" />
+                </a>
+            </div>
+            <div class="col-sm-6 collapse navbar-collapse ds_global_menu">
+                <ul id="ds_links_list">
+                    <li><a href="http://docs.datastax.com"/en/glossary/doc/" target="_blank">GLOSSARY</a></li>
+                    <li><a href="https://support.datastax.com/" target="_blank">SUPPORT</a></li>
+                    <li><a href="https://www.datastax.com/dev/blog/" target="_blank">DEVELOPER
+                        BLOGS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default wh_header">
+        <div class="container">
+            <div class="wh_header_flex_container">
+                <div class="hidden-xs">
+                    <span id="version-dropdown" style="display: none;">
+                        <form id="version-dropdown-form">
+                            <select></select>
+                        </form>
+                    </span>
+                </div>
+                <div class="wh_logo_and_publication_title_container">
+                    <div class="wh_logo_and_publication_title">
+                        
+                        <!-- whc:webhelp_logo class="hidden-xs"/ -->
+                    <div class=" wh_publication_title "><a href="../../index.html"><span class="title">CQL for Apache Cassandra™ 3.0 <span class="ph red">(Supported)</span>  </span></a></div>
+                    
+                </div>
+                    <button type="button" data-target=".wh_top_menu_and_indexterms_link" data-toggle="collapse" class="navbar-toggle collapsed wh_toggle_button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            
+                <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse">
+                    <!--whc:include_html href="${webhelp.fragment.before.top_menu}"/-->
+                    <div class=" wh_top_menu "><ul><li><span class="topicref"><a href="../../cql/cqlIntro.html" data-id="cqlIntro">Introduction to Cassandra Query Language</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/ddl/ddlCQLDataModelingTOC.html" data-id="ddlCQLDataModelingTOC">CQL data modeling</a></span><ul><li><span class="topicref"><a href="../../cql/ddl/dataModelingApproach.html" data-id="dataModelingApproach">Data modeling concepts</a></span></li><li><span class="topicref"><a href="../../cql/ddl/dataModelingAnalysis.html" data-id="dataModelingAnalysis">Data modeling analysis</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAboutCQL.html" data-id="useAboutCQL">Using CQL</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/startCqlLinuxMac.html" data-id="startCqlLinuxMac">Starting cqlsh on Linux and Mac OS X</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateKeyspace.html" data-id="useCreateKeyspace">Creating and updating a keyspace</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useExampleCreatingKeyspace.html" data-id="useExampleCreatingKeyspace">Example of creating a keyspace</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useUpdateKeyspaceRF.html" data-id="useUpdateKeyspaceRF">Updating the replication factor</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateTableTOC.html" data-id="useCreateTableTOC">Creating a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCreateTable.html" data-id="useCreateTable">Creating a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useKSQualifier.html" data-id="useKSQualifier">Using the keyspace qualifier</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSimplePrimaryKeyConcept.html#useSimplePrimaryKeyConcept" data-id="useSimplePrimaryKeyConcept">Simple Primary Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompositePartitionKeyConcept.html#useCompositePartitionKeyConcept" data-id="useCompositePartitionKeyConcept">Composite Partition Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompoundPrimaryKeyConcept.html" data-id="useCompoundPrimaryKeyConcept">Compound Primary Key</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCountersConcept.html" data-id="useCountersConcept">Creating a counter table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCompactStorage.html" data-id="useCompactStorage">Create table with COMPACT STORAGE</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateTableCollisionFix.html" data-id="useCreateTableCollisionFix">Table schema collision fix</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateMV.html" data-id="useCreateMV">Creating a materialized view</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAdvancedDataTypesTOC.html" data-id="useAdvancedDataTypesTOC">Creating advanced data types in tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCollections.html" data-id="useCollections">Creating collections</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateTableTuple.html" data-id="useCreateTableTuple">Creating a table with a tuple</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDT.html" data-id="useCreateUDT">Creating a user-defined type (UDT)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useCreateFunctionsTOC.html" data-id="useCreateFunctionsTOC">Creating functions</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDF.html" data-id="useCreateUDF">Creating user-defined function (UDF)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCreateUDA.html" data-id="useCreateUDA">Creating User-Defined Aggregate Function (UDA)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useInsertDataTOC.html" data-id="useInsertDataTOC">Inserting and updating data</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useInsertSimple.html" data-id="useInsertSimple">Inserting simple data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertSet.html" data-id="useInsertSet">Inserting and updating data into a set</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertList.html" data-id="useInsertList">Inserting and updating data into a list</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertMap.html" data-id="useInsertMap">Inserting and updating data into a map</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertTuple.html" data-id="useInsertTuple">Inserting tuple data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertUDT.html" data-id="useInsertUDT">Inserting or updating data into a user-defined type (UDT)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertJSON.html" data-id="useInsertJSON">Inserting JSON data into a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useInsertLWT.html" data-id="useInsertLWT">Using lightweight transactions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/refStaticCol.html" data-id="refStaticCol">Sharing a static column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useExpire.html" data-id="useExpire">Expiring data with time-to-live</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useBatchTOC.html" data-id="useBatchTOC">Batching data insertion and updates</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useBatch.html" data-id="useBatch">Batching inserts, updates and deletes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useBatchGoodExample.html" data-id="useBatchGoodExample">Good use of BATCH statement</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useBatchBadExample.html" data-id="useBatchBadExample">Misuse of BATCH statement</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useQueryDataTOC.html" data-id="useQueryDataTOC">Querying tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useQueryColumnsSort.html" data-id="useQueryColumnsSort">Retrieval and sorting results</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryCollections.html" data-id="useQueryCollections">Retrieval using collections</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryJSON.html" data-id="useQueryJSON">Retrieval using JSON</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryIN.html" data-id="useQueryIN">Retrieval using the IN keyword</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useScanPartition.html" data-id="useScanPartition">Retrieval by scanning a partition</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryStdAggregate.html" data-id="useQueryStdAggregate">Retrieval using standard aggregate functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryUDF.html" data-id="useQueryUDF">Retrieval using a user-defined function (UDF)</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryUDA.html" data-id="useQueryUDA">Retrieval using user-defined aggregate (UDA) functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQuerySystem.html" data-id="useQuerySystem">Querying a system table</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/usePrimaryIndex.html" data-id="usePrimaryIndex">Indexing</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useWhenIndex.html" data-id="useWhenIndex">When to use an index</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecondaryIndex.html" data-id="useSecondaryIndex">Using a secondary index</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useMultIndexes.html" data-id="useMultIndexes">Using multiple indexes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useIndexColl.html" data-id="useIndexColl">Indexing a collection</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useAlterTableTOC.html" data-id="useAlterTableTOC">Altering a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useAlterColumn.html" data-id="useAlterColumn">Altering columns in a table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterAddColl.html" data-id="useAlterAddColl">Altering a table to add a collection</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterColType.html" data-id="useAlterColType">Altering the data type of a column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterTabProp.html" data-id="useAlterTabProp">Altering the table properties</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterMV.html" data-id="useAlterMV">Altering a materialized view</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useAlterType.html" data-id="useAlterType">Altering a user-defined type</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useRemoveData.html" data-id="useRemoveData">Removing a keyspace, schema, or data</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useDropKSTableMV.html" data-id="useDropKSTableMV">Dropping a keyspace, table or materialized view</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useDropColumn.html" data-id="useDropColumn">Deleting columns and rows</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useDropUDF.html" data-id="useDropUDF">Dropping a user-defined function (UDF)</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useSecureTOC.html" data-id="useSecureTOC">Securing a table</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useSecureRoles.html" data-id="useSecureRoles">Database roles</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecurePermission.html" data-id="useSecurePermission">Database Permissions</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useSecureUsers.html" data-id="useSecureUsers">Database users</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useTracing.html" data-id="useTracing">Tracing consistency changes</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useTracingSetup.html" data-id="useTracingSetup">Setup to trace consistency changes</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTracingTrace.html" data-id="useTracingTrace">Trace reads at different consistency levels</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTracingPerf.html" data-id="useTracingPerf">How consistency affects performance</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_using/useToken.html" data-id="useToken">Displaying rows from an unordered partitioner with the TOKEN function</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useTTL.html" data-id="useTTL">Determining time-to-live (TTL) for a column</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useWritetime.html" data-id="useWritetime">Determining the date/time of a write</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_using/useLegacyTableTOC.html" data-id="useLegacyTableTOC">Legacy tables</a></span><ul><li><span class="topicref"><a href="../../cql/cql_using/useLegacyTables.html" data-id="useLegacyTables">Working with legacy applications</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useQueryLegacyTables.html" data-id="useQueryLegacyTables">Querying a legacy table</a></span></li><li><span class="topicref"><a href="../../cql/cql_using/useCQL3QueryLegacyTables.html" data-id="useCQL3QueryLegacyTables">Using a CQL legacy table query</a></span></li></ul></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html" data-id="cqlReferenceTOC">CQL reference</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/about_cql_ref_c.html" data-id="about_cql_ref_c">Introduction</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cql_lexicon_c.html" data-id="cql_lexicon_c">CQL lexical structure</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/ucase-lcase_r.html" data-id="ucase-lcase_r">Uppercase and lowercase</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/escape_char_r.html" data-id="escape_char_r">Escaping characters</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/valid_literal_r.html" data-id="valid_literal_r">Valid literals</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/exponential_notation_r.html" data-id="exponential_notation_r">Exponential notation</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRefComment.html" data-id="cqlRefComment">CQL code comments</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/keywords_r.html" data-id="keywords_r">CQL Keywords</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cql_data_types_c.html" data-id="cql_data_types_c">CQL data types</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/blob_r.html" data-id="blob_r">Blob type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/collection_type_r.html" data-id="collection_type_r">Collection type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/counter_type.html" data-id="counter_type">Counter type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/uuid_type_r.html" data-id="uuid_type_r">UUID and timeuuid types</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/timeuuid_functions_r.html" data-id="timeuuid_functions_r">UUID and timeuuid functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/timestamp_type_r.html" data-id="timestamp_type_r">Timestamp type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/tupleType.html" data-id="tupleType">Tuple type</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRefUDType.html" data-id="cqlRefUDType">User-defined type</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_function_r.html" data-id="cql_function_r">Functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/refLimits.html" data-id="refLimits">CQL limits</a></span></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html" data-id="cqlshCommandsTOC">CQL shell commands</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/cqlsh.html" data-id="cqlsh">Starting cqlsh</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshUsingCqlshrc.html" data-id="cqlshUsingCqlshrc">Configuring cqlsh from a file</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCapture.html" data-id="cqlshCapture">CAPTURE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshClear.html" data-id="cqlshClear">CLEAR</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshConsistency.html" data-id="cqlshConsistency">CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCopy.html" data-id="cqlshCopy">COPY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshDescribe.html" data-id="cqlshDescribe">DESCRIBE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExpand.html" data-id="cqlshExpand">cqlshExpand</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshExit.html" data-id="cqlshExit">EXIT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshLogin.html" data-id="cqlshLogin">LOGIN</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshPaging.html" data-id="cqlshPaging">PAGING</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSerialConsistency.html" data-id="cqlshSerialConsistency">SERIAL CONSISTENCY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshShow.html" data-id="cqlshShow">SHOW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshSource.html" data-id="cqlshSource">SOURCE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshTracing.html" data-id="cqlshTracing">TRACING</a></span></li></ul></li><li class=" has-children "><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html" data-id="cqlCommandsTOC">CQL commands</a></span><ul><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterKeyspace.html" data-id="cqlAlterKeyspace">ALTER KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterMaterializedView.html" data-id="cqlAlterMaterializedView">ALTER MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterRole.html" data-id="cqlAlterRole">ALTER ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterTable.html" data-id="cqlAlterTable">ALTER TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterType.html" data-id="cqlAlterType">ALTER TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterUser.html" data-id="cqlAlterUser">ALTER USER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlBatch.html" data-id="cqlBatch">BATCH</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateAggregate.html" data-id="cqlCreateAggregate">CREATE AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateIndex.html" data-id="cqlCreateIndex">CREATE INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateFunction.html" data-id="cqlCreateFunction">CREATE FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateKeyspace.html" data-id="cqlCreateKeyspace">CREATE KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateMaterializedView.html" data-id="cqlCreateMaterializedView">CREATE MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#cqlCreateTable" data-id="cqlCreateTable">CREATE TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTrigger.html" data-id="cqlCreateTrigger">CREATE TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateType.html" data-id="cqlCreateType">CREATE TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateRole.html" data-id="cqlCreateRole">CREATE ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateUser.html" data-id="cqlCreateUser">CREATE USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDelete.html" data-id="cqlDelete">DELETE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropAggregate.html" data-id="cqlDropAggregate">DROP AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropFunction.html" data-id="cqlDropFunction">DROP FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropIndex.html" data-id="cqlDropIndex">DROP INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropKeyspace.html" data-id="cqlDropKeyspace">DROP KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropMatializedView.html" data-id="cqlDropMatializedView">DROP MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropRole.html" data-id="cqlDropRole">DROP ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTable.html" data-id="cqlDropTable">DROP TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTrigger.html" data-id="cqlDropTrigger">DROP TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropType.html" data-id="cqlDropType">DROP TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropUser.html" data-id="cqlDropUser">DROP USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlGrant.html" data-id="cqlGrant">GRANT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlInsert.html" data-id="cqlInsert">INSERT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListPermissions.html" data-id="cqlListPermissions">LIST PERMISSIONS</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListRoles.html" data-id="cqlListRoles">LIST ROLES</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListUsers.html" data-id="cqlListUsers">LIST USERS (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRevoke.html" data-id="cqlRevoke">REVOKE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlSelect.html" data-id="cqlSelect">SELECT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlTruncate.html" data-id="cqlTruncate">TRUNCATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUpdate.html" data-id="cqlUpdate">UPDATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUse.html" data-id="cqlUse">USE</a></span></li></ul></li></ul></li></ul></div>
+                    
+                    <!--whc:include_html href="${webhelp.fragment.after.top_menu}"/-->
+                    <div class="ds_top_menu_collapse">
+                        <ul>
+                            <li><a href="https://www.datastax.com">Home</a></li>
+                            <li><a href="https://academy.datastax.com/">Academy</a></li>
+                            <li><a href="/en">Docs home</a></li>
+                            <li><a href="https://www.datastax.com/contactus">Contact us</a></li>
+                            <li><a href="https://academy.datastax.com/downloads">Download
+                                DataStax</a></li>
+                            <li><a href="http://docs.datastax.com"/en/glossary/doc/">Glossary</a></li>
+                            <li><a href="https://support.datastax.com/">Support</a></li>
+                            <li><a href="https://www.datastax.com/dev/blog/">Developer blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+        
+        <!-- Search forms -->
+        
+        <span>
+            <div class=" wh_search_input "><form id="searchForm" method="get" action="../../search.html"><div><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" /><button type="submit" class="wh_search_button"><span>Search</span></button></div></form></div>
+        </span>
+        <div class="advanced-search">
+            <p><a href="http://docs.datastax.com"/en/advancedSearch.html">Search all docs</a></p>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+
+                <nav class="wh_tools hidden-print">
+                    <div class=" wh_breadcrumb "><ol class="hidden-print"><li><span class="home"><a href="../../index.html"><span>Home</span></a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html">CQL reference</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html">CQL commands</a></span></li><li class="active"><span class="topicref">CREATE TABLE</span></li></ol></div>
+
+                    <div class="wh_right_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cql/cql_reference/cqlCreateMaterializedView.html" title="CREATE MATERIALIZED VIEW"></a></span>  
+<span class="navnext"><a class="link" href="../../cql/cql_reference/cqlCreateTrigger.html" title="CREATE TRIGGER"></a></span>  </span></div>
+                        <div class=" wh_print_link print "><a href="javascript:window.print();" title="Print this page"></a></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wh_content_area  data-swiftype-index=true" id="annotate">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><article class="nested0" aria-labelledby="ariaid-title1" id="cqlCreateTable">
+  <h1 class="title topictitle1" id="ariaid-title1">CREATE TABLE<a class="headerlink" href="cqlCreateTable.html#cqlCreateTable" rel="internal"> </a></h1>
+
+  
+  <div class="body refbody"><p class="shortdesc">Define a new table.</p>
+
+    <section class="section">
+      <p class="p">Define a new table.</p>
+ </section>
+
+    <section class="section" id="cqlCreateTable__synopsis"><h2 class="title sectiontitle">Synopsis<a class="headerlink" href="cqlCreateTable.html#cqlCreateTable__synopsis" rel="internal"> </a></h2>
+      
+      <pre class="pre codeblock"><code>CREATE TABLE [IF NOT EXISTS] [<var class="keyword varname">keyspace_name.</var>]<var class="keyword varname">table_name</var> ( 
+   <var class="keyword varname">column_definition</var> [, ...]
+   PRIMARY KEY (<var class="keyword varname">column_name</var> [, <var class="keyword varname">column_name</var> ...])
+[WITH <var class="keyword varname">table_options</var>
+   | CLUSTERING ORDER BY (<var class="keyword varname">clustering_column_name</var> <var class="keyword varname">order</var>])
+   | ID = '<var class="keyword varname">table_hash_tag</var>'
+   | COMPACT STORAGE]</code></pre>
+      
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table collapseOnLoad" frame="border" border="1" rules="all"><caption><span class="tablecap">Legend</span></caption><colgroup><col style="width:38.314176245210724%" /><col style="width:61.68582375478927%" /></colgroup><thead class="thead" style="text-align:left;">
+            <tr>
+              <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e79">Syntax conventions</th>
+
+              <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e82">Description</th>
+
+            </tr>
+
+          </thead>
+<tbody class="tbody">
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 ">UPPERCASE</td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Literal keyword. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 ">Lowercase</td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Not literal.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph"><var class="keyword varname">Italics</var></code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Variable value. Replace with a user-defined value.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">[]</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Optional. Square brackets (<code class="ph codeph"> [] </code>) surround optional command
+                arguments. Do not type the square brackets.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">( )</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Group. Parentheses ( <code class="ph codeph">( )</code> ) identify a group to choose from. Do
+                not type the parentheses. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph"> | </code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Or. A vertical bar (<code class="ph codeph"> | </code>) separates alternative elements. Type
+                any one of the elements. Do not type the vertical bar.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">...</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Repeatable. An ellipsis ( <code class="ph codeph">...</code> ) indicates that you can repeat
+                the syntax element as often as required. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">'<var class="keyword varname">Literal string</var>'</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Single quotation (<code class="ph codeph"> ' </code>) marks must surround literal strings in
+                CQL statements. Use single quotation marks to preserve upper case.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">{ <var class="keyword varname">key</var> : <var class="keyword varname">value</var> }</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Map collection. Braces (<code class="ph codeph"> { } </code>) enclose map collections or key
+                value pairs. A colon separates the key and the value. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">&lt;<var class="keyword varname">datatype1</var>,<var class="keyword varname">datatype2</var>&gt;</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Set, list, map, or tuple. Angle brackets ( <code class="ph codeph">&lt; &gt;</code> ) enclose
+                data types in a set, list, map, or tuple. Separate the data types with a comma.
+              </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph"><var class="keyword varname">cql_statement</var>;</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">End CQL statement. A semicolon (<code class="ph codeph"> ; </code>) terminates all CQL
+                statements.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">[--]</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Separate the command line options from the command arguments with two hyphens (
+                  <code class="ph codeph">--</code> ). This syntax is useful when arguments might be mistaken for
+                command line options. </td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">' <var class="keyword varname">&lt;schema&gt; ... &lt;/schema&gt;</var> '</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Search CQL only: Single quotation marks (<code class="ph codeph"> ' </code>) surround an
+                entire XML schema declaration.</td>
+
+            </tr>
+
+            <tr>
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e79 "><code class="ph codeph">@<var class="keyword varname">xml_entity</var>='<var class="keyword varname">xml_entity_type</var>'</code></td>
+
+              <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e82 ">Search CQL only: Identify the entity and literal value to overwrite the XML
+                element in the schema and solrConfig files.</td>
+
+            </tr>
+
+          </tbody>
+</table>
+</div>
+ </section>
+
+    <section class="section" id="cqlCreateTable__description"><h2 class="title sectiontitle">Description<a class="headerlink" href="cqlCreateTable.html#cqlCreateTable__description" rel="internal"> </a></h2>
+      
+      <p class="p" id="cqlCreateTable__p_kp2_vdr_2k">The <code class="ph codeph">CREATE TABLE</code> command creates a new <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_table.html" target="_blank">table</a> under the current keyspace.</p>
+
+      <p class="p">The <code class="ph codeph">IF NOT EXISTS</code> keywords may be used in creating a table. Attempting to
+        create an existing table returns an error unless the <code class="ph codeph">IF NOT EXISTS</code> option
+        is used. If the option is used, the statement if a no-op if the table already exists.</p>
+
+      <p class="p">A <a class="xref" href="../cql_using/refStaticCol.html" title="In a table that uses clustering columns, non-clustering columns can be declared static in the table definition.">static column</a> can store the same data in multiple
+        clustered rows of a partition, and then retrieve that data with a single
+          <code class="ph codeph">SELECT</code> statement.</p>
+
+      <p class="p">You can add a <a class="xref" href="../cql_using/useCounters.html" title="A counter is a special column for storing a number that is changed in increments.">counter column</a> to a counter table.</p>
+ </section>
+
+  </div>
+
+<article class="topic reference nested1" aria-labelledby="ariaid-title2" id="refcolumndef">
+  <h2 class="title topictitle2" id="ariaid-title2">column_definition<a class="headerlink" href="cqlCreateTable.html#refcolumndef" rel="internal"> </a></h2>
+
+  
+  <div class="body refbody"><p class="shortdesc">Name column, define the data type, and set to static or primary key.</p>
+
+    <section class="section" id="refcolumndef__defining-a-column">
+      <div class="p">Columns are defined enclosed in parenthesis after the table name, use a comma-separated
+        list to define multiple columns. All tables must have at least one primary key column. Each
+        column is defined using the following syntax:
+        <pre class="pre codeblock"><code><var class="keyword varname">column_name</var> <var class="keyword varname">cql_type_definition</var> [STATIC | PRIMARY KEY] [, ...]</code></pre></div>
+
+      <div class="p">
+        
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><colgroup><col style="width:25%" /><col style="width:75%" /></colgroup><thead class="thead" style="text-align:left;">
+              <tr>
+                <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e407"> </th>
+
+                <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e409">Description</th>
+
+              </tr>
+
+            </thead>
+<tbody class="tbody">
+              <tr>
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e407 "><var class="keyword varname">column_name</var></td>
+
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e409 ">Use a unique name for each column in table. To preserve case or use special
+                  characters, enclose the name in double-quotes.</td>
+
+              </tr>
+
+              <tr>
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e407 "><var class="keyword varname">cql_type_definition</var></td>
+
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e409 ">Defines the type of data allowed in the column, see <a class="xref" href="cql_data_types_c.html" title="Built-in data types for columns.">CQL data type</a> or a <a class="xref" href="cqlRefUDType.html" title="A user-defined type facilitates handling multiple fields of related information in a table.">user-defined type</a>.</td>
+
+              </tr>
+
+              <tr>
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e407 "><code class="ph codeph">STATIC</code></td>
+
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e409 ">Optional, the column has a single value.</td>
+
+              </tr>
+
+              <tr>
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e407 "><code class="ph codeph">PRIMARY KEY</code></td>
+
+                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e409 ">Optional, use to indicate that the column is the only primary key for the
+                  table; to define a key that uses multiple columns see <a class="xref" href="cqlCreateTable.html#refPkCol" title="Uniquely identifies rows, determines storage partitions, and data ordering (clustering) within the partition.">PRIMARY KEY</a>.</td>
+
+              </tr>
+
+            </tbody>
+</table>
+</div>
+
+        <div class="note restriction"><span class="restrictiontitle">Restriction:</span> 
+          <ul class="ul" id="refcolumndef__ul_mnh_qwc_3l">
+            <li class="li">When primary key is at the end of a column definition that column is the only
+              primary key for the table.</li>
+
+            <li class="li">A table must have at least one <code class="ph codeph">PRIMARY KEY</code>.</li>
+
+            <li class="li">A static column cannot be a primary key. </li>
+
+            <li class="li">Primary keys can include frozen collections.</li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <p class="p">Create a table that has a frozen user defined type.</p>
+
+      <pre class="pre codeblock"><code>CREATE TABLE cycling.race_winners (
+   race_name text, 
+   race_position int, 
+   cyclist_name FROZEN&lt;fullname&gt;, 
+   PRIMARY KEY (race_name, race_position));</code></pre>
+      <p class="p">See <a class="xref" href="../cql_using/useCreateUDT.html" title="User-Defined Types (UDTs) can be used to attach multiple data fields to a column.">"Creating a user-defined type"</a> for information on
+        creating UDTs. .</p>
+
+    </section>
+
+  </div>
+
+</article>
+<article class="topic reference nested1" aria-labelledby="ariaid-title3" id="refPkCol">
+ <h2 class="title topictitle2" id="ariaid-title3">PRIMARY KEY<a class="headerlink" href="cqlCreateTable.html#refPkCol" rel="internal"> </a></h2>
+
+ 
+ <div class="body refbody"><p class="shortdesc">Uniquely identifies rows, determines storage partitions, and data ordering (clustering)
+    within the partition.</p>
+
+    <section class="section" id="refPkCol__singlekey"><h3 class="title sectiontitle">Single key<a class="headerlink" href="cqlCreateTable.html#refPkCol__singlekey" rel="internal"> </a></h3>
+      
+      <div class="p">When the <code class="ph codeph">PRIMARY KEY</code> is one column, append PRIMARY KEY to the end of the
+        column definition. This is only schema information required to create a table. When there is
+        one primary key, it is the partition key; the data is divided and stored by the unique
+        values in this
+        column.<pre class="pre codeblock"><code><var class="keyword varname">column_name</var> <var class="keyword varname">cql_type_definition</var> PRIMARY KEY</code></pre></div>
+
+      <p class="p">Alternatively, you can declare the primary key consisting of only one column in the same
+        way as you declare a compound primary key. </p>
+
+      <div class="p">Create the cyclist_name table with UUID as the primary
+        key:<pre class="pre screen">CREATE TABLE cycling.cyclist_name ( 
+   id UUID PRIMARY KEY, 
+   lastname text, 
+   firstname text );</pre>
+</div>
+
+      <div class="note restriction"><span class="restrictiontitle">Restriction:</span> 
+        <p class="p">Primary keys cannot have the data type: counter, non-frozen collection, or static.</p>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="refPkCol__compoundPK"><h3 class="title sectiontitle">Compound key<a class="headerlink" href="cqlCreateTable.html#refPkCol__compoundPK" rel="internal"> </a></h3>
+      
+      <div class="p">A compound primary key consists of more than one column; the first column is the partition
+        key, and the additional columns are clustering keys. To define compound primary key as
+        follows:<pre class="pre codeblock"><code>PRIMARY KEY (<var class="keyword varname">partition_column_name</var>, <var class="keyword varname">clustering_column_name</var> [, ...])</code></pre></div>
+
+      <div class="p">Create the cyclist category table and store the data in reverse
+        order:<pre class="pre screen">CREATE TABLE cycling.cyclist_category (
+   category text, 
+   points int, 
+   id UUID, 
+   lastname text, 
+   PRIMARY KEY (category, points)) 
+WITH CLUSTERING ORDER BY (points DESC);</pre>
+</div>
+
+    </section>
+
+    <section class="section" id="refPkCol__cqlPKcomposite"><h3 class="title sectiontitle">Composite partition key<a class="headerlink" href="cqlCreateTable.html#refPkCol__cqlPKcomposite" rel="internal"> </a></h3>
+      
+      <div class="p">A composite partition key is a partition key consisting of multiple columns. Enclose the
+        partition key columns in
+        parenthesis.<pre class="pre codeblock"><code>PRIMARY KEY (
+   (<var class="keyword varname">partition_column_name</var>[, ...]), 
+    <var class="keyword varname">clustering_column_name</var> [, ...])</code></pre></div>
+
+      <div class="p">Create a table that is optimized for query by cyclist rank by
+        year:<pre class="pre screen">CREATE TABLE cycling.rank_by_year_and_name ( 
+   race_year int, 
+   race_name text, 
+   cyclist_name text, 
+   rank int, 
+   PRIMARY KEY ((race_year, race_name), rank) );</pre>
+</div>
+
+    </section>
+
+ </div>
+
+</article>
+<article class="topic reference nested1" aria-labelledby="ariaid-title4" id="tabProp">
+ <h2 class="title topictitle2" id="ariaid-title4">table_options<a class="headerlink" href="cqlCreateTable.html#tabProp" rel="internal"> </a></h2>
+
+ 
+ <div class="body refbody"><p class="shortdesc">CQL table properties and descriptions of the syntax.</p>
+
+    <section class="section">
+      <p class="p">Table properties tune data handling, including I/O operations, compression, and compaction.
+        Set table properties in the following CQL requests:</p>
+
+      <ul class="ul">
+        <li class="li"><a class="xref" href="cqlCreateTable.html#cqlCreateTable" title="Define a new table.">CREATE TABLE</a></li>
+
+        <li class="li"><a class="xref" href="cqlAlterTable.html" title="Modifies the columns and properties of a table.">ALTER TABLE</a></li>
+
+        <li class="li"><a class="xref" href="cqlCreateMaterializedView.html" title="Create a materialized view.">CREATE MATERIALIZED VIEW</a></li>
+
+        <li class="li"><a class="xref" href="cqlAlterMaterializedView.html" title="Changes the table properties of a materialized view.">ALTER MATERIALIZED VIEW</a></li>
+
+      </ul>
+
+      <div class="note note"><span class="notetitle">Note:</span> Cassandra applies the default value if an option is not defined.</div>
+
+      <div class="p">Table property options that have one value use the following
+        syntax:<pre class="pre codeblock"><code><var class="keyword varname">option_name</var> = '<var class="keyword varname">value</var>' [AND ...]</code></pre></div>
+
+      <div class="p">Table property that have multiple subproperties are specified in a map. Maps are in simple
+        JSON format, key value pairs in a comma separated list enclosed by curly
+          brackets:<pre class="pre codeblock"><code><var class="keyword varname">option_name</var> = { '<var class="keyword varname">subproperty</var>' : '<var class="keyword varname">value</var>' [, ...] } [AND ...]</code></pre><div class="note note"><span class="notetitle">Note:</span> Enclose
+          strings in quotes; not required for numeric values.</div>
+</div>
+
+      <div class="p">In a CQL statement use a <code class="ph codeph">WITH</code> clause to define table property options,
+        separate multiple values with <code class="ph codeph">AND</code>, for
+        example:<pre class="pre codeblock"><code>ALTER TABLE [<var class="keyword varname">keyspace_name.</var>]<var class="keyword varname">table_name</var>
+WITH option_name = '<var class="keyword varname">value</var>' 
+AND option_name = <var class="keyword varname">option_map</var>;</code></pre></div>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableBloomFilter">bloom_filter_fp_chance<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableBloomFilter" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <div class="p">False-positive probability for SSTable <a class="xref" href="https://en.wikipedia.org/wiki/Bloom_filter" target="_blank">bloom filter</a>. When a client requests data, the bloom filter checks if the
+              row exists before executing disk I/O.
+              <pre class="pre codeblock"><code>bloom_filter_fp_chance = <var class="keyword varname">N</var></code></pre></div>
+
+            <div class="p">Value ranges from 0 to 1.0, where:<ul class="ul" id="tabProp__ul_tqk_ndq_4v">
+                <li class="li"><code class="ph codeph">0</code>: (Min value) enables the largest possible bloom filter and
+                  uses the most memory.</li>
+
+                <li class="li"><code class="ph codeph">1.0</code>: (Max value) disables the bloom filter.</li>
+
+              </ul>
+<div class="note tip"><span class="tiptitle">Tip:</span> Recommended setting: <code class="ph codeph">0.1</code>. A higher value yields
+                diminishing returns.</div>
+</div>
+
+            <p class="p"><strong class="ph b">Default</strong>: <code class="ph codeph">bloom_filter_fp_chance = '0.01'</code></p>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableCaching">caching <a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableCaching" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <div class="p">Caching optimizes the use of cache memory of a table without manual tuning. Cassandra
+              weighs the cached data by size and access frequency. Coordinate this setting with the
+              global caching properties in the <span class="ph filepath">cassandra.yaml</span> file. See <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/operations/opsSetCaching.html" target="_blank">Cassandra 3.0
+              documentation</a>.<pre class="pre codeblock"><code>caching = {
+ 'keys' = 'ALL | NONE',
+ 'rows_per_partition' = 'ALL' | 'NONE' |<var class="keyword varname">N</var>}</code></pre></div>
+
+            <div class="p">Valid values: <ul class="ul" id="tabProp__ul_qrp_rdq_4v">
+                <li class="li"><code class="ph codeph">ALL</code>– all primary keys or rows</li>
+
+                <li class="li"><code class="ph codeph">NONE</code>– no primary keys or rows</li>
+
+                <li class="li"><code class="ph codeph"><var class="keyword varname">N</var></code>: (rows per partition only) Number of rows;
+                  specify a whole number</li>
+
+              </ul>
+</div>
+
+            <p class="p">Cassandra caches only the first <var class="keyword varname">N</var> rows in a partition, as
+              determined by the clustering order.</p>
+
+            <div class="p"> For example, to cache all riders in each age partition:
+              <pre class="pre screen">ALTER MATERIALIZED VIEW cycling.cyclist_by_age 
+WITH caching = { 
+ 'keys' : 'ALL', 
+ 'rows_per_partition' : 'ALL' } ;</pre>
+</div>
+
+            <p class="p"><strong class="ph b">Default</strong>: <code class="ph codeph">{ 'keys' : 'ALL', 'rows_per_partition' : 'NONE'
+              }</code></p>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm">cdc</dt>
+
+          <dd class="dd">
+            <div class="p">Create a Change Data Capture (CDC) log on the table.
+              <pre class="pre codeblock"><code>cdc = TRUE | FALSE</code></pre></div>
+
+            <div class="p">Valid values: <ul class="ul" id="tabProp__ul_qkw_t2b_hy">
+                <li class="li"><code class="ph codeph">TRUE</code>- create CDC log</li>
+
+                <li class="li"><code class="ph codeph">FALSE</code>- do not create CDC log</li>
+
+              </ul>
+<code class="ph codeph">CREATE TABLE</code> and <code class="ph codeph">ALTER TABLE</code> can be modified
+              with this table option, but not <code class="ph codeph">CREATE MATERIALIZED VIEW</code> or
+                <code class="ph codeph">ALTER MATERIALIZED VIEW</code>.</div>
+
+            <div class="p"> For example, create a table with a CDC
+              log:<pre class="pre screen">CREATE TABLE cycling.cyclist_name 
+WITH cdc = TRUE;</pre>
+</div>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableComments">comments<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableComments" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <div class="p">Provide documentation on the table. <pre class="pre codeblock"><code>comments = 'text'</code></pre></div>
+
+            <div class="note tip"><span class="tiptitle">Tip:</span> Enter a description of the types of queries the table was designed to
+              satisfy.</div>
+
+            <div class="p"> For example, note the base table for the materialized view:
+              <pre class="pre screen">ALTER MATERIALIZED VIEW cycling.cyclist_by_age 
+WITH comment = "Basetable: cyclist_mv";</pre>
+</div>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableDclocal_read_repair_chance">dclocal_read_repair_chance<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableDclocal_read_repair_chance" rel="internal"> </a></dt>
+
+          <dd class="dd">Probability that a successful read operation triggers a read repair, between 0 and 1;
+            default value: <code class="ph codeph">0.01</code>. Unlike the repair controlled by <a class="xref" href="cqlCreateTable.html#tabProp__cqlTableRead_repair_chance">read_repair_chance</a>, this repair is limited to replicas in
+            the same DC as the coordinator.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableDefaultTTL">default_time_to_live<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableDefaultTTL" rel="internal"> </a></dt>
+
+          <dd class="dd">TTL (Time To Live) in seconds, where zero is disabled. When specified, the value is
+            set for the <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_ttl.html" target="_blank">Time To Live</a> (TTL) marker on each column in the table; default
+            value: <code class="ph codeph">0</code>. When the table TTL is exceeded, the table is tombstoned.
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableGc_grace_seconds">gc_grace_seconds<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableGc_grace_seconds" rel="internal"> </a></dt>
+
+          <dd class="dd">Seconds after data is marked with a tombstone (deletion marker) before it is eligible
+            for garbage-collection. Default value: 864000. The default value allows time for
+            Cassandra to maximize consistency prior to deletion.<div class="note note"><span class="notetitle">Note:</span> Tombstoned records within the
+              grace period are excluded from <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/operations/opsRepairNodesHintedHandoff.html" target="_blank">hints</a> or <a class="xref" href="../cql_using/useBatchTOC.html" title="How to batch insert or update data into a table.">batched
+                mutations</a>.</div>
+<div class="p">In a single-node cluster, this property can safely be set
+              to zero. You can also reduce this value for tables whose data is not explicitly
+              deleted — for example, tables containing only data with <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_ttl.html" target="_blank">TTL</a> set, or tables with <span class="keyword parmname">default_time_to_live</span> set.
+              However, if you lower the <span class="keyword parmname">gc_grace_seconds</span> value, consider its
+              interaction with these operations:<ul class="ul">
+                <li class="li"><strong class="ph b">hint replays</strong> — When a node goes down and then comes back up, other nodes
+                  replay the write operations (called <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/operations/opsRepairNodesHintedHandoff.html" target="_blank">hints</a>) that are queued for that node while
+                  it was unresponsive. Cassandra does not replay hints older than
+                    <span class="keyword parmname">gc_grace_seconds</span> after creation. The <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html#max_hint_window_in_ms" target="_blank"> max_hint_window_in_ms</a> setting in the
+                    <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html" target="_blank">cassandra.yaml</a> file sets the time limit (3
+                  hours by default) for collecting hints for the unresponsive node.</li>
+
+                <li class="li"><strong class="ph b">batch replays </strong> — Like hint queues, <a class="xref" href="../cql_using/useBatchTOC.html" title="How to batch insert or update data into a table.">batch
+                    operations</a> store database mutations that are replayed in sequence. As
+                  with hints, Cassandra does not replay a batched mutation until
+                    <span class="keyword parmname">gc_grace_seconds</span> after it was created. If your application
+                  uses batch operations, consider the possibility that decreasing
+                    <span class="keyword parmname">gc_grace_seconds</span> increases the chance that a batched write
+                  operation may restore deleted data. The <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html#batchlog_replay" target="_blank">batchlog_replay_throttle_in_kb </a> and <a class="xref" href="/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html#concurrent_batchlog_writes" target="_blank">concurrent_batchlog_writes</a> properties in
+                  the <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html" target="_blank">cassandra.yaml</a> file give some control of
+                  the batch replay process. The most important factors, however, are the size and
+                  scope of the batches you use.</li>
+
+              </ul>
+</div>
+</dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableMemtable_flush_period_in_ms">memtable_flush_period_in_ms<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableMemtable_flush_period_in_ms" rel="internal"> </a></dt>
+
+          <dd class="dd">Milliseconds before <code class="ph codeph">memtables</code> associated with the table are flushed.
+                <p class="p"><strong class="ph b">Default</strong>: <code class="ph codeph">0</code></p>
+</dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableMin_index_interval">min_index_interval<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableMin_index_interval" rel="internal"> </a></dt>
+
+          <dd class="dd">Minimum gap between index entries in the index summary. A lower
+              <span class="keyword option">min_index_interval</span> means the index summary contains more entries from
+            the index, which allows Cassandra to search fewer index entries to execute a read. A
+            larger index summary may also use more memory. The value for
+              <span class="keyword option">min_index_interval</span> is the densest possible sampling of the
+            index.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableMax_index_interval">max_index_interval<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableMax_index_interval" rel="internal"> </a></dt>
+
+          <dd class="dd">If the total memory usage of all index summaries reaches this value, Cassandra
+            decreases the index summaries for the coldest SSTables to the maximum set by
+              <span class="keyword option">max_index_interval</span>. The <span class="keyword option">max_index_interval</span> is the
+            sparsest possible sampling in relation to memory pressure.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableRead_repair_chance">read_repair_chance<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableRead_repair_chance" rel="internal"> </a></dt>
+
+          <dd class="dd">The probability that a successful read operation triggers a read repair. Unlike the
+            repair controlled by <a class="xref" href="cqlCreateTable.html#tabProp__cqlTableDclocal_read_repair_chance">dclocal_read_repair_chance</a>, this
+            repair is not limited to replicas in the same DC as the coordinator. The value must be
+            between <code class="ph codeph">0</code> and <code class="ph codeph">1</code>; default value:
+            <code class="ph codeph">0.0</code>.</dd>
+
+        
+        
+          <dt class="dt dlterm" id="tabProp__cqlTableSpeculative_retry">speculative_retry<a class="headerlink" href="cqlCreateTable.html#tabProp__cqlTableSpeculative_retry" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p">Overrides normal read timeout when read_repair_chance is not 1.0, sending another
+              request to read. Specify the value as a number followed by a type, <code class="ph codeph">ms</code>
+              (milliseconds) or <code class="ph codeph">percentile</code>. For example, <code class="ph codeph">speculative_retry
+                = '3ms'</code>. </p>
+
+            <p class="p">Use the <span class="keyword option">speculative retry</span> property to configure <a class="xref" href="https://www.datastax.com/dev/blog/rapid-read-protection-in-cassandra-2-0-2" target="_blank">rapid read protection</a>. In a normal read,
+              Cassandra sends data requests to just enough replica nodes to satisfy the <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_consistency_level.html" target="_blank">consistency level</a>. In rapid read protection, Cassandra sends
+              out extra read requests to other replicas, even after the consistency level has been
+              met. The <span class="keyword option">speculative retry</span> property specifies the trigger for these
+              extra read requests. </p>
+
+            <div class="p"><ul class="ul">
+                <li class="li"><code class="ph codeph">ALWAYS</code>: The coordinator node sends extra read requests to all
+                  other replicas after every read of that table.</li>
+
+                <li class="li"><code class="ph codeph"><strong class="ph b">X</strong>percentile</code>: Cassandra constantly tracks each table's
+                  typical read latency (in milliseconds). Set <span class="keyword option">speculative retry</span> to
+                    <code class="ph codeph">Xpercentile</code> to tell the coordinator node to retrieve the
+                  typical latency time of the table being read and calculate X percent of that
+                  figure. The coordinator sends redundant read requests if the number of
+                  milliseconds it waits without responses exceeds that calculated figure. (For
+                  example, if the <span class="keyword option">speculative_retry</span> property for Table_A is set to
+                    <code class="ph codeph">80percentile</code>, and that table's typical latency is 60
+                  milliseconds, the coordinator node handling a read of Table_A would send a normal
+                  read request first, and send out redundant read requests if it received no
+                  responses within 48ms, which is 80 % of 60ms.)</li>
+
+                <li class="li"><code class="ph codeph"><strong class="ph b">N</strong>ms</code>: The coordinator node sends extra read requests to
+                  all other replicas if the coordinator node has not received any responses within
+                    <code class="ph codeph">N</code> milliseconds.</li>
+
+                <li class="li"><code class="ph codeph">NONE</code>: The coordinator node does not send extra read requests
+                  after any read of that table.</li>
+
+              </ul>
+For example:
+              <pre class="pre codeblock"><code>ALTER TABLE users WITH speculative_retry = '10ms';</code></pre>Or:<pre class="pre codeblock"><code>ALTER TABLE users WITH speculative_retry = '99percentile';</code></pre></div>
+
+          </dd>
+
+        
+      </dl>
+
+    </section>
+
+    <section class="section">
+      <div class="p mfp-hide" id="tabProp__compactionstrategies">
+                
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><colgroup><col style="width:27.27272727272727%" /><col style="width:18.181818181818183%" /><col style="width:18.181818181818183%" /><col style="width:18.181818181818183%" /><col style="width:18.181818181818183%" /></colgroup><thead class="thead" style="text-align:left;">
+                            <tr>
+                                <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1204">Cassandra Version</th>
+
+                                <th class="entry cellrowborder" colspan="4" style="vertical-align:top;" id="d16075e1207">Compaction Strategy</th>
+
+                            </tr>
+
+                        </thead>
+<tbody class="tbody">
+                            <tr>
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1204 ">3.0 Linux</td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__lcs-compaction" target="_blank">LCS</a></td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__stcs-compaction" target="_blank">STCS</a></td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__dtcs-compaction" target="_blank">DTCS</a></td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__twcs" target="_blank">TWCS</a></td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1204 ">3.x Linux</td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__lcs-compaction" target="_blank">LCS</a></td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__stcs-compaction" target="_blank">STCS</a></td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__dtcs-compaction" target="_blank">DTCS</a></td>
+
+                                <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1207 "><a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__twcs" target="_blank">TWCS</a></td>
+
+                            </tr>
+
+                        </tbody>
+</table>
+</div>
+
+            </div>
+ </section>
+
+ </div>
+
+<article class="topic reference nested2" aria-labelledby="ariaid-title5" id="compressSubprop">
+ <h3 class="title topictitle3" id="ariaid-title5">compression<a class="headerlink" href="cqlCreateTable.html#compressSubprop" rel="internal"> </a></h3>
+
+ 
+ <div class="body refbody"><p class="shortdesc">Configuring compression for a table.</p>
+
+  <section class="section">
+   <div class="p">Configure <code class="ph codeph">compression</code> by specifying the compression algorithm class followed
+    by the subproperties in simple JSON format. Choosing the right compressor depends on your
+    requirements for space savings over read performance. LZ4 is fastest to decompress, followed by
+    Snappy, then by Deflate. Compression effectiveness is inversely correlated with decompression
+    speed. The extra compression from Deflate or Snappy is not enough to make up for the decreased
+    performance for general-purpose workloads, but for archival data they may be worth considering.
+    Developers can also implement custom compression classes using the
+     <code class="ph codeph">org.apache.cassandra.io.compress.ICompressor</code>
+     interface.<pre class="pre codeblock" id="compressSubprop__cqlTableCompressionSyntax"><code>compression = { 
+   ['class' : '<var class="keyword varname">compression_algorithm_name</var>', 
+     'chunk_length_kb' : '<var class="keyword varname">value</var>',  
+     'crc_check_chance' : '<var class="keyword varname">value</var>',] 
+   | 'sstable_compression' : ''] 
+}</code></pre>
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="compressSubprop__table_compression" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">compression subproperties</span></caption><colgroup><col style="width:33.33333333333333%" /><col style="width:66.66666666666666%" /></colgroup><thead class="thead" style="text-align:left;">
+       <tr>
+        <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1324">Subproperty</th>
+
+        <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1327">Description</th>
+
+       </tr>
+
+      </thead>
+<tbody class="tbody">
+       <tr>
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1324 ">class</td>
+
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1327 ">Sets the compressor name, <div class="p">The class name of the compression algorithm. Cassandra
+          provides the following built-in classes: <ul class="ul">
+           <li class="li"><code class="ph codeph">LZ4Compressor</code>, see </li>
+
+           <li class="li"><code class="ph codeph">SnappyCompressor</code></li>
+
+           <li class="li"><code class="ph codeph">DeflateCompressor</code></li>
+
+          </ul>
+</div>
+Default: <code class="ph codeph">LZ4Compressor</code>.</td>
+
+       </tr>
+
+       <tr>
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1324 ">chunk_length_kb</td>
+
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1327 ">Size (in KB) of the block. On disk, SSTables are compressed by block to allow random
+         reads. Values larger than the default value might improve the compression rate, but
+         increases the minimum size of data to be read from disk when a read occurs. The default
+         value is a good middle-ground for compressing tables. Adjust compression size to account
+         for read/write access patterns (how much data is typically requested at once) and the
+         average size of rows in the table. Default value: <code class="ph codeph">64KB</code>. <p class="p">Default
+          value:<code class="ph codeph"></code>.</p>
+</td>
+
+       </tr>
+
+       <tr>
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1324 ">crc_check_chance</td>
+
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1327 ">When compression is enabled, each compressed block includes a checksum of that block
+         for the purpose of detecting disk bitrot and avoiding the propagation of corruption to
+         other replica. This option defines the probability with which those checksums are checked
+         during read. By default they are always checked. Set to <span class="keyword option">0</span> to disable
+         checksum checking and to <span class="keyword option">0.5</span>, for instance, to check them on every other
+         read. <p class="p">Default: <code class="ph codeph">1.0</code>. </p>
+</td>
+
+       </tr>
+
+       <tr>
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1324 ">sstable_compression</td>
+
+        <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1327 ">Disables compression. Specify a null value.</td>
+
+       </tr>
+
+      </tbody>
+</table>
+</div>
+</div>
+
+   <div class="p">To disable compression, specify the <code class="ph codeph">sstable_compression</code> option with value of
+    empty string
+    (''):<pre class="pre screen">ALTER TABLE cycling.cyclist_name 
+WITH COMPRESSION = {'sstable_compression': ''};</pre>
+</div>
+
+  </section>
+
+ </div>
+
+</article>
+<article class="topic concept nested2" aria-labelledby="ariaid-title6" id="compactSubprop">
+ <h3 class="title topictitle3" id="ariaid-title6">compaction<a class="headerlink" href="cqlCreateTable.html#compactSubprop" rel="internal"> </a></h3>
+
+ 
+ <div class="body conbody"><p class="shortdesc">Constructing a map of the compaction option and its subproperties.</p>
+
+    <div class="p">The compaction option in <a class="xref" href="cqlCreateTable.html#cqlCreateTable" title="Define a new table.">CREATE TABLE</a> or <a class="xref" href="cqlAlterTable.html#cqlAlterTable__alter-compression">ALTER TABLE</a>
+      <code class="ph codeph">WITH</code> clause defines the strategy for cleaning up data after writes. Define a
+      compaction class and properties in simple JSON format:
+      <pre class="pre codeblock"><code>compaction = { 
+   'class' : '<var class="keyword varname">compaction_strategy_name</var>' 
+   [, '<var class="keyword varname">subproperty_name</var>' : '<var class="keyword varname">value</var>',...] 
+}</code></pre></div>
+
+    <div class="note note"><span class="notetitle">Note:</span> 
+      <p class="p">For more guidance, see the <a class="xref" href="https://www.datastax.com/dev/blog/when-to-use-leveled-compaction" target="_blank">When to Use Leveled Compaction</a>, <a class="xref" href="https://www.datastax.com/dev/blog/leveled-compaction-in-apache-cassandra" target="_blank">Leveled Compaction in Apache Cassandra</a> blog, and
+          <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/dml/dmlHowDataMaintain.html" target="_blank">How data is maintained</a>.</p>
+
+    </div>
+
+    <section class="section" id="compactSubprop__cqlTableCompSizeTieredCompactionStrategy"><h4 class="title sectiontitle">compaction properties<a class="headerlink" href="cqlCreateTable.html#compactSubprop__cqlTableCompSizeTieredCompactionStrategy" rel="internal"> </a></h4>
+      
+      <div class="p">Cassandra provides the following compaction classes, each class has different subproperties:<ul class="ul">
+          <li class="li"><a class="xref" href="cqlCreateTable.html#compactSubprop__compactionSubpropertiesSTCS">SizeTieredCompactionStrategy (STCS)</a></li>
+
+          <li class="li"><a class="xref" href="cqlCreateTable.html#compactSubprop__compactionSubproperties">DateTieredCompactionStrategy</a></li>
+
+        <li class="li"><a class="xref" href="cqlCreateTable.html#compactSubprop__compactionSubpropertiesTWCS">TimeWindowCompactionStrategy (TWCS)</a></li>
+
+        <li class="li"><a class="xref" href="cqlCreateTable.html#compactSubprop__compactionSubpropertiesLCS">LeveledCompactionStrategy (LCS)</a></li>
+
+        </ul>
+</div>
+
+      <dl class="dl">
+        
+          <dt class="dt dlterm title3" id="compactSubprop__compactionSubpropertiesSTCS">SizeTieredCompactionStrategy (STCS) <a class="headerlink" href="cqlCreateTable.html#compactSubprop__compactionSubpropertiesSTCS" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p"><span class="ph" id="compactSubprop__stcs-description">Triggers a minor compaction when table meets the
+                  <code class="ph codeph">min_threshold</code>. Minor compactions do not involve all the tables in
+                a keyspace. </span>See <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__stcs-compaction" target="_blank">SizeTieredCompactionStrategy</a> in the Cassandra
+              documentation for more details.</p>
+
+            <p class="p">Default compaction strategy.</p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">subproperties</span></caption><colgroup><col style="width:33.33333333333333%" /><col style="width:66.66666666666666%" /></colgroup><thead class="thead" style="text-align:left;">
+                  <tr>
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1552">Subproperty</th>
+
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1555">Description</th>
+
+                  </tr>
+
+                </thead>
+<tbody class="tbody">
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">bucket_high</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 "><span class="ph" id="compactSubprop__compaction_bucket_high">Size-tiered compaction merges sets of
+                        SSTables that are approximately the same size. Casssandra compares each
+                        SSTable size to the average of all SSTable sizes on the node. It merges
+                        SSTables whose size in KB are within [average-size ×
+                          <span class="keyword parmname">bucket_low</span>] and [average-size ×
+                          <span class="keyword parmname">bucket_high</span>].</span><p class="p"> Default value:
+                          <code class="ph codeph">1.5</code></p>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">bucket_low</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">See <a class="xref" href="cqlCreateTable.html#compactSubprop__compaction_bucket_high">bucket_high</a>. <p class="p">Default value: <code class="ph codeph">0.5</code>.</p>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">enabled</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">Enables background compaction. Default value: <code class="ph codeph">true</code>. See
+                        <a class="xref" href="cqlCreateTable.html#compactSubprop__moreEnableDisable">Enabling and disabling
+                        background compaction</a>.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">log_all</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">Activates advanced logging for the entire cluster. <p class="p">Default value:
+                          <code class="ph codeph">false</code>.</p>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">max_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">The maximum number of SSTables to allow in a minor compaction. <p class="p">Default
+                        value: <code class="ph codeph">32</code>.</p>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">min_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">The minimum number of SSTables to trigger a minor compaction. Default
+                      value: <code class="ph codeph">4</code>.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">min_sstable_size</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">STCS groups SSTables into buckets. The bucketing process groups SSTables
+                      that differ in size by less than 50%. This bucketing process is too fine
+                      grained for small SSTables. If your SSTables are small, use
+                        <span class="keyword parmname">min_sstable_size</span> to define a size threshold (in bytes)
+                      below which all SSTables belong to one unique bucket. Default value:
+                        <code class="ph codeph">50MB</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">only_purge_repaired_tombstones</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 "><var class="keyword varname">true</var> allows purging tombstones only from repaired
+                      SSTables. The purpose is to prevent data from resurrecting if repair is not
+                      run within <code class="ph codeph">gc_grace_seconds</code>. If you do not run repair for a
+                      long time, Cassandra keeps all tombstones — this may cause problems. Default
+                      value: <code class="ph codeph">false</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">tombstone_compaction_interval</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">The minimum number of seconds after which an SSTable is created before
+                      Cassandra considers the SSTable for tombstone compaction. An SSTable is
+                      eligible for tombstone compaction if the table exceeds the
+                        <span class="keyword parmname">tombstone_threshold</span> ratio. Default value:
+                        <code class="ph codeph">86400</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">tombstone_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 ">The ratio of garbage-collectable tombstones to all contained columns. If
+                      the ratio exceeds this limit, Cassandra starts compaction on that table alone,
+                      to purge the tombstones. Default value: <code class="ph codeph">0.2</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1552 ">unchecked_tombstone_compaction</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1555 "><var class="keyword varname">True</var> allows Cassandra to run tombstone compaction
+                      without pre-checking which tables are eligible for this operation. Even
+                      without this pre-check, Cassandra checks an SSTable to make sure it is safe to
+                      drop tombstones. Default value: <code class="ph codeph">false</code>. </td>
+
+                  </tr>
+
+                </tbody>
+</table>
+</div>
+
+            <div class="note note"><span class="notetitle">Note:</span> Cassandra 3.0 does not support the <code class="ph codeph">cold_reads_to_omit</code> property
+              for <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/dml/dmlHowDataMaintain.html#dml_types_of_compaction" target="_blank">SizeTieredCompactionStrategy</a>.</div>
+
+            <div class="note note"><span class="notetitle">Note:</span> For more details, see <a class="xref" href="https://docs.datastax.com/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__stcs-compaction" target="_blank">How data is maintained &gt; Compaction Strategy &gt;
+                STCS</a></div>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="compactSubprop__compactionSubproperties">DateTieredCompactionStrategy<a class="headerlink" href="cqlCreateTable.html#compactSubprop__compactionSubproperties" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p"><span class="ph" id="compactSubprop__dtcs-description">Stores data written within a certain period of time in the
+                same SSTable. Also see <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__dtcs-compaction" target="_blank">DateTieredCompactionStrategy</a> in the
+                Cassandra documentation.</span></p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Subproperties</span></caption><colgroup><col style="width:33.33333333333333%" /><col style="width:66.66666666666666%" /></colgroup><thead class="thead" style="text-align:left;">
+                  <tr>
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1781">Subproperty</th>
+
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1784">Description</th>
+
+                  </tr>
+
+                </thead>
+<tbody class="tbody">
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">base_time_seconds</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">The size of the first time window. Default value: <code class="ph codeph">3600</code>.
+                    </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">enabled</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">Enables background compaction. Default value: <code class="ph codeph">true</code>. See
+                        <a class="xref" href="cqlCreateTable.html#compactSubprop__moreEnableDisable">Enabling and disabling
+                        background compaction</a>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">log_all</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 "><var class="keyword varname">True</var> activates advanced logging for the entire
+                      cluster. Default value: <code class="ph codeph">false</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">max_sstable_age_days</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">Cassandra does not compact SSTables if its most recent data is older than
+                      this property. Fractional days can be set. Default value:
+                        <code class="ph codeph">1000</code>. <div class="note attention"><span class="attentiontitle">Attention:</span> This parameter is
+                        deprecated.</div>
+</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">max_window_size_seconds</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">The maximum window size in seconds. Default value:
+                      <code class="ph codeph">86400</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">max_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">The maximum number of SSTables allowed in a minor compaction. Default
+                      value: <code class="ph codeph">32</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">min_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">The minimum number of SSTables that trigger a minor compaction. Default
+                      value: <code class="ph codeph">4</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">timestamp_resolution</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">Units, <var class="keyword varname">MICROSECONDS</var> or
+                      <var class="keyword varname">MILLISECONDS</var>, to match the timestamp of inserted data.
+                      Default value: <code class="ph codeph">MICROSECONDS</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">tombstone_compaction_interval</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">The minimum number of seconds after an SSTable is created before
+                      Cassandra considers the SSTable for tombstone compaction. Tombstone compaction
+                      is triggered if the number of garbage-collectable tombstones in the SSTable is
+                      greater than <span class="keyword parmname">tombstone_threshold</span>. Default value:
+                        <code class="ph codeph">86400</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">tombstone_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 ">The ratio of garbage-collectable tombstones to all contained columns. If
+                      the ratio exceeds this limit, Cassandra starts compaction on that table alone,
+                      to purge the tombstones. Default value: <code class="ph codeph">0.2</code>. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1781 ">unchecked_tombstone_compaction</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1784 "><var class="keyword varname">True</var> allows Cassandra to run tombstone compaction
+                      without pre-checking which tables are eligible for this operation. Even
+                      without this pre-check, Cassandra checks an SSTable to make sure it is safe to
+                      drop tombstones. Default value: <code class="ph codeph">false</code>. </td>
+
+                  </tr>
+
+                </tbody>
+</table>
+</div>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="compactSubprop__compactionSubpropertiesTWCS">TimeWindowCompactionStrategy (TWCS)<a class="headerlink" href="cqlCreateTable.html#compactSubprop__compactionSubpropertiesTWCS" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p"><span class="ph" id="compactSubprop__tools-compact-twcs">Compacts SSTables using a series of <em class="ph i">time windows</em>
+                or <em class="ph i">buckets</em>. TWCS creates a new time window within each successive time
+                period. During the active time window, TWCS compacts all SSTables flushed from
+                memory into larger SSTables using STCS. At the end of the time period, all of these
+                SSTables are compacted into a single SSTable. Then the next time window starts and
+                the process repeats. See <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__twcs-compaction" target="_blank">TimeWindowCompactionStrategy</a> in the
+                Cassandra documentation for more details.</span>
+            </p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Subproperties</span></caption><colgroup><col style="width:33.33333333333333%" /><col style="width:66.66666666666666%" /></colgroup><thead class="thead" style="text-align:left;">
+                  <tr>
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1985">Compaction Subproperties</th>
+
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e1988">Description</th>
+
+                  </tr>
+
+                </thead>
+<tbody class="tbody">
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1985 ">compaction_window_unit</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1988 ">Time unit used to define the bucket size, milliseconds, seconds, hours,
+                      etc. Default value: <code class="ph codeph">milliseconds</code>.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1985 ">compaction_window_size</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1988 ">Units per bucket.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1985 ">log_all</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e1988 "><var class="keyword varname">True</var> activates advanced logging for the entire
+                      cluster. Default value: <code class="ph codeph">false</code>. </td>
+
+                  </tr>
+
+                  
+                </tbody>
+</table>
+</div>
+
+          </dd>
+
+        
+        
+          <dt class="dt dlterm" id="compactSubprop__compactionSubpropertiesLCS">LeveledCompactionStrategy (LCS)<a class="headerlink" href="cqlCreateTable.html#compactSubprop__compactionSubpropertiesLCS" rel="internal"> </a></dt>
+
+          <dd class="dd">
+            <p class="p"><span class="ph" id="compactSubprop__lcs-description">Creates SSTables of a fixed, relatively small size (160 MB
+                by default) that are grouped into levels. Within each level, SSTables are guaranteed
+                to be non-overlapping. Each level (L0, L1, L2 and so on) is 10 times as large as the
+                previous. Disk I/O is more uniform and predictable on higher than on lower levels as
+                SSTables are continuously being compacted into progressively larger levels. At each
+                level, row keys are merged into non-overlapping SSTables in the next level. See
+                  <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.x/cassandra/dml/dmlHowDataMaintain.html#dmlHowDataMaintain__lcs-compaction" target="_blank">LeveledCompactionStrategy (LCS)</a> in the
+                Cassandra documentation.</span></p>
+
+            
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Subproperties</span></caption><colgroup><col style="width:28.57142857142857%" /><col style="width:14.285714285714285%" /><col style="width:57.14285714285714%" /></colgroup><thead class="thead" style="text-align:left;">
+                  <tr>
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e2067">Subproperties</th>
+
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e2070">Default</th>
+
+                    <th class="entry cellrowborder" style="vertical-align:top;" id="d16075e2073">Description</th>
+
+                  </tr>
+
+                </thead>
+<tbody class="tbody">
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2067 ">enabled</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2070 "><span class="keyword option">true</span></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2073 ">Enables background compaction. See <a class="xref" href="cqlCreateTable.html#compactSubprop__moreEnableDisable">Enabling and disabling background
+                        compaction</a> below.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2067 ">log_all</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2070 "><span class="keyword option">false</span></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2073 "><var class="keyword varname">True</var> activates advanced logging for the entire
+                      cluster. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2067 ">sstable_size_in_mb</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2070 "><span class="keyword option">160MB</span></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2073 ">The target size for SSTables that use the Leveled Compaction Strategy.
+                      Although SSTable sizes should be less or equal to
+                        <span class="keyword parmname">sstable_size_in_mb</span>, it is possible tthat compaction may
+                      produce a larger SSTable during compaction. This occurs when data for a given
+                      partition key is exceptionally large. Cassandra does not split the data into
+                      two SSTables.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2067 ">tombstone_compaction_interval</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2070 "><span class="keyword option">864000</span> (one day)</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2073 ">The minimum number of seconds after an SSTable is created before
+                      Cassandra considers the SSTable for tombstone compaction. Cassandra begins
+                      tombstone compaction SSTable's <span class="keyword parmname">tombstone_threshold</span>
+                      exceeds value of the following property. </td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2067 ">tombstone_threshold</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2070 "><span class="keyword option">0.2</span></td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2073 ">The ratio of garbage-collectable tombstones to all contained columns. If
+                      the ratio exceeds this limit, Cassandra starts compaction on that table alone,
+                      to purge the tombstones.</td>
+
+                  </tr>
+
+                  <tr>
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2067 ">unchecked_tombstone_compaction</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2070 ">false</td>
+
+                    <td class="entry cellrowborder" style="vertical-align:top;" headers="d16075e2073 "><var class="keyword varname">True</var> allows Cassandra to run tombstone compaction
+                      without pre-checking which tables are eligible for this operation. Even
+                      without this pre-check, Cassandra checks an SSTable to make sure it is safe to
+                      drop tombstones. </td>
+
+                  </tr>
+
+                </tbody>
+</table>
+</div>
+
+          </dd>
+
+        
+      </dl>
+
+    </section>
+
+  <section class="section" id="compactSubprop__moreEnableDisable"><h4 class="title sectiontitle">Enabling and disabling background compaction<a class="headerlink" href="cqlCreateTable.html#compactSubprop__moreEnableDisable" rel="internal"> </a></h4>
+      
+      <div class="p">The following example sets the <var class="keyword varname">enable</var> property to disable background
+        compaction:<pre class="pre codeblock"><code>ALTER TABLE mytable 
+WITH COMPACTION = {
+   'class': 'SizeTieredCompactionStrategy', 
+   'enabled': 'false' }</code></pre></div>
+
+      <p class="p">Disabling background compaction can be harmful: without it, Cassandra does not regain disk
+        space, and may allow <a class="xref" href="http://docs.datastax.com"/en/glossary/doc/glossary/gloss_zombie.html" target="_blank">zombies</a> to propagate. Although compaction uses I/O, it is better
+        to leave it enabled in most cases.</p>
+
+    </section>
+
+  <section class="section" id="compactSubprop__enabling-extended-compaction-logging"><h4 class="title sectiontitle">Reading extended compaction
+        logs<a class="headerlink" href="cqlCreateTable.html#compactSubprop__enabling-extended-compaction-logging" rel="internal"> </a></h4><p class="p">Set the <code class="ph codeph">log_all</code> subproperty to <code class="ph codeph">true</code> to
+        collect in-depth information about compaction activity on a node in a dedicated log file.
+        </p>
+<div class="note important"><span class="importanttitle">Important:</span>  If you enable extended logging for any table on any node,
+        Cassandra enables it for all tables on all nodes in the cluster.</div>
+<p class="p">When extended
+        compaction is enabled, Cassandra creates a file named <span class="ph filepath">compaction-%d.log</span>
+        (where <code class="ph codeph">%d</code> is a sequential number) in
+          <span class="ph filepath"><a href="#" class="home open-popup-link"><span class="keyword filepath-popup">home</span></a>/logs</span>. </p>
+ The compaction
+      logging service logs detailed information about four types of compaction events:<ul class="ul" id="compactSubprop__ul_s54_ygh_vw">
+        <li class="li">
+          <p class="p"><code class="ph codeph">type:enable</code></p>
+
+          <p class="p">Lists SSTables that have been flushed previously</p>
+
+          <div class="p">
+            <pre class="pre codeblock"><code>{"type":"enable","keyspace":"test","table":"t","time":1470071098866,"strategies":
+  [    {"strategyId":"0","type":"LeveledCompactionStrategy","tables":[],"repaired":true,"folders":
+      ["/home/carl/oss/cassandra/bin/../data/data"]},
+    {"strategyId":"1","type":"LeveledCompactionStrategy","tables":[],"repaired":false,"folders":
+      ["/home/carl/oss/cassandra/bin/../data/data"]
+    }
+ ]
+}</code></pre>
+          </div>
+
+        </li>
+
+        <li class="li"><code class="ph codeph">type: flush</code><p class="p">Logs a flush event from a memtable to an SSTable on disk,
+            including the CompactionStrategy for each table.</p>
+<div class="p">
+            <pre class="pre codeblock"><code>{"type":"flush","keyspace":"test","table":"t","time":1470083335639,"tables":
+  [    {"strategyId":"1","table":
+      {"generation":1,"version":"mb","size":106846362,"details":
+        {"level":0,"min_token":"-9221834874718566760","max_token":"9221396997139245178"}
+      }
+    }
+ ]
+}
+</code></pre>
+          </div>
+</li>
+
+        <li class="li"><code class="ph codeph">type: compaction</code><p class="p">Logs a compaction event.</p>
+<div class="p">
+            <pre class="pre codeblock"><code>{"type":"compaction","keyspace":"test","table":"t","time":1470083660267,"start":"1470083660188","end":"1470083660267","input":
+  [    {"strategyId":"1","table":
+      {"generation":1372,"version":"mb","size":1064979,"details":
+        {"level":1,"min_token":"7199305267944662291","max_token":"7323434447996777057"}
+      }
+    }
+ ],"output":
+  [    {"strategyId":"1","table":
+      {"generation":1404,"version":"mb","size":1064306,"details":
+        {"level":2,"min_token":"7199305267944662291","max_token":"7323434447996777057"}
+      }
+    }
+ ]
+}
+</code></pre>
+          </div>
+</li>
+
+        <li class="li"><code class="ph codeph">type: pending</code><p class="p">Lists the number of pending tasks for a compaction
+            strategy</p>
+<div class="p">
+            <pre class="pre codeblock"><code>{"type":"pending","keyspace":"test","table":"t","time":1470083447967,"strategyId":"1","pending":200}</code></pre>
+          </div>
+</li>
+
+      </ul>
+</section>
+
+ </div>
+
+</article>
+<article class="topic concept nested2" aria-labelledby="ariaid-title7" id="refClstrOrdr">
+ <h3 class="title topictitle3" id="ariaid-title7">Table keywords<a class="headerlink" href="cqlCreateTable.html#refClstrOrdr" rel="internal"> </a></h3>
+
+ <div class="body conbody">
+  <dl class="dl">
+   
+    <dt class="dt dlterm" id="refClstrOrdr__cql-clustering-order-by">CLUSTERING ORDER BY ( column_name ASC | DESC)<a class="headerlink" href="cqlCreateTable.html#refClstrOrdr__cql-clustering-order-by" rel="internal"> </a></dt>
+
+    <dd class="dd">
+     <p class="p">Order rows storage to make use of the on-disk sorting of columns. Specifying order can make
+      query results more efficient. Options are:</p>
+
+     <p class="p">
+      <code class="ph codeph">ASC</code>: ascending (default order)</p>
+
+     <p class="p">
+      <code class="ph codeph">DESC</code>: descending, reverse order </p>
+
+     <p class="p">The following example shows a table definition that changes the clustering order to
+      descending by insertion time.</p>
+
+     <div class="p">The following example shows a table definition stores the categories with the highest points
+      first.<pre class="pre screen">CREATE TABLE cycling.cyclist_category ( 
+   category text, 
+   points int, 
+   id UUID, 
+   lastname text, 
+   PRIMARY KEY (category, points)) 
+WITH CLUSTERING ORDER BY (points DESC);</pre>
+</div>
+
+    </dd>
+
+   
+   
+    <dt class="dt dlterm" id="refClstrOrdr__cql-compact-storage">COMPACT STORAGE<a class="headerlink" href="cqlCreateTable.html#refClstrOrdr__cql-compact-storage" rel="internal"> </a></dt>
+
+    <dd class="dd">
+     <p class="p">Use <code class="ph codeph">COMPACT STORAGE</code> to store data in the legacy (Thrift) storage engine
+      format to conserve disk space. </p>
+
+     <div class="p">Use compact storage for the category
+      table.<pre class="pre codeblock"><code>CREATE TABLE cycling.cyclist_category ( 
+   category text, 
+   points int, 
+   id UUID, 
+   lastname text, 
+   PRIMARY KEY (category, points)) 
+WITH CLUSTERING ORDER BY (points DESC)
+   AND COMPACT STORAGE;</code></pre></div>
+
+     <div class="note important"><span class="importanttitle">Important:</span> The <a class="xref" href="https://www.datastax.com/2015/12/storage-engine-30" target="_blank">storage engine is much more efficient</a> at storing data,
+      and compact storage is not necessary.</div>
+
+    </dd>
+
+   
+   
+    <dt class="dt dlterm">ID</dt>
+
+    <dd class="dd">
+     <p class="p">If a table is accidentally dropped with <a class="xref" href="cqlDropTable.html" title="Remove the named table.">DROP TABLE</a>,
+      use this option to recreate the table and run a commitlog replayer to retrieve the data.</p>
+
+     <pre class="pre codeblock"><code>CREATE TABLE users (
+  userid text PRIMARY KEY,
+  emails set&lt;text&gt;
+) WITH ID='5a1c395e-b41f-11e5-9f22-ba0be0483c18';</code></pre>
+    </dd>
+
+   
+  </dl>
+
+  <section class="section" id="refClstrOrdr__cql_tabprop_more_read_repairs"><h4 class="title sectiontitle">Configuring read repairs<a class="headerlink" href="cqlCreateTable.html#refClstrOrdr__cql_tabprop_more_read_repairs" rel="internal"> </a></h4>
+   
+   <p class="p">Cassandra performs <a class="xref" href="http://docs.datastax.com"/en/cassandra/3.0/cassandra/operations/opsRepairNodesReadRepair.html" target="_blank">read repair</a> whenever a read reveals inconsistencies among replicas. You
+    can also configure Cassandra to perform read repair after a completely consistent read.
+    Cassandra compares and coordinates all replicas, even those that were not accessed in the
+    successful read. The <a class="xref" href="cqlCreateTable.html#tabProp__cqlTableDclocal_read_repair_chance">dclocal_read_repair_chance</a> and <a class="xref" href="cqlCreateTable.html#tabProp__cqlTableRead_repair_chance">read_repair_chance</a> set the probability that a consistent read of a
+    table triggers a read repair. The first of these properties sets the probability for a read
+    repair that is confined to the same datacenter as the coordinator node. The second property sets
+    the probability for a read repair across all datacenters that contain matching replicas. This
+    cross-datacenter operation is much more resource-intensive than the local operation. </p>
+
+   <p class="p">Recommendations: if the table is for time series data, both properties can be set to
+     <code class="ph codeph">0</code> (zero). For other tables, the more performant strategy is to set
+     <span class="keyword option">dc_local_read_repair_chance</span> to <code class="ph codeph">0.1</code> and
+     <span class="keyword option">read_repair_chance</span> to <code class="ph codeph">0</code>. If you want to use
+     <span class="keyword option">read_repair_chance</span>, set this property to <code class="ph codeph">0.1</code>.</p>
+
+  </section>
+
+ </div>
+
+</article>
+</article>
+</article>
+</article></main></div>
+                        
+                        
+                        
+                        
+                    </div>
+                    <nav role="navigation" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 navbar" id="wh_side_toc">
+                        <div class=" wh_side_toc "><ul class="hidden-print"><li><span class="topicref"><a href="../../cql/cql_reference/cqlReferenceTOC.html">CQL reference</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/about_cql_ref_c.html">Introduction</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_lexicon_c.html">CQL lexical structure</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_data_types_c.html">CQL data types</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cql_function_r.html">Functions</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/refLimits.html">CQL limits</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlshCommandsTOC.html">CQL shell commands</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCommandsTOC.html">CQL commands</a></span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterKeyspace.html">ALTER KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterMaterializedView.html">ALTER MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterRole.html">ALTER ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterTable.html">ALTER TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterType.html">ALTER TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlAlterUser.html">ALTER USER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlBatch.html">BATCH</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateAggregate.html">CREATE AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateIndex.html">CREATE INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateFunction.html">CREATE FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateKeyspace.html">CREATE KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateMaterializedView.html">CREATE MATERIALIZED VIEW</a></span></li><li class="active"><span class="topicref">CREATE TABLE</span><ul class="nav nav-list"><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#refcolumndef">column_definition</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#refPkCol">PRIMARY KEY</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTable.html#tabProp">table_options</a></span></li></ul></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateTrigger.html">CREATE TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateType.html">CREATE TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateRole.html">CREATE ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlCreateUser.html">CREATE USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDelete.html">DELETE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropAggregate.html">DROP AGGREGATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropFunction.html">DROP FUNCTION</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropIndex.html">DROP INDEX</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropKeyspace.html">DROP KEYSPACE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropMatializedView.html">DROP MATERIALIZED VIEW</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropRole.html">DROP ROLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTable.html">DROP TABLE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropTrigger.html">DROP TRIGGER</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropType.html">DROP TYPE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlDropUser.html">DROP USER (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlGrant.html">GRANT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlInsert.html">INSERT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListPermissions.html">LIST PERMISSIONS</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListRoles.html">LIST ROLES</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlListUsers.html">LIST USERS (Deprecated)</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlRevoke.html">REVOKE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlSelect.html">SELECT</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlTruncate.html">TRUNCATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUpdate.html">UPDATE</a></span></li><li><span class="topicref"><a href="../../cql/cql_reference/cqlUse.html">USE</a></span></li></ul></li></ul></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="hidden-print col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="text-center wh_bottom_tools hidden-sm hidden-xs">
+                        <div class=" wh_navigation_links bottom_navigation_links "><span id="topic_navigation_links" class="navheader">
+  
+<span class="navprev"><a class="link" href="../../cql/cql_reference/cqlCreateMaterializedView.html" title="CREATE MATERIALIZED VIEW"></a></span>  
+<span class="navnext"><a class="link" href="../../cql/cql_reference/cqlCreateTrigger.html" title="CREATE TRIGGER"></a></span>  </span></div>
+                    </div>
+                </nav>
+            </div>
+        </div> 
+        <nav class="navbar navbar-default wh_footer">
+  <div class=" footer-container text-center ">
+    <div class="ds_footer_bottom">
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/docTips.html" target="_blank" title="Doc Tips">
+        <span class="flaticon-signs"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Email feedback guidelines">
+        <span class="flaticon-new-email-interface-symbol-of-black-closed-envelope"></span></a>
+      <a href="http://docs.datastax.com"/en/landing_page/doc/landing_page/contact.html" target="_blank" title="Twitter feedback guidelines">
+        <span class="flaticon-twitter-logo-button"></span></a>
+      <a href="https://github.com/datastax/" target="_blank" title="DataStax GitHub">
+        <span class="flaticon-github-logo"></span></a>
+      <a href="http://docs.datastax.com"/en/cql/3.3/zip/cql33.zip" target="_blank" title="Zipped document">
+        <span class="flaticon-symbols"></span></a>
+      <div>
+        <span>DataStax Enterprise is powered by the best distribution of Apache Cassandra™</span>
+      </div>
+      <div>
+        <span>©</span>
+        <span id="copyrightdate"></span>
+        <script type="text/javascript">document.getElementById("copyrightdate").innerHTML = new Date().getFullYear();</script>
+        <span>DataStax, Inc. All rights reserved. Updated: 14 August 2017</span>
+        <span style="display: none">Build time: 14 August 2017 16:56:08.983</span>
+      </div>
+    </div>
+    <div>
+        <p>DataStax, Titan, and TitanDB are registered trademark of DataStax, Inc. and its subsidiaries in the United States and/or other countries.</p>
+        <p>Apache Cassandra, Apache, Tomcat, Lucene, Solr, Hadoop, Spark, TinkerPop, and Cassandra are trademarks of the 
+            <a href="https://www.apache.org/" target="_blank" title="Apache Software Foundation">Apache Software Foundation</a> 
+            or its subsidiaries in Canada, the United States and/or other countries.</p>
+    </div>
+  </div>
+</nav>
+ 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="../../oxygen-webhelp/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/template/resources/js/wt_default.js?buildId=2017062918" type="text/javascript"></script>
+        <!-- Expand/collapse support -->
+        <script src="../../oxygen-webhelp/template/resources/js/wt_expand.js?buildId=2017062918" type="text/javascript"></script>
+        <div>
+    <script>
+    <!--
+    var collapsibleSections = {
+        /* Selectors for the nodes that contain an expand/collapse button. */
+        "expand_buttons" : [
+            /* Table caption */
+            "table > caption > .wh_expand_btn",
+            /* Article title */
+            ".topic > .title > .wh_expand_btn",
+            /* Section title */
+            ".sectiontitle > .wh_expand_btn",
+            /* Index terms groups */
+            ".wh_term_group > .wh_first_letter > .wh_expand_btn"
+        ],
+        "collapse_by_default" : [
+            /* sections with collapseByDefault output class */
+            ".collapseOnLoad > .wh_expand_btn"
+        ]
+    };
+
+    $(document).ready(function () {
+        /* Collapse selected nodes. */
+        collapsibleSections.collapse_by_default.forEach(
+            function(selector) {
+                var matchedNodes =  $(document).find(selector);
+                // Change the button state
+                matchedNodes.toggleClass("expanded");
+                // Will collapse the siblings of the parent node, excepting the ones that were marked otherwise
+                var siblings = matchedNodes.parent().siblings(':not(.wh_not_expandable)');
+                siblings.toggle();
+            }
+        );
+    });
+    //-->
+    </script>
+</div>
+        
+        <!-- DataStax js -->
+        <script src="../../oxygen-webhelp/assets/js/details-shim.min.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/highlight.pack.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/magnific-popup.js" type="text/javascript"></script>
+        <script src="../../oxygen-webhelp/assets/js/dsInit.js" type="text/javascript"></script>
+        <!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+        <script type="text/javascript">replaceNextPrevArrows();</script>
+        <script type="text/javascript">getVersionDropdown("cql", "cql33");</script>
+        
+        <!-- Search autocomplete -->
+        <script type="text/javascript" src="../../oxygen-webhelp/search/keywords.js?uniqueId=20170814045608"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchAutocomplete.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchHistoryItems.js?buildId=2017062918"></script>
+        <script type="text/javascript" src="../../oxygen-webhelp/search/searchOptions.js?uniqueId=20170814045608"></script>
+        
+        <!-- Analytics scripts for IT -->
+        <script type="text/javascript">
+          (function() {
+            var didInit = false;
+            function initMunchkin() {
+              if(didInit === false) {
+                didInit = true;
+                Munchkin.init('259-IFZ-779');
+                }
+              }
+              var s = document.createElement('script');
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+              s.onreadystatechange = function() {
+                if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                  initMunchkin();
+                }
+             };
+             s.onload = initMunchkin;
+             document.getElementsByTagName('head')[0].appendChild(s);
+        })();
+        </script>
+        
+        <!-- end analytics scripts for IT -->
+            
+        <!-- Swiftype search code -->
+        
+        <!-- script type="text/javascript">
+            // set up autocomplete
+            $("#st-search-input").swiftype({
+                engineKey: "35HEzyB2mn1a1qGMmCwN"
+            });
+            // set up search
+            $("#st-search-input").swiftypeSearch({
+                engineKey: "35HEzyB2mn1a1qGMmCwN",
+                resultContainingElement: "#st-results-container"
+            });
+        </script -->
+		<!-- Run the datastax specific initialization code from dsInit.js -->
+        <script type="text/javascript">dsInit();</script>
+    </body>
+</html>

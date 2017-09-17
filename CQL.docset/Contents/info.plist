@@ -4,11 +4,11 @@
     <plist version="1.0">
     <dict>
             <key>CFBundleIdentifier</key>
-            <string>CQL3.3</string>
+            <string>CQL</string>
             <key>CFBundleName</key>
-            <string>CQL3.3</string>
+            <string>CQL</string>
             <key>DashDocSetFamily</key>
-            <string>CQL3.3</string>
+            <string>CQL</string>
             <key>DocSetPlatformFamily</key>
             <string>cql</string>
             <key>isDashDocset</key>

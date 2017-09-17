@@ -4,11 +4,11 @@
     <plist version="1.0">
     <dict>
             <key>CFBundleIdentifier</key>
-            <string>Cassandra3.0</string>
+            <string>Cassandra</string>
             <key>CFBundleName</key>
-            <string>Cassandra3.0</string>
+            <string>Cassandra</string>
             <key>DashDocSetFamily</key>
-            <string>Cassandra3.0</string>
+            <string>Cassandra</string>
             <key>DocSetPlatformFamily</key>
             <string>cassandra</string>
             <key>isDashDocset</key>

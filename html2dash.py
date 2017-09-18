@@ -126,7 +126,7 @@ if __name__ == "__main__":
     doc_path = docset_name + "/Contents/Resources/Documents"
     dsidx_path = docset_name + "/Contents/Resources/docSet.dsidx"
     icon_path = docset_name + "/icon.png"
-    info = docset_name + "/Contents/info.plist"
+    info = docset_name + "/Contents/Info.plist"
 
     destpath = results.path
     if results.path and results.path[-1] != "/":
